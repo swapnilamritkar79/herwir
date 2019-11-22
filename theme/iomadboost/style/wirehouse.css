@@ -1,0 +1,258 @@
+@charset "UTF-8";
+[data-region="drawer"] {
+  padding: 0;
+  width: 280px;
+  background-color: #ffffff;
+  border-right: 1px solid #E8E9EC;
+  padding-top: 2px;
+}
+
+[data-region="drawer"] .list-group-item {
+  padding-top: 2px;
+  position: relative;
+  display: block;
+  padding: .75rem 1.25rem;
+  margin-bottom: 0px;
+  background-color: #fff;
+  border: 0px solid rgba(0, 0, 0, 0.125);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+[data-region="drawer"] .list-group.m-t-1 {
+  margin-top: 0px !important;
+}
+
+.btn.nav-link.bg-gray {
+  background: none !important;
+  color: #173D7B;
+}
+
+.btn.nav-link.bg-gray:hover {
+  border: 1px solid #fff;
+}
+
+.list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: #4CC0AF;
+  border-color: #4CC0AF;
+}
+
+footer.bg-dark {
+  background: #851C61 !important;
+}
+
+section .block_iomad_company_admin.card {
+  background: transparent;
+  border: 0px solid #ccc;
+}
+
+.block_iomad_company_admin .nav.nav-tabs {
+  display: block;
+  -ms-flex-wrap: inherit;
+      flex-wrap: inherit;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  float: left;
+  border: 1px solid #dee2e6;
+  background: #fff;
+}
+
+.block_iomad_company_admin .nav.nav-tabs a {
+  color: #545454;
+}
+
+.block_iomad_company_admin .nav-tabs .nav-link.active {
+  color: #fff;
+  background-color: #4CC0AF;
+  position: relative;
+}
+
+.block_iomad_company_admin .nav-tabs .active:before {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: -18px;
+  content: "";
+  font: normal normal normal 27px/1 FontAwesome;
+  color: #4cc0af;
+}
+
+.block_iomad_company_admin .tab-content {
+  display: block;
+  float: left;
+  width: calc(100% - 160px);
+}
+
+.block_iomad_company_admin .iomadlink_container {
+  background-color: transparent;
+  border: 0px solid #ddd;
+  padding-top: 0 !important;
+}
+
+.block_iomad_company_admin .iomadlink_container .iomadlink {
+  min-height: 63px;
+  background-color: #fff;
+  border-radius: 2px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  width: 96%;
+  margin-right: 4%;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 626px) {
+  .block_iomad_company_admin .iomadlink_container .iomadlink {
+    min-height: auto;
+    padding-bottom: 10px;
+  }
+}
+
+.block_iomad_company_admin .iomadlink_container .iomadlink .iomadicon {
+  display: block;
+  position: relative;
+  margin: 14px 0px 0px 0;
+  float: left;
+  padding: 0px 15px;
+  width: 60px;
+}
+
+@media (max-width: 626px) {
+  .block_iomad_company_admin .iomadlink_container .iomadlink .iomadicon {
+    float: none;
+    margin: 0px auto;
+    margin-top: 14px;
+  }
+}
+
+.block_iomad_company_admin .iomadlink_container .iomadlink .iomadicon .fa-topic {
+  font-size: 35px;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.block_iomad_company_admin .iomadlink_container .iomadlink .iomadicon .fa-action {
+  border-radius: 15px;
+  color: #666;
+  background-color: #ffffff;
+  font-size: 16px;
+  height: 22px;
+  line-height: 22px;
+  margin-left: -12px;
+  width: 22px;
+  position: absolute;
+  bottom: 0;
+  right: 8px;
+}
+
+.block_iomad_company_admin .iomadlink_container .iomadlink .actiondescription {
+  text-align: left;
+  padding-top: 18px;
+  font-size: 14px;
+  color: #545454;
+}
+
+@media (max-width: 626px) {
+  .block_iomad_company_admin .iomadlink_container .iomadlink .actiondescription {
+    padding-top: 8px;
+    text-align: center;
+  }
+}
+
+.block_iomad_company_admin .iomadlink_container > a {
+  display: block;
+  float: left;
+  margin: 0px;
+  min-height: auto;
+  width: 50%;
+}
+
+@media (max-width: 1024px) {
+  .block_iomad_company_admin .iomadlink_container > a {
+    width: 33%;
+  }
+}
+
+@media (max-width: 768px) {
+  .block_iomad_company_admin .iomadlink_container > a {
+    width: 50%;
+  }
+}
+
+@media (max-width: 626px) {
+  .block_iomad_company_admin .iomadlink_container > a {
+    width: 100%;
+  }
+}
+
+#page-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: calc(100% - 100px);
+}
+
+.loginhold {
+  width: 400px;
+}
+
+.imagehold {
+  width: 400px;
+  padding: 20px;
+}
+
+.logincard {
+  border-radius: 5px;
+  border: 1px solid #F7F7F7;
+  -webkit-box-shadow: 0px 2px 2px #dbdbdb;
+          box-shadow: 0px 2px 2px #dbdbdb;
+}
+
+.logincard .form-group {
+  position: relative;
+}
+
+.logincard .usernameicon {
+  position: absolute;
+  z-index: 10;
+  height: 20px;
+  width: 20px;
+  left: 9px;
+  top: 5px;
+}
+
+.logincard .form-control {
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  padding-left: 32px;
+}
+
+.logincard .card-header {
+  padding: 2.5rem 1.25rem;
+  margin-bottom: 0;
+  background-color: #fff;
+  border-bottom: 0px solid rgba(0, 0, 0, 0.125);
+}
+
+.logincard .loginbtn {
+  background: #4CC0AF;
+  margin-top: 60px !important;
+  border-color: #4CC0AF;
+}
+
+.logincard .card-body {
+  padding: 0px 1.25rem 1.25rem 1.25rem;
+}
+
+.logincard .alert-danger {
+  color: #FD0000;
+  background-color: #fff;
+  border-color: #fff;
+  margin-bottom: 0px;
+}
+/*# sourceMappingURL=wirehouse.css.map */
