@@ -1,0 +1,55 @@
+#page-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 100px);
+}
+
+ .loginhold{width:400px;  }
+
+ .imagehold{width:400px; padding:20px;}
+
+
+.logincard{
+
+    border-radius: 5px;
+    border: 1px solid #F7F7F7;
+    box-shadow: 0px 2px 2px #dbdbdb;
+
+  .form-group{ position: relative;}
+
+ .usernameicon {
+    position: absolute;
+    z-index: 10;
+    height: 20px;
+    width: 20px;
+    left: 9px;
+    top: 5px;
+}
+
+    .form-control{ border:1px solid #EAEAEA; border-radius: 4px; padding-left: 32px; }
+
+    .card-header {
+        padding: 2.5rem 1.25rem;
+        margin-bottom: 0;
+        background-color:#fff;
+        border-bottom: 0px solid rgba(0,0,0,.125);
+        
+    }
+
+    .loginbtn{
+        background: $wirehouse-green;
+        margin-top:60px!important;
+        border-color: $wirehouse-green;
+    }
+
+    .card-body{ padding: 0px 1.25rem 1.25rem 1.25rem;}
+
+    .alert-danger{
+        color:#FD0000;
+        background-color:#fff;;
+        border-color: #fff;
+        margin-bottom:0px; 
+
+    }
+
+}

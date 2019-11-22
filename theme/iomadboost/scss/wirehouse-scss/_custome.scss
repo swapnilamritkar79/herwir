@@ -1,0 +1,67 @@
+
+body{ background:$bodybgcolor; }
+
+/*Button CSS*/
+
+.btn-secondary, .btn-default {
+    color:$wirehouse-green;
+    background-color: #fff;
+    border-color:$wirehouse-green;
+    &:hover {
+        color: #fff;
+        background-color:$wirehouse-green;
+        border-color:$wirehouse-green;
+    }
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: $wirehouse-green;
+    border-color:$wirehouse-green;
+    &:hover {
+        color: $wirehouse-green;
+        background-color:#fff;
+        border-color:$wirehouse-green;
+    }
+    
+}
+
+/*Button CSS End*/
+
+
+
+section{
+
+& .block_iomad_company_admin.card{ background: transparent; border: 0px solid #ccc; }
+
+}
+
+
+.block_mycourses.card, .block_recentlyaccessedcourses.card {
+
+    background: transparent; border: 0px solid #ccc;
+
+} 
+
+.block .empty-placeholder-image-lg {
+    height: 124px; 
+    width: 124px;
+}
+
+
+div[data-region=recentlyaccessedcourses-view-content] {
+
+    .empty-placeholder-image-lg {
+        height: 150px; 
+        width: 150px;
+    }
+
+}
+
+.text-muted{ color: #059 !important;
+    background-color: #e9faff;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 4px;
+}
