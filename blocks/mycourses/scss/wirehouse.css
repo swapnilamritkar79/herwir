@@ -1,0 +1,633 @@
+@charset "UTF-8";
+@import url(d:\Project2019\WireHouse - LMS\HTML\fonts\stylesheet.css);
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #F5F5F5;
+  font-family: "Museo Sans Rounded 300";
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.bar {
+  background: #fff;
+  height: 50px;
+}
+
+.section-title {
+  font-size: 18px;
+  padding: 15px 0px 15px 27px;
+  margin: 0px;
+}
+
+.responsive {
+  width: 96%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.event-bg {
+  background: #fff;
+  width: 95%;
+  padding: 20px 20px 20px 40px;
+}
+
+.event-bg .slick-next {
+  right: 0px;
+  left: inherit;
+}
+
+.event-bg .slick-prev {
+  right: 34px;
+  left: inherit;
+}
+
+.event-bg .name {
+  font-weight: 700;
+}
+
+.event-bg .time {
+  font-size: 14px;
+  color: #7A7A7A;
+  padding-bottom: 5px;
+}
+
+.event-bg .event-img {
+  padding: 10px 0px;
+}
+
+.event-bg .event-img img {
+  width: 100%;
+}
+
+.responsive-hold {
+  width: 100%;
+  overflow: hidden;
+  padding: 50px 15px 0px 15px;
+}
+
+.coursehold {
+  padding-right: 20px;
+  position: relative;
+}
+
+.coursehold .statusebar {
+  position: relative;
+  background: #707070;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+}
+
+.coursehold .statusebar .bar {
+  background: red;
+  height: 8px;
+}
+
+.coursehold .newcourse {
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  left: 20px;
+  top: -28px;
+}
+
+.coursehold img:first-child {
+  display: block;
+  width: 100%;
+}
+
+.courecontent {
+  background: #FFFFFF;
+  padding: 20px;
+  color: #545454;
+  position: relative;
+}
+
+.courecontent .price {
+  width: 51px;
+  height: 51px;
+  background: #851C61;
+  position: absolute;
+  top: -31px;
+  right: 29px;
+  border-radius: 80px;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  line-height: 51px;
+}
+
+.courecontent .name {
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-bottom: 10px;
+}
+
+.courecontent .dec {
+  font-size: 14px;
+  font-weight: normal;
+  padding-bottom: 10px;
+}
+
+.courecontent .add-cart-action {
+  padding: 0px 0px 5px 5px !important;
+}
+
+.slick-next,
+.slick-prev {
+  border: 1px solid #44C0B0;
+  border-radius: 2px;
+  top: -21px;
+  z-index: 100;
+  text-align: center;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+}
+
+.slick-next {
+  right: 18px;
+  left: inherit;
+}
+
+.slick-prev {
+  right: 52px;
+  left: inherit;
+}
+
+.slick-next:before,
+.slick-prev:before {
+  line-height: inherit;
+  font-family: FontAwesome;
+  font-size: 20px;
+  color: #4CC0AF;
+  display: inline-block;
+}
+
+.slick-next:before {
+  content: '';
+}
+
+.slick-prev:before {
+  content: '';
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #44C0B0;
+  padding-top: 3px;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.container .checkmark:after {
+  left: 8px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid #979696;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.carthold {
+  float: right;
+  position: relative;
+  padding: 15px;
+}
+
+.ellip {
+  display: block;
+  height: 100%;
+}
+
+.ellip-line {
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+.ellip,
+.ellip-line {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.shopping-cart {
+  margin: 20px 0;
+  position: absolute;
+  background: #f3f3f3;
+  width: 614px;
+  border-radius: 3px;
+  padding: 1px;
+  right: 0px;
+  top: 21px;
+  z-index: 1000;
+  border: 1px solid #ebebeb;
+  -webkit-box-shadow: 0px 2px #ccc;
+          box-shadow: 0px 2px #ccc;
+  display: none;
+  /* -webkit-transition: width 0.3; 
+  -webkit-transition-timing-function: linear;
+  transition: width 0.3s;
+  transition-timing-function: linear;*/
+}
+
+@media (max-width: 626px) {
+  .shopping-cart {
+    width: 375px;
+  }
+}
+
+.shopping-cart:after {
+  bottom: 100%;
+  left: 97%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: #f3f3f3;
+  border-width: 8px;
+  margin-left: -8px;
+}
+
+.cart-icon {
+  color: #515783;
+  font-size: 24px;
+  margin-right: 7px;
+  float: left;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.shopping-cart-hold {
+  background: #fff;
+  padding: 15px 0px 15px 15px;
+}
+
+.shopping-cart-hold .divhold {
+  padding-right: 8px;
+  margin-top: 15px;
+}
+
+.shopping-cart-hold .viewcart-btn {
+  border: 1px solid #4CC0AF;
+  color: #4CC0AF;
+  background: #fff;
+}
+
+.shopping-cart-hold .buynow-btn {
+  border: 1px solid #4CC0AF;
+  color: #ffff;
+  background: #4CC0AF;
+}
+
+.shopping-cart-hold .viewcart-btn,
+.shopping-cart-hold .buynow-btn {
+  width: 49%;
+  padding: 10px 0px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.shopping-cart-hold .final-total {
+  background: #e9e7e7;
+  overflow: hidden;
+  margin-right: 15px;
+}
+
+.shopping-cart-hold .final-total .text {
+  width: 80%;
+  font-size: 24px;
+  font-weight: 500;
+  padding: 10px 30px 10px 10px;
+  float: left;
+  text-align: right;
+}
+
+@media (max-width: 626px) {
+  .shopping-cart-hold .final-total .text {
+    width: 72%;
+  }
+}
+
+.shopping-cart-hold .final-total .number {
+  width: 20%;
+  float: left;
+  font-weight: 700;
+  padding: 10px 25px 10px 10px;
+  font-size: 24px;
+  text-align: right;
+}
+
+.shopping-cart-table {
+  color: #545454;
+  display: block;
+  empty-cells: show;
+}
+
+.shopping-cart-table .course-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.shopping-cart-table .course-dec {
+  font-size: 13px;
+  padding-top: 5px;
+  overflow: hidden;
+  height: 50px;
+}
+
+@media (max-width: 626px) {
+  .shopping-cart-table .course-dec {
+    display: none;
+  }
+}
+
+.shopping-cart-table .price-textbox {
+  width: 50%;
+  height: 43px;
+  border: 1px solid #aaaaaa;
+  text-align: center;
+  border-radius: 2px;
+  float: left;
+}
+
+@media (max-width: 626px) {
+  .shopping-cart-table .price-textbox {
+    width: 100%;
+  }
+}
+
+.shopping-cart-table .price {
+  width: 51px;
+  height: 51px;
+  background: #851C61;
+  border-radius: 80px;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  line-height: 51px;
+  display: inline-block;
+  -webkit-box-shadow: 1px 1px 4px 2px #a3a3a3;
+  box-shadow: 1px 1px 4px 2px #a3a3a3;
+}
+
+.shopping-cart-table .remove-cart {
+  color: #000;
+  font-size: 24px;
+  display: block;
+  float: left;
+  padding: 8px 0px 0px 15px;
+  cursor: pointer;
+}
+
+@media (max-width: 626px) {
+  .shopping-cart-table .remove-cart {
+    padding: 8px 0px 0px 20px;
+  }
+}
+
+.shopping-cart-table .total {
+  font-weight: 700;
+  text-align: right;
+  margin-top: 15px;
+}
+
+.shopping-cart-table tbody {
+  /* Position */
+  display: block;
+  position: relative;
+  width: 100%;
+  /* Decoration */
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  height: 300px;
+}
+
+.shopping-cart-table thead {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding-right: 20px;
+}
+
+.shopping-cart-table tr {
+  display: block;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.shopping-cart-table th {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px 0px 15px 0px;
+  display: block;
+  float: left;
+}
+
+.shopping-cart-table td {
+  text-align: left;
+  border-bottom: 1px solid #dcdcdc;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  padding-right: 10px;
+  display: block;
+  float: left;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  max-width: 100%;
+}
+
+.shopping-cart-table th:nth-child(1),
+.shopping-cart-table td:nth-child(1) {
+  width: 45%;
+}
+
+.shopping-cart-table th:nth-child(2),
+.shopping-cart-table td:nth-child(2) {
+  width: 20%;
+}
+
+.shopping-cart-table th:nth-child(3),
+.shopping-cart-table td:nth-child(3) {
+  width: 15%;
+  text-align: center;
+}
+
+.shopping-cart-table th:nth-child(4),
+.shopping-cart-table td:nth-child(4) {
+  width: 20%;
+  text-align: right;
+}
+
+.shopping-cart-table td:nth-child(3) {
+  text-align: center;
+}
+
+.shopping-cart-table td:nth-child(4) {
+  text-align: right;
+  padding-right: 0;
+}
+
+.shopping-cart-table .mCSB_scrollTools .mCSB_draggerRail {
+  width: 8px;
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 16px;
+}
+
+.shopping-cart-table .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.75);
+  filter: "alpha(opacity=75)";
+  -ms-filter: "alpha(opacity=75)";
+  width: 8px;
+}
+
+.shopping-cart-table div.myautoscroll {
+  height: 40ex;
+  width: 40em;
+  overflow: hidden;
+  border: 1px solid #444;
+  margin: 3em;
+}
+
+.shopping-cart-table div.myautoscroll:hover {
+  overflow: auto;
+}
+
+.shopping-cart-table div.myautoscroll p {
+  padding-right: 16px;
+}
+
+.shopping-cart-table div.myautoscroll:hover p {
+  padding-right: 0px;
+}
+
+.shopping-cart-table .mCSB_inside > .mCSB_container {
+  margin-right: 25px;
+}
+
+.shopping-cart-all {
+  padding: 20px;
+}
+
+.shopping-cart-all tbody {
+  height: auto;
+}
+
+.shopping-cart-all thead {
+  padding-right: 0;
+}
+
+.shopping-cart-all .final-total {
+  margin-right: 0px;
+}
+
+.shopping-cart-all .divhold {
+  padding-right: 0px;
+  margin-left: -15px;
+  margin-right: -15px;
+  overflow: hidden;
+}
+
+.shopping-cart-all .viewcart-btn {
+  width: 100%;
+}
+
+.shopping-cart-all .buynow-btn {
+  width: 100%;
+}
+
+.shopping-cart-all .btnhold {
+  width: 50%;
+  padding: 15px;
+  float: left;
+}
+
+.all-courses {
+  padding: 15px;
+}
+
+.all-courses .coursehold {
+  padding-right: 0;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.name a {
+    color: #FFF;
+}
+.name{
+text-align:center;
+}
+/*# sourceMappingURL=wirehouse.css.map */

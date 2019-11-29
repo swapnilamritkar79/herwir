@@ -61,7 +61,7 @@ class available_view implements renderable, templatable {
         require_once($CFG->dirroot.'/course/lib.php');
 
         // Build courses view data structure.
-        $availableview = [];
+        $availableview = ['wwwroot'=>$CFG->wwwroot];
 
         foreach ($this->mycompletion->mynotstartedenrolled as $mid => $notstarted) {
             // get the course display info.
@@ -87,15 +87,58 @@ class available_view implements renderable, templatable {
             }
             $exportedcourse = $exporter->export($output);
             $exportedcourse->url = new \moodle_url('/course/view.php', array('id' => $notstarted->courseid));
+           
             $exportedcourse->image = $imageurl;
             $exportedcourse->summary = $coursesummary;
+			$exportedcourse->cnt = count($availableview['courses']);
             $availableview['courses'][] = $exportedcourse;
         }
+		
 
         foreach ($this->mycompletion->mynotstartedlicense as $mid => $notstarted) {
             // get the course display info.
             $context = \context_course::instance($notstarted->courseid);
             $course = $DB->get_record("course", array("id"=>$notstarted->courseid));
+            $courseobj = new \core_course_list_element($course);
+
+            $exporter = new course_summary_exporter($course, ['context' => $context]);
+            $exportedcourse = $exporter->export($output);
+            if ($CFG->mycourses_showsummary) {
+                // Convert summary to plain text.
+                $coursesummary = content_to_text($exportedcourse->summary, $exportedcourse->summaryformat);
+            } else {
+                $coursesummary = '';
+            }
+            // display course overview files
+            $imageurl = '';
+            foreach ($courseobj->get_course_overviewfiles() as $file) {
+                $isimage = $file->is_valid_image();
+                if (!$isimage) {
+                    $imageurl = $output->pix_icon(file_file_icon($file, 24), $file->get_filename(), 'moodle');
+                } else {
+                    $imageurl = file_encode_url("$CFG->wwwroot/pluginfile.php",
+                                '/'. $file->get_contextid(). '/'. $file->get_component(). '/'.
+                                $file->get_filearea(). $file->get_filepath(). $file->get_filename(), !$isimage);
+                } 
+            }
+            if (empty($imageurl)) {
+                $imageurl = $output->image_url('i/course');
+            }
+            $exportedcourse = $exporter->export($output);
+            $exportedcourse->url = new \moodle_url('/course/view.php', array('id' => $notstarted->courseid));
+            $exportedcourse->image = $imageurl;
+            $exportedcourse->summary = $coursesummary;
+			//$exportedcourse->cnt = count($availableview['courses']);
+            $availableview['courses'][] = $exportedcourse;
+        }
+		
+		$allcourses = $DB->get_records_sql("select c.*,cp.price from {course} c inner join {course_price}  cp on c.id = cp.courseid where visible =1 ");
+		$availableview['allcourses'] =[];
+		foreach ($allcourses as $mid => $course) {
+            // get the course display info.
+            $context = \context_course::instance($course->id);
+           // $course = $DB->get_record("course", array("id"=>$notstarted->courseid));
+		   
             $courseobj = new \core_course_list_element($course);
 
             $exporter = new course_summary_exporter($course, ['context' => $context]);
@@ -122,11 +165,15 @@ class available_view implements renderable, templatable {
                 $imageurl = $output->image_url('i/course');
             }
             $exportedcourse = $exporter->export($output);
-            $exportedcourse->url = new \moodle_url('/course/view.php', array('id' => $notstarted->courseid));
+            $exportedcourse->url = new \moodle_url('/course/view.php', array('id' => $course->id));
+            $exportedcourse->carturl = new \moodle_url('/blocks/mycourses/buynow.php', array('courseid' => $course->id));
             $exportedcourse->image = $imageurl;
             $exportedcourse->summary = $coursesummary;
-            $availableview['courses'][] = $exportedcourse;
+			$exportedcourse->cnt = count($availableview['allcourses']);
+			$exportedcourse->price = $course->price;
+            $availableview['allcourses'][] = $exportedcourse;
         }
+		
         return $availableview;
     }
 }
