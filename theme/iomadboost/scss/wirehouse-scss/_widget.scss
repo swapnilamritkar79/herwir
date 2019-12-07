@@ -1,0 +1,281 @@
+html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #F5F5F5;
+      font-family: "Museo Sans Rounded 300";
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    .bar {
+      background: #fff;
+      height: 50px;
+    }
+
+    .section-title{ font-size: 18px; padding:15px 0px 15px 27px; margin: 0px;; }
+
+
+    .responsive {
+        width: 96%;
+        margin-left: 2%;
+        margin-right: 2%;
+
+ 
+      }
+
+
+      .event-bg{
+        background:#fff;
+        width:95%;
+        padding:20px 20px 20px 40px;
+
+        .slick-next {
+            right: 0px;
+            left: inherit;
+      
+          }
+      
+          .slick-prev {
+            right: 34px;
+            left: inherit;
+          }
+
+          .name{ font-weight: 700;}
+
+          .time{ font-size: 14px; color:#7A7A7A; padding-bottom: 5px; }
+          .event-img {
+              padding: 10px 0px;
+              img{width:100%; } 
+            }
+       
+               }
+
+
+    .responsive-hold {
+      width: 100%;
+      overflow: hidden;
+      padding: 50px 15px 0px 15px;
+    }
+
+
+    .coursehold{
+        padding-right: 20px;
+        position: relative;
+
+        .statusebar{ position: absolute;
+             background:#707070 ;
+            width: 100%;
+            top:0px;
+            left: 0px;
+            z-index: 1;
+        
+            .bar{
+                background:red ;
+                height: 8px;
+            }
+        
+        }
+
+
+        .progress{background:#707070 !important; height: 8px; border: 0px solid #707070!important; border-radius: 0px; }
+
+            
+
+        .newcourse {
+            position: absolute;
+            width: 51px;
+            height: 51px;
+            left: 20px;
+            top: -28px;
+          }
+
+          img:first-child {
+            display: block;
+            width: 100%;
+          }
+
+
+    }
+
+
+
+
+    .courecontent {
+      background: #FFFFFF;
+      padding: 20px;
+      color: #545454;
+      position: relative;
+
+    
+
+      .price {
+        width: 51px;
+        height: 51px;
+        background: #851C61;
+        position: absolute;
+        top: -31px;
+        right: 29px;
+        border-radius: 80px;
+        font-size: 18px;
+        color: #fff;
+        text-align: center;
+        line-height: 51px;
+      }
+
+      .name {
+        font-size: 18px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-bottom: 10px;
+      }
+
+      .dec {
+        font-size: 14px;
+        font-weight: normal;
+        padding-bottom: 10px;
+      }
+
+      .add-cart-action {
+        padding-top: 20px;
+      }
+
+   
+
+
+    }
+
+    .slick-next,
+    .slick-prev {
+      border: 1px solid #44C0B0;
+      border-radius: 2px;
+      top: -21px;
+      z-index: 100;
+      text-align: center;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+    }
+
+    .slick-next {
+      right: 18px;
+      left: inherit;
+
+    }
+
+    .slick-prev {
+      right: 52px;
+      left: inherit;
+    }
+
+
+    .slick-next:before,
+    .slick-prev:before {
+
+      line-height: inherit;
+
+      font-family: FontAwesome;
+      font-size: 20px;
+      color: #4CC0AF;
+      display: inline-block;
+    }
+
+    .slick-next:before {
+
+      content: '';
+
+    }
+
+    .slick-prev:before {
+      content: ''
+
+    }
+
+
+
+
+
+    .container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      color: #44C0B0;
+      padding-top: 3px;
+    }
+
+ 
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input~.checkmark {
+      background-color: #fff;
+      border: 1px solid #ccc
+    }
+
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+
+    .container {
+        input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+          }
+
+
+          input:checked~.checkmark:after {
+            display: block;
+          }
+      
+
+          input:checked~.checkmark {
+            background-color: #fff;
+            border: 1px solid #ccc;
+          }
+      
+
+
+          .checkmark:after {
+            left: 8px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid #979696;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+      
+          }
+
+    }
+
+
+  

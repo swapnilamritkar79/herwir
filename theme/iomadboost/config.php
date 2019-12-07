@@ -143,7 +143,13 @@ $THEME->layouts = [
         'file' => 'secure.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre'
+    ),
+	 'popup' => array(
+        'file' => 'embedded.php',
+        'regions' => array(),
+        'options' => array('nofooter' => true, 'nonavbar' => true),
     )
+
 ];
 
 $THEME->parents = [];
@@ -157,4 +163,4 @@ $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 $THEME->requiredblocks = '';
 $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
 $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
-$THEME->javascripts = array('jquery-3.2.1.min','jquery.min','jquery-ui','jquery.dataTables.min','jquery.validate.min');
+$THEME->javascripts = array('jquery-3.2.1.min','jquery.min','jquery-ui','jquery.dataTables.min','jquery.validate.min','slick.js');
