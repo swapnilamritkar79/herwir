@@ -48,25 +48,26 @@ class course_cart_form extends moodleform {
               </td>
               <td>');
 			  $removeurl = new \moodle_url('/blocks/mycourses/basket.php',array('remove'=>$invoiceitem->id));
-			$mform->addElement('html','<input type="text" class="price-textbox" name="price['.$invoiceitem->id.']" value="'.$invoiceitem->quantity.'">');
+			$mform->addElement('html','<input type="number" min="1" class="price-textbox" name="price['.$invoiceitem->id.']" value="'.$invoiceitem->quantity.'">');
 			  $mform->addElement('html','<a href="'.$removeurl.'"><i class="fa fa-times remove-cart "
                   aria-hidden="true"></i></a></td>
               <td>
                 <div class="price">$'.$invoiceitem->price.'</div>
               </td>
               <td>
-                <div class="total">$'.$invoiceitem->price * $invoiceitem->quantity.'</div>
+                <div class="total">$'.sprintf ("%.2f",$invoiceitem->price * $invoiceitem->quantity).'</div>
               </td>
+
             </tr>');
 			$total += ($invoiceitem->price * $invoiceitem->quantity);
 			
 		}
 		$mform->addElement('html','</tbody></table><div class="final-total">
           <div class="text">Total</div>
-          <div class="number">'.$total.'</div>
+          <div class="number">$'.sprintf ("%.2f",$total).'</div>
         </div>
         <div class="divhold">
-          <div class="btnhold"><a href="'.new \moodle_url('/').'"><div class="btnhold"><span class="buynow-btn">Add More Course</span></div></a> 
+          <div class="btnhold"><a href="'.new \moodle_url('/my/?mycoursestab=all').'"><div class="btnhold"><span class="buynow-btn">Add More Course</span></div></a> 
 			</div>
 		<div class="btnhold"><a href="'.new \moodle_url('/').'"><div class="btnhold"><span class="buynow-btn">Check Out</span></div></a> 
 			</div>

@@ -49,3 +49,4 @@ $string['privacy:metadata'] = 'The My Courses block only shows data stored in ot
 $string['showsummarylabel'] = 'Show course summary';
 $string['showsummarydesc'] = 'Show the course summary in the listing';
 $string['title'] = 'My courses';
+$string['allcourse'] = 'All Courses';

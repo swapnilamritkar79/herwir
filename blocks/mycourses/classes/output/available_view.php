@@ -132,7 +132,7 @@ class available_view implements renderable, templatable {
             $availableview['courses'][] = $exportedcourse;
         }
 		
-		$allcourses = $DB->get_records_sql("select c.*,cp.price from {course} c inner join {course_price}  cp on c.id = cp.courseid where visible =1 ");
+		/*$allcourses = $DB->get_records_sql("select c.*,cp.price from {course} c inner join {course_price}  cp on c.id = cp.courseid where visible =1 ");
 		$availableview['allcourses'] =[];
 		foreach ($allcourses as $mid => $course) {
             // get the course display info.
@@ -172,7 +172,7 @@ class available_view implements renderable, templatable {
 			$exportedcourse->cnt = count($availableview['allcourses']);
 			$exportedcourse->price = $course->price;
             $availableview['allcourses'][] = $exportedcourse;
-        }
+        }*/
 		
         return $availableview;
     }

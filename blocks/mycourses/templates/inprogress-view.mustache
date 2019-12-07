@@ -22,33 +22,40 @@
     Example context (json):
     {}
 }}
-<div id="inprogress-view-{{uniqid}}" data-region="inprogress-view">
+<div id="inprogress-view-{{uniqid}}" data-region="inprogress-view" class="responsive">
    {{#inprogressview.courses}}
-        <div class="tab-content">
-            <div class="tab-pane active fade in" id="mycourses_inprogress_view">
-                    <div class="mycourselisting">
+ <!-- <div class="responsive-hold">
+  <div class="responsive">-->
+        <div class="coursehold">
+            
+                    <div class="courecontent">
                         <div class="courseimage">
                             <a href="{{ url }}"><img class="imgresponsive" src="{{ image }}" class="courseimage"></a>
                         </div>
-                        <div class="mycoursedetails">
-                            <div class="mycourseheading">
-                                <h4 class="title">
-                                    <a href="{{ url }}">{{ fullname }}</a>
-                                </h4>
-                            </div>
-                            <div class="mycoursesummary">
-                                {{ summary}}
-                            </div>
-                        </div>
-                            <div class="ml-auto mt-auto w-50 p-t-1">
+                      <div class="ml-auto mt-auto">
                                 {{#hasprogress}}
                                     {{> block_mycourses/progress-bar}}
                                 {{/hasprogress}}
                             </div>
+                            <div class="name">
+                                <h4 class="title">
+                                    <a href="{{ url }}">{{ fullname }}</a>
+                                </h4>
+                            </div>
+                            <div class="dec ">
+                                {{ summary}}
+                            </div>
+                        
+                            
                     </div>
-            </div>
+
         </div>
-    {{/inprogressview.courses}}
+<!--</div>
+		     
+  </div>-->
+
+
+   {{/inprogressview.courses}}
     {{^inprogressview.courses}}
         <div class="text-xs-center text-center m-t-3">
             <img class="empty-placeholder-image-lg"
@@ -59,6 +66,7 @@
         </div>
     {{/inprogressview.courses}}
 </div>
+
 {{#js}}
 require(['jquery', 'core/custom_interaction_events'], function($, customEvents) {
     var root = $('#inprogress-view-{{uniqid}}');
@@ -66,5 +74,7 @@ require(['jquery', 'core/custom_interaction_events'], function($, customEvents) 
     root.on(customEvents.events.activate, '[data-toggle="btns"] > .btn', function() {
         root.find('.btn.active').removeClass('active');
     });
-});
+}); 
+
+
 {{/js}}

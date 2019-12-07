@@ -22,11 +22,7 @@ require_once('edit_cart.php');
 require_commerce_enabled();
 
 $remove = optional_param('remove', 0, PARAM_INT);
-
-global $DB,$CFG;
-
-// Correct the navbar.
-// Set the name for the page.
+$popup = optional_param('popup', 0, PARAM_INT);
 $linktext = get_string('course_shop_title', 'block_iomad_commerce');
 // Set the url.
 $linkurl = new moodle_url('/blocks/iomad_commerce/shop.php');
@@ -35,14 +31,20 @@ $linkurl = new moodle_url('/blocks/iomad_commerce/shop.php');
 $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_url($linkurl);
+global $DB,$CFG;
+if($popup != 1)
+{	
+// Correct the navbar.
+// Set the name for the page.
+
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title($linktext);
 $PAGE->set_heading($SITE->fullname);
-$PAGE->navbar->add($linktext, $linkurl);
+//$PAGE->navbar->add($linktext, $linkurl);
 $PAGE->navbar->add(get_string('basket', 'block_iomad_commerce'));
 
 echo $OUTPUT->header();
-
+}
 flush();
 
 
@@ -101,5 +103,7 @@ if (!empty($SESSION->basketid)) {
 }
 
 
-
+if($popup != 1)
+{
 echo $OUTPUT->footer();
+}

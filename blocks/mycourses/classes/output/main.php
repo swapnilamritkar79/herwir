@@ -72,18 +72,35 @@ class main implements renderable, templatable {
         $availableview = new available_view($mycompletion, $cutoffdate);
         $inprogressview = new inprogress_view($mycompletion, $cutoffdate);
         $completedview = new completed_view($mycompletion, $cutoffdate);
-
+        $allview = new all_view();
+		$c_admin=user_has_role_assignment($USER->id,10);
+		if(!$c_admin)
+		{
+			$notcompanyadmin=1;
+			
+		}else{
+			$notcompanyadmin=0;
+			$this->tab ='all';
+		}
         // Now, set the tab we are going to be viewing.
         $viewingavailable = false;
         $viewinginprogress = false;
         $viewingcompleted = false;
+        $viewingall = false;
         if ($this->tab == 'available') {
-            $viewingavailable = true;
+            $viewingavailable = false;
         } else if ($this->tab == 'completed') {
             $viewingcompleted = true;
-        } else {
+        } 
+		else
+		if ($this->tab == 'inprogress') {
             $viewinginprogress = true;
+        } 
+		else if($this->tab == 'all')
+		{
+            $viewingall = true;
         }
+		//echo $viewingall."1****".$viewinginprogress."2****".$viewingavailable."3****".$viewingcompleted;
         $nocoursesurl = $output->image_url('courses', 'block_myoverview')->out();
 
         return [
@@ -91,10 +108,16 @@ class main implements renderable, templatable {
             'nocourses' => $nocoursesurl,
             'availableview' => $availableview->export_for_template($output),
             'inprogressview' => $inprogressview->export_for_template($output),
+            'allview' => $allview->export_for_template($output),
             'completedview' => $completedview->export_for_template($output),
+            'viewingall' => $viewingall,
             'viewingavailable' => $viewingavailable,
             'viewinginprogress' => $viewinginprogress,
-            'viewingcompleted' => $viewingcompleted
+            'viewingcompleted' => $viewingcompleted,
+			'notcompanyadmin' => $notcompanyadmin,
+			'companyadmin' =>$c_admin
+			
+			
         ];
     }
 }

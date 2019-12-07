@@ -25,6 +25,14 @@
 
 <div id="block-mycourses-{{uniqid}}" class="block-mycourses" data-region="mycourses">
     <ul id="block-mycourses-view-choices-{{uniqid}}" class="nav nav-tabs" role="tablist">
+		{{#companyadmin}}
+		<li class="nav-item">
+            <a class="nav-link {{#viewingall}}active{{/viewingall}}" href="#mycourses_all_view" role="tab" data-toggle="tab" data-tabname="all">
+                {{#str}} allcourse, block_mycourses {{/str}}
+            </a>
+        </li>
+		{{/companyadmin}}
+		{{#notcompanyadmin}}
         <li class="nav-item">
             <a class="nav-link {{#viewingavailable}}active{{/viewingavailable}}" href="#mycourses_available_view" role="tab" data-toggle="tab" data-tabname="available">
                 {{#str}} availableheader, block_mycourses {{/str}}
@@ -40,8 +48,15 @@
                 {{#str}} completedheader, block_mycourses {{/str}}
             </a>
         </li>
+		{{/notcompanyadmin}}
     </ul>
     <div class="tab-content content-centred">
+		{{#companyadmin}}
+		<div role="tabpanel" class="tab-pane fade {{#viewingall}}in active{{/viewingall}}" id="mycourses_all_view">
+            {{> block_mycourses/all-view }}
+        </div>
+		{{/companyadmin}}
+		{{#notcompanyadmin}}
         <div role="tabpanel" class="tab-pane fade {{#viewingavailable}}in active{{/viewingavailable}}" id="mycourses_available_view">
             {{> block_mycourses/available-view }}
         </div>
@@ -51,6 +66,7 @@
         <div role="tabpanel" class="tab-pane fade {{#viewingcompleted}}in active{{/viewingcompleted}}" id="mycourses_completed_view">
             {{> block_mycourses/completed-view }}
         </div>
+		{{/notcompanyadmin}}
     </div>
 </div>
 {{#js}}

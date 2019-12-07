@@ -3,30 +3,37 @@ require_once(dirname(__FILE__) . '/../iomad_company_admin/lib.php');
 require_once(dirname(__FILE__) . '/../iomad_commerce/lib.php');
 
 $remove = optional_param('remove', 0, PARAM_INT);
-
+$popup = optional_param('popup', 0, PARAM_INT);
+$courseid    = required_param('courseid', PARAM_INT);
+//echo "************".$popup;
 global $DB;
+if($popup != 1)
+{	
+	// Correct the navbar.
+	// Set the name for the page.
+	$linktext = get_string('course_shop_title', 'block_iomad_commerce');
+	// Set the url.
+	$linkurl = new moodle_url('/blocks/iomad_commerce/shop.php');
 
-// Correct the navbar.
-// Set the name for the page.
-$linktext = get_string('course_shop_title', 'block_iomad_commerce');
-// Set the url.
-$linkurl = new moodle_url('/blocks/iomad_commerce/shop.php');
+	// Page stuff:.
+	$context = context_system::instance();
+	$PAGE->set_context($context);
+	$PAGE->set_url($linkurl);
+	$PAGE->set_pagelayout('admin');
+	$PAGE->set_title($linktext);
+	$PAGE->set_heading($SITE->fullname);
+	$PAGE->navbar->add($linktext, $linkurl);
+	$PAGE->navbar->add(get_string('basket', 'block_iomad_commerce'));
 
-// Page stuff:.
-$context = context_system::instance();
-$PAGE->set_context($context);
-$PAGE->set_url($linkurl);
-$PAGE->set_pagelayout('admin');
-$PAGE->set_title($linktext);
-$PAGE->set_heading($SITE->fullname);
-$PAGE->navbar->add($linktext, $linkurl);
-$PAGE->navbar->add(get_string('basket', 'block_iomad_commerce'));
-
-echo $OUTPUT->header();
-
+	echo $OUTPUT->header();
+}
+else
+{
+		$PAGE->set_pagelayout('popup');
+}
 flush();
 
-$courseid    = required_param('courseid', PARAM_INT);
+
 
 // Get or create basket.
 if (!empty($SESSION->basketid)) {
@@ -78,7 +85,14 @@ else
     $invoiceitem->license_shelflife = 0;
 	$DB->update_record('invoiceitem', $invoiceitem);
 }
+if($popup != 1)
+{	echo $OUTPUT->footer();
 redirect(new \moodle_url('/blocks/mycourses/basket.php'));
 
-echo $OUTPUT->footer();
+}
+else
+{
+		echo "success";
+}
+
 ?>
