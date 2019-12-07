@@ -36,7 +36,10 @@
 
 require_once(__DIR__ . '/../config.php');
 require_once($CFG->dirroot . '/my/lib.php');
+?>
 
+
+<?php
 redirect_if_major_upgrade_required();
 
 // TODO Add sesskey check to edit
@@ -162,7 +165,76 @@ if (empty($CFG->forcedefaultmymoodle) && $PAGE->user_allowed_editing()) {
 }
 
 echo $OUTPUT->header();
+?>
+<?php
+echo "<script src="."'$CFG->wwwroot/theme/iomadboost/javascript/slick.js'"."></script>";
+echo "<script src="."'$CFG->wwwroot/theme/iomadboost/javascript/jquery.ellipsis.js'"."></script>";
+?>
 
+<style>
+<!--.tab-content>.tab-pane {
+   display: block;
+ height: 0;
+  overflow: hidden;
+}-->
+.tab-content>.tab-pane.active {
+    height: auto;
+	overflow:inherit;
+}
+</style>
+<script>
+
+//$.noConflict();
+function initslider(){
+	console.log( "ready!" );
+	$('.responsive').slick({
+        dots: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+          // You can unslick at a given breakpoint now by adding:
+          // settings: "unslick"
+          // instead of a settings object
+        ]
+      });
+}
+//$.noConflict();
+	jQuery( document ).ready(function($){
+		alert('fff');
+    initslider();
+	$(".nav-link").click(function(event){
+			alert('eee');
+			initslider();
+		});
+});
+	
+</script>
+<?php
 echo $OUTPUT->custom_block_region('content');
 
 echo $OUTPUT->footer();
