@@ -107,7 +107,7 @@ class all_view implements renderable, templatable {
 			
         }
 		$allview['viewcarturl'] = new \moodle_url('/blocks/mycourses/basket.php', array('popup'=>1));
-		//print_object($allview);
+		
         return $allview;
     }
 }

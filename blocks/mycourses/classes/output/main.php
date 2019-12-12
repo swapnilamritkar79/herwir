@@ -77,6 +77,7 @@ class main implements renderable, templatable {
 		if(!$c_admin)
 		{
 			$notcompanyadmin=1;
+			$this->tab ='all';
 			
 		}else{
 			$notcompanyadmin=0;

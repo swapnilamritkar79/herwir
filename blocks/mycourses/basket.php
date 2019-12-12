@@ -107,3 +107,29 @@ if($popup != 1)
 {
 echo $OUTPUT->footer();
 }
+
+?>
+
+<script>
+$(".viewcart").click(function(event){
+    event.preventDefault();
+    console.log($(this).attr('href'));
+    
+    $.get($(this).attr('href'), function(data, status){
+        var trigger = $('#myModal');
+        console.log(data);
+        
+        ModalFactory.create({
+            
+            title: 'View Cart',
+            body: data,
+            large : 1,
+        }, trigger)
+        .done(function(modal) {
+            modal.show();
+        });
+            
+    });
+});
+</script>
+<?php 
