@@ -71,8 +71,7 @@ class course_cart_form extends moodleform {
 			</div>
 		<div class="btnhold"><a href="'.new \moodle_url('/').'"><div class="btnhold"><span class="buynow-btn">Check Out</span></div></a> 
 			</div>
-			<div class="btnhold"><input class="buynow-btn" type="submit" name="updatequatity" value="Update Quantity"></div></a> 
-			</div>
+			
 		</div>');
 	}
 }
