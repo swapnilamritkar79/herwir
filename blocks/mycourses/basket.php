@@ -72,26 +72,33 @@ if (!empty($SESSION->basketid)) {
     $baskethtml ='';
 	$invoiceitems = $DB->get_records_sql("select ii.*,c.fullname,c.summary  from {invoiceitem} ii
                                 INNER JOIN {course} c ON ii.invoiceableitemid = c.id where ii.invoiceid = :basketid",array('basketid' => $SESSION->basketid) );
-	$args = array(
-		'invoiceitems' => $invoiceitems
-	);
+	
 	
 	if(count($invoiceitems) >0)
 	{
-		$editform = new course_cart_form(null,$args);
 		
 		
-		if (isset($_REQUEST['price']) && count($_REQUEST['price']) >0) 
+		
+		if (isset($_REQUEST['quantity']) && count($_REQUEST['quantity']) >0) 
 		{
 			
-			foreach($_REQUEST['price'] as $iitemid =>$quantity )
+			foreach($_REQUEST['quantity'] as $iitemid =>$quantity )
 			{
 				$invoiceitem = $DB->get_record('invoiceitem', array('id' => $SESSION->basketid, 'id' => $iitemid));
 				$invoiceitem->quantity = $quantity;
 				$DB->update_record('invoiceitem', $invoiceitem);
 			}
-			redirect(new \moodle_url('/blocks/mycourses/basket.php'));
+			if($popup != 1)
+			{
+				redirect(new \moodle_url('/blocks/mycourses/basket.php'));
+			}
 		}
+		$invoiceitems = $DB->get_records_sql("select ii.*,c.fullname,c.summary  from {invoiceitem} ii
+                                INNER JOIN {course} c ON ii.invoiceableitemid = c.id where ii.invoiceid = :basketid",array('basketid' => $SESSION->basketid) );
+			$args = array(
+				'invoiceitems' => $invoiceitems
+			);
+			$editform = new course_cart_form(null,$args);
 		$editform->display(); 
 	}
 	else
@@ -111,6 +118,36 @@ echo $OUTPUT->footer();
 ?>
 
 <script>
+
+$("a.removecart").click(function(event){
+    event.preventDefault();
+    console.log($(this).attr('href'));
+	$.get($(this).attr('href'), function(data, status){
+		 console.log(data);
+		$.get("<?php echo new moodle_url('/blocks/mycourses/basket.php',array('popup'=>$popup))?>", function(data, status){
+				var trigger = $('#myModal');
+				console.log(data);
+				$(".modal-body").html(data);
+					
+			});
+	});
+});
+function changequantity(obj,invoiceid)
+{
+	var url ="<?php echo new moodle_url('/blocks/mycourses/updatequantity.php',array('popup'=>$popup)); ?>";
+	url = url + "&iitemid="+invoiceid+"&quantity="+obj.value;
+	
+	$.get(url, function(data, status){
+		 console.log(data);
+		$.get("<?php echo new moodle_url('/blocks/mycourses/basket.php',array('popup'=>$popup))?>", function(data, status){
+				var trigger = $('#myModal');
+				console.log(data);
+				$(".modal-body").html(data);
+					
+			});
+	});
+	
+}
 $(".viewcart").click(function(event){
     event.preventDefault();
     console.log($(this).attr('href'));
