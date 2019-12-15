@@ -21,7 +21,7 @@ class course_cart_form extends moodleform {
         $mform =& $this->_form;
 
         // Then show the fields about where this block appears.
-        $mform->addElement('header', 'header','Cart');
+       //$mform->addElement('header', 'header','Cart');
 		$invoiceitems        = $this->_customdata['invoiceitems'];
 	
 		
