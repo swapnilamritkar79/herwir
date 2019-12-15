@@ -41,8 +41,10 @@
 											<div class="dec ">{{ summary}}</div>
 											<div class="price">${{price}}</div>
 											<div class="add-cart-action">
-												<a href="javascript:void(0)" class="addtocart" onclick="getcarturl('{{ carturl }}')">
-												<label class="container">Add to cart</label></a>								
+												 <label class="container" >Add to cart
+												  <input type="checkbox" name="course_{{id}}" id="course_{{id}}" {{checked}} onclick="getcarturl('{{ carturl }}','course_{{id}}')">
+												  <span class="checkmark" ></span> </label>
+																				
 												
 											</div>
 										</div>
@@ -78,21 +80,29 @@
 			  </div>
 
 			<script type="text/javascript">
-			    function getcarturl(url)
+			    function getcarturl(url,chk)
 				{
-					console.log(url.replace('&amp;','&'));
-					 $.get(url.replace('&amp;','&'), function(data, status){
-					 alert("Course is added");
-				});
+					console.log($('#'+chk).is(":checked"));
+					 if($('#'+chk).is(":checked"))
+					 {
+							url = url+"&remove=0";
+							console.log(url);
+							$.get(url.replace('&amp;','&'), function(data, status){
+								 alert("Course is added");
+							});
+					 }
+					 else
+					 {
+						url = url+"&remove=1";
+						console.log(url);
+						$.get(url.replace('&amp;','&'), function(data, status){
+								 alert("Course is removed");
+							});
+					 }
+					 
 				}
 				
-				$(document).on('ready', function () {
-			
 				
-				
-
-				});
-
 				(function ($) {
 
 
@@ -177,12 +187,8 @@ require(['jquery', 'core/custom_interaction_events','core/modal_factory',"{{allv
 				$('.course-dec').ellipsis({ responsive: true });
 				});
 });
-function addtocart(url)
-				{
-					$.get(url, function(data, status){
-					
-				  });
+
 				
 				
-				}
+				
 {{/js}}

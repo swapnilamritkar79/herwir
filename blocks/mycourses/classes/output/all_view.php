@@ -23,7 +23,8 @@
  */
 namespace block_mycourses\output;
 defined('MOODLE_INTERNAL') || die();
-
+require_once(dirname(__FILE__) . '/../../../iomad_company_admin/lib.php');
+require_once(dirname(__FILE__) . '/../../../iomad_commerce/lib.php');
 use renderable;
 use renderer_base;
 use templatable;
@@ -56,7 +57,7 @@ class all_view implements renderable, templatable {
      * @return array
      */
     public function export_for_template(renderer_base $output) {
-        global $CFG, $DB;
+        global $CFG, $DB,$SESSION;
         require_once($CFG->dirroot.'/course/lib.php');
 
         // Build courses view data structure.
@@ -84,6 +85,7 @@ class all_view implements renderable, templatable {
             // display course overview files
             $imageurl = '';
             foreach ($courseobj->get_course_overviewfiles() as $file) {
+				
                 $isimage = $file->is_valid_image();
                 if (!$isimage) {
                     $imageurl = $output->pix_icon(file_file_icon($file, 24), $file->get_filename(), 'moodle');
@@ -92,8 +94,9 @@ class all_view implements renderable, templatable {
                                 '/'. $file->get_contextid(). '/'. $file->get_component(). '/'.
                                 $file->get_filearea(). $file->get_filepath(). $file->get_filename(), !$isimage);
                 }
+			
             }
-            if (empty($imageurl)) {
+            if (empty($imageurl) ) {
                 $imageurl = $output->image_url('i/course');
             }
             $exportedcourse = $exporter->export($output);
@@ -103,6 +106,29 @@ class all_view implements renderable, templatable {
             $exportedcourse->summary = substr(content_to_text($course->summary, $course->summaryformat),0,80);
 			$exportedcourse->cnt = count($allview['allcourses']);
 			$exportedcourse->price = $course->price;
+			$exportedcourse->id = $course->id;
+			
+			
+			if (isset($SESSION->basketid) && $DB->record_exists_sql('SELECT ii.id
+                                      FROM {invoiceitem} ii
+                                INNER JOIN {course} c ON ii.invoiceableitemid = c.id
+                                     WHERE c.id = :courseid
+                                       AND
+                                    EXISTS ( SELECT id
+                                             FROM {invoice} i
+                                             WHERE i.id = :basketid
+                                             AND i.status = :status
+                                             AND i.id = ii.invoiceid)
+                                             ', array('basketid' => $SESSION->basketid, 'status' => INVOICESTATUS_BASKET,'courseid'=>$course->id)))
+			 {
+				 $exportedcourse->checked = "checked";
+				
+			 }
+			 else
+			 {
+				 $exportedcourse->checked = "";
+			 }
+			
             $allview['allcourses'][] = $exportedcourse;
 			
         }

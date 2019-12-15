@@ -37,6 +37,40 @@ flush();
 
 // Get or create basket.
 if (!empty($SESSION->basketid)) {
+	if ($remove) {
+		
+		$removeid = $DB->get_record_sql('SELECT ii.id
+                                      FROM {invoiceitem} ii
+                                INNER JOIN {course} c ON ii.invoiceableitemid = c.id
+                                     WHERE c.id = :courseid
+                                       AND
+                                    EXISTS ( SELECT id
+                                             FROM {invoice} i
+                                             WHERE i.id = :basketid
+                                             AND i.status = :status
+                                             AND i.id = ii.invoiceid)
+                                             ', array('basketid' => $SESSION->basketid, 'status' => INVOICESTATUS_BASKET,'courseid'=>$courseid));
+		
+		
+		
+        // Before deleting
+        // check that the record to be removed is on the current user's basket
+        // (and not on an invoice or on somebody else's basket).
+        if ($DB->record_exists_sql('SELECT ii.id
+                                      FROM {invoiceitem} ii
+                                INNER JOIN {course} c ON ii.invoiceableitemid = c.id
+                                     WHERE ii.id = :toberemoved
+                                       AND
+                                    EXISTS ( SELECT id
+                                             FROM {invoice} i
+                                             WHERE i.id = :basketid
+                                             AND i.status = :status
+                                             AND i.id = ii.invoiceid
+                                             )', array('basketid' => $SESSION->basketid, 'status' => INVOICESTATUS_BASKET, 'toberemoved' => $removeid->id))) {
+            $DB->delete_records('invoiceitem', array('id' => $removeid->id));
+        }
+    }
+	else
     if (!$basket = $DB->get_record('invoice', array('id' => $SESSION->basketid, 'status' => INVOICESTATUS_BASKET), '*')) {
         $basket = new stdClass;
         $basket->userid = $USER->id;
@@ -53,7 +87,7 @@ if (!empty($SESSION->basketid)) {
     $basket->id = $DB->insert_record('invoice', $basket, true);
     $SESSION->basketid = $basket->id;
 }
-
+if (!$remove) {
 $invoiceitem = $DB->get_record('invoiceitem', array('invoiceid' => $SESSION->basketid, 'invoiceableitemid' => $courseid));
 
 $courseprice = $DB->get_record('course_price', array('courseid' => $courseid), '*', MUST_EXIST) ;
@@ -84,6 +118,7 @@ else
     $invoiceitem->license_validlength = 999;
     $invoiceitem->license_shelflife = 0;
 	$DB->update_record('invoiceitem', $invoiceitem);
+}
 }
 if($popup != 1)
 {	echo $OUTPUT->footer();
