@@ -22,58 +22,39 @@
     Example context (json):
     {}
 }}
-<div id="all-view-{{uniqid}}" data-region=#all-view">
+<div id="recommended-view-{{uniqid}}" data-region=#recommended-view">
    
         <div class="tab-content">
-            <div class="tab-pane active fade in" id="mycourses_all_view">
-			<div class="responsive">
-				 
-				
-					{{#allview.allcourses}}
-						
-							
-									<div class="coursehold">
-										<div class="courseimage">
-										<img class="imgresponsive" src="{{ image }}" class="courseimage">
-										</div>
-										<div class="courecontent">
-											<div class="name">{{ fullname }}</div>
-											<div class="dec ">{{ summary}}</div>
-											<div class="price">${{price}}</div>
-											<div class="add-cart-action">
-												 <label class="container" >Add to cart
-												  <input type="checkbox" name="course_{{id}}" id="course_{{id}}" {{checked}} onclick="getcarturl('{{ carturl }}','course_{{id}}')">
-												  <span class="checkmark" ></span> </label>
-																				
-												
-											</div>
-										</div>
+            <div class="tab-pane active fade in" id="mycourses_recommended_view">
+				<div class="responsive">
+
+				{{#recommendview.recommendedcourses}}
+
+					
+							<div class="coursehold">
+								<div class="courseimage">
+								{{{ image }}}
+								</div>
+								<div class="courecontent">
+									<div class="name">{{ fullname }}</div>
+									<div class="dec ">{{ summary}}</div>
+									<div class="price">${{price}}</div>
+									<div class="add-cart-action">
+										 <label class="container" >Add to cart
+										  <input type="checkbox" name="course_{{id}}" id="course_{{id}}" {{checked}} onclick="getcarturl('{{ carturl }}','course_{{id}}')">
+										  <span class="checkmark" ></span> </label>
+																		
+										
 									</div>
-								
-						{{/allview.allcourses}}
-					</div>
+								</div>
+							</div>
+						
+				{{/recommendview.recommendedcourses}}
+
+				</div>
 					
 				
-			
-			<div id="myModal" class="modal fade" role="dialog">
-			  <div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-				  <div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Modal Header</h4>
-				  </div>
-				  <div class="modal-body">
-					<p>Some text in the modal.</p>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				  </div>
-				</div>
-
-			  </div>
-			  </div>
+	
 
 			<script type="text/javascript">
 			    function getcarturl(url,chk)
@@ -129,7 +110,7 @@
 		</div>
 </div>
 {{#js}}
-require(['jquery', 'core/custom_interaction_events','core/modal_factory',"{{allview.wwwroot}}/blocks/mycourses/slick/slick.js"], function($, customEvents,ModalFactory,slick) {
+require(['jquery', 'core/custom_interaction_events','core/modal_factory',"{{recommended.wwwroot}}/blocks/mycourses/slick/slick.js"], function($, customEvents,ModalFactory,slick) {
     var root = $('#all-view-{{uniqid}}');
     customEvents.define(root, [customEvents.events.activate]);
     root.on(customEvents.events.activate, '[data-toggle="btns"] > .btn', function() {

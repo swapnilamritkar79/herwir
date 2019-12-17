@@ -23,11 +23,14 @@
  */
 namespace block_mycourses\output;
 defined('MOODLE_INTERNAL') || die();
-require_once(dirname(__FILE__) . '/../../../iomad_company_admin/lib.php');
-require_once(dirname(__FILE__) . '/../../../iomad_commerce/lib.php');
+require_once($CFG->dirroot . '/blocks/iomad_company_admin/lib.php');
+require_once($CFG->dirroot . '/blocks/iomad_commerce/lib.php');
+require_once($CFG->dirroot . '/tag/classes/tag.php');
+require_once($CFG->libdir.'/gdlib.php');
 use renderable;
 use renderer_base;
 use templatable;
+use core_tag;
 use core_course\external\course_summary_exporter;
 
 /**
@@ -57,17 +60,29 @@ class recommended_view implements renderable, templatable {
      * @return array
      */
     public function export_for_template(renderer_base $output) {
-        global $CFG, $DB,$SESSION;
+        global $CFG, $DB,$SESSION,$USER;
         require_once($CFG->dirroot.'/course/lib.php');
-
+		require_once($CFG->dirroot . '/tag/classes/tag.php');
         // Build courses view data structure.
         $recommendedview = ['wwwroot'=>$CFG->wwwroot];
-
+		
+			
+			
        
 		
 		$recommendedcourses = $DB->get_records_sql("select c.*,cp.price from {course} c inner join {course_price}  cp on c.id = cp.courseid where visible =1 ");
 		$recommendedview['recommendedcourses'] =[];
 		foreach ($recommendedcourses as $mid => $course) {
+			$tags = \core_tag_tag::get_item_tags_array('core', 'course', $course->id);
+			$interests = \core_tag_tag::get_item_tags_array('core', 'user', $USER->id);
+			
+			$tags_interests = array_intersect($interests, $tags);
+			
+			
+			if(count($tags_interests) == 0)
+			{
+				continue;
+			} 
             // get the course display info.
             $context = \context_course::instance($course->id);
            // $course = $DB->get_record("course", array("id"=>$notstarted->courseid));
@@ -132,9 +147,9 @@ class recommended_view implements renderable, templatable {
             $recommendedview['recommendedcourses'][] = $exportedcourse;
 			
         }
-		print_r($recommendedview['recommendedcourses']);
 		$recommendedview['viewcarturl'] = new \moodle_url('/blocks/mycourses/basket.php', array('popup'=>1));
 		
+			
         return $recommendedview;
     }
 }

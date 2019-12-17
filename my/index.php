@@ -172,11 +172,7 @@ echo "<script src="."'$CFG->wwwroot/theme/iomadboost/javascript/jquery.ellipsis.
 ?>
 
 <style>
-<!--.tab-content>.tab-pane {
-   display: block;
- height: 0;
-  overflow: hidden;
-}-->
+
 .tab-content>.tab-pane.active {
     height: auto;
 	overflow:inherit;
