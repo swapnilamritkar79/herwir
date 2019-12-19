@@ -90,7 +90,7 @@ class main implements renderable, templatable {
         $viewingcompleted = false;
         $viewingall = false;
         if ($this->tab == 'available') {
-            $viewingavailable = false;
+            $viewingavailable = true;
         } else if ($this->tab == 'completed') {
             $viewingcompleted = true;
         } 

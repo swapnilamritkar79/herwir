@@ -22,11 +22,13 @@
     Example context (json):
     {}
 }}
-<div id="completed-view-{{uniqid}}" data-region="completed-view">
+<div id="completed-view-{{uniqid}}" data-region="completed-view"  > 
+<div class="responsive-hold">
+  <div class="responsive">
    {{#completedview.courses}}
-        <div class="tab-content">
-            <div class="tab-pane active fade in" id="mycourses_completed_view">
-                    <div class="mycourselisting">
+        <div class="coursehold" >
+            
+                    <div class="courecontent">
                         <div class="courseimage">
                             <a href="{{ url }}"><img class="imgresponsive" src="{{ image }}" class="courseimage"></a>
                         </div>
@@ -62,9 +64,9 @@
                             </div>
                         </div>
                     </div>
-            </div>
+ 
         </div>
-    {{/completedview.courses}}
+    {{/completedview.courses}}</div></div>
     {{^completedview.courses}}
         <div class="text-xs-center text-center m-t-3">
             <img class="empty-placeholder-image-lg"

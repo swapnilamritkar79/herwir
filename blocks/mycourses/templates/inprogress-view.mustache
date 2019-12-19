@@ -22,10 +22,12 @@
     Example context (json):
     {}
 }}
-<div id="inprogress-view-{{uniqid}}" data-region="inprogress-view" class="responsive">
+<div id="inprogress-view-{{uniqid}}"  >
+<div class="responsive-hold">
+  <div class="responsive">
+
    {{#inprogressview.courses}}
- <!-- <div class="responsive-hold">
-  <div class="responsive">-->
+
         <div class="coursehold">
             
                     <div class="courecontent">
@@ -50,12 +52,10 @@
                     </div>
 
         </div>
-<!--</div>
-		     
-  </div>-->
 
 
-   {{/inprogressview.courses}}
+
+   {{/inprogressview.courses}}</div></div>
     {{^inprogressview.courses}}
         <div class="text-xs-center text-center m-t-3">
             <img class="empty-placeholder-image-lg"
@@ -66,7 +66,6 @@
         </div>
     {{/inprogressview.courses}}
 </div>
-
 {{#js}}
 require(['jquery', 'core/custom_interaction_events'], function($, customEvents) {
     var root = $('#inprogress-view-{{uniqid}}');

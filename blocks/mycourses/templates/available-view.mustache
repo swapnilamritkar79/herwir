@@ -22,14 +22,16 @@
     Example context (json):
     {}
 }}
-<div id="available-view-{{uniqid}}" data-region="available-view" class="responsive">
+<div id="available-view-{{uniqid}}"  >
+<div class="responsive-hold">
+  <div class="responsive">
    {{#availableview.courses}}
    
         <div class="coursehold" >
             
                     <div class="courecontent">
                         <div class="courseimage">
-                            <a href="{{ url }}"><img class="imgresponsive" src="{{ image }}" class="courseimage"></a>
+                            <a href="{{ url }}">{{ image }}</a>
                         </div>
                         
                             <div class="name">
@@ -47,6 +49,7 @@
 
 
     {{/availableview.courses}}
+	</div></div>
     {{^availableview.courses}}
         <div class="text-xs-center text-center m-t-3">
             <img class="empty-placeholder-image-lg"
@@ -56,13 +59,35 @@
             <p class="text-muted m-t-1">{{#str}} noavailable, block_mycourses {{/str}}</p>
         </div>
     {{/availableview.courses}}
-</div>
+
 {{#js}}
-require(['jquery', 'core/custom_interaction_events'], function($, customEvents) {
+require(['jquery', 'core/custom_interaction_events',"{{availableview.wwwroot}}/blocks/mycourses/slick/slick.js"], function($, customEvents,slick) {
     var root = $('#available-view-{{uniqid}}');
     customEvents.define(root, [customEvents.events.activate]);
     root.on(customEvents.events.activate, '[data-toggle="btns"] > .btn', function() {
         root.find('.btn.active').removeClass('active');
     });
+	$('.responsive').slick({
+				dots: false,
+				infinite: true,
+				speed: 300,
+				slidesToShow: 3,
+				slidesToScroll: 3,
+				responsive: [
+				  {
+					breakpoint: 1024,
+					settings: {
+					  slidesToShow: 3,
+					  slidesToScroll: 3,
+					  infinite: true,
+					  dots: true
+					}
+				  }
+				  // You can unslick at a given breakpoint now by adding:
+				  // settings: "unslick"
+				  // instead of a settings object
+				]
+				});
+
 });
-{{/js}}
+{{/js}} </div>
