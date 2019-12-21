@@ -806,6 +806,9 @@ body {
   padding: 20px;
   color: #545454;
   position: relative;
+  width:27vw !important;
+  float:left;
+  
 }
 
 .courecontent .price {
@@ -974,7 +977,7 @@ body {
   margin: 20px 0;
   position: absolute;
   background: #f3f3f3;
-   width:800px;
+   min-width:800px;
   border-radius: 3px;
   padding: 1px;
   right: 0px;
