@@ -22,6 +22,8 @@
     Example context (json):
     {}
 }}
+
+<div id="allview">View All</div>
 <div id="all-view-{{uniqid}}" data-region=#all-view">
    
         <div class="tab-content">
@@ -34,7 +36,7 @@
 							
 									<div class="coursehold">
 										<div class="courseimage">
-										{{{ image }}}
+										<img class="imgresponsive" src="{{ image }}" >
 										</div>
 										<div class="courecontent">
 											<div class="name">{{ fullname }}</div>
@@ -84,7 +86,7 @@
 							url = url+"&remove=0";
 							console.log(url);
 							$.get(url.replace('&amp;','&'), function(data, status){
-								 alert("Course is added");
+								 
 							});
 					 }
 					 else
@@ -92,7 +94,7 @@
 						url = url+"&remove=1";
 						console.log(url);
 						$.get(url.replace('&amp;','&'), function(data, status){
-								 alert("Course is removed");
+								
 							});
 					 }
 					 

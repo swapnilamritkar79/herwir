@@ -17,7 +17,11 @@
 // Define the Iomad menu items that are defined by this plugin
 
 function block_iomad_company_admin_menu() {
-
+global $USER, $CFG;
+if($USER->id ==2){
+	$uploaduser="guardian_user_upload_title";
+}
+else{$uploaduser="user_upload_title";}
         return array(
             'managecompanies' => array(
                 'category' => 'CompanyAdmin',
@@ -165,7 +169,7 @@ function block_iomad_company_admin_menu() {
             'uploadfromfile' => array(
                 'category' => 'UserAdmin',
                 'tab' => 2,
-                'name' => get_string('user_upload_title', 'block_iomad_company_admin'),
+                'name' => get_string("$uploaduser", 'block_iomad_company_admin'),
                 'url' => 'uploaduser.php',
                 'cap' => 'block/iomad_company_admin:user_upload',
                 'icondefault' => 'up',

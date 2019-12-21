@@ -1,0 +1,181 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_mycourses/available-view
+
+    This template renders the available view for the myoverview block.
+
+    Example context (json):
+    {}
+}}
+<div id="all-view-{{uniqid}}" data-region=#all-view">
+   
+        <div class="tab-content">
+            <div class="tab-pane active fade in" id="mycourses_all_view">
+			 <link rel="stylesheet" type="text/css" href="{{allview.wwwroot}}/blocks/mycourses/slick/slick.css">
+			 <link rel="stylesheet" type="text/css" href="{{allview.wwwroot}}/blocks/mycourses/slick/slick-theme.css">
+			 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+			 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css">
+			 <link rel="stylesheet" href="{{allview.wwwroot}}/blocks/mycourses/scss/wirehouse.css">
+			 
+			 <script src="{{allview.wwwroot}}/blocks/mycourses/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+			<script src="{{allview.wwwroot}}/blocks/mycourses/slick/jquery.ellipsis.js" type="text/javascript" charset="utf-8"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.js" type="text/javascript" charset="utf-8"></script>
+			 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			 
+			<div class="responsive-hold">
+			<div class="responsive">
+			
+			{{#allview.allcourses}}
+			<div class="coursehold"> <img src="images/c1.jpg" alt="" title="">
+							<div class="courecontent">
+
+							  <div class="newcourse"> <img src="{{ image }}" alt="" title=""></div>
+							  <div class="price">${{price}}</div>
+							  <div class="name"><a href="{{ url }}">{{ fullname }}</a> </div>
+							  <div class="dec ">{{ summary}}</div>
+							  <div class="add-cart-action">
+								<a href="javascript:void(0)" class="addtocart" onclick="getcarturl('{{ carturl }}')">
+												<label class="container">Add to cart 
+								  <input type="checkbox">
+								  <span class="checkmark"></span> </label> </a>
+							  </div>
+							</div>
+			</div>
+				{{/allview.allcourses}} 
+			</div>
+			<div class="add-cart-action">
+						<a href="{{ allview.viewcarturl }}" class="viewcart" >
+						<label class="container">View cart
+						</label></a>
+			</div>
+			</div>
+			
+			</div>
+			</div>
+			
+			<script type="text/javascript">
+			    function getcarturl(url)
+				{
+					console.log(url.replace('&amp;','&'));
+					 $.get(url.replace('&amp;','&'), function(data, status){
+					 alert("Course is added");
+				});
+				}
+				
+				$(document).on('ready', function () {
+				
+				
+				$('.responsive').slick({
+				dots: false,
+				infinite: false,
+				speed: 300,
+				slidesToShow: 4,
+				slidesToScroll: 4,
+				responsive: [
+				  {
+					breakpoint: 1024,
+					settings: {
+					  slidesToShow: 3,
+					  slidesToScroll: 3,
+					  infinite: true,
+					  dots: true
+					}
+				  }
+				  // You can unslick at a given breakpoint now by adding:
+				  // settings: "unslick"
+				  // instead of a settings object
+				]
+				});
+
+				$("#cart").on("click", function () {
+				$(".shopping-cart").fadeToggle("fast");
+				$('.course-dec').ellipsis({ responsive: true });
+				});
+
+				});
+
+				(function ($) {
+
+
+				/*$(window).on("load", function () {
+				$(".content, .content1").mCustomScrollbar(
+				  {
+
+					scrollInertia: 0,
+				  }
+
+
+				);
+				});*/
+
+				})(jQuery);
+
+
+				$(window).resize(function () {
+
+				$('.course-dec').ellipsis({ responsive: true });
+
+				});
+				
+
+
+				</script>
+				<script src="{{allview.wwwroot}}/blocks/mycourses/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+				<script src="{{allview.wwwroot}}/blocks/mycourses/slick/jquery.ellipsis.js" type="text/javascript" charset="utf-8"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.js" type="text/javascript" charset="utf-8"></script>
+				<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+			</div>
+		</div>
+</div>
+{{#js}}
+require(['jquery', 'core/custom_interaction_events','core/modal_factory'], function($, customEvents,ModalFactory) {
+    var root = $('#all-view-{{uniqid}}');
+    customEvents.define(root, [customEvents.events.activate]);
+    root.on(customEvents.events.activate, '[data-toggle="btns"] > .btn', function() {
+        root.find('.btn.active').removeClass('active');
+    });
+	
+	$(".viewcart").click(function(event){
+	event.preventDefault();
+		console.log($(this).attr('href'));
+       /* alert(ModalFactory); */
+		$.get($(this).attr('href'), function(data, status){
+			var trigger = $('#myModal');
+			console.log(data);
+			
+			  ModalFactory.create({
+				
+				title: 'View Cart',
+				body: data,
+			  }, trigger)
+			  .done(function(modal) {
+				modal.show();
+			  });
+		
+    });
+	});
+});
+function addtocart(url)
+				{
+					$.get(url, function(data, status){
+					alert("Data: " + data + "\nStatus: " + status);
+				  });
+				
+				
+				}
+{{/js}}

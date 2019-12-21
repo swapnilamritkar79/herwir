@@ -67,9 +67,9 @@ class course_cart_form extends moodleform {
           <div class="number">$'.sprintf ("%.2f",$total).'</div>
         </div>
         <div class="divhold">
-          <div class="btnhold"><a href="'.new \moodle_url('/my/?mycoursestab=all').'"><div class="btnhold"><span class="buynow-btn">Add More Course</span></div></a> 
+          <div class="btnhold"><a href="'.new \moodle_url('/my/?mycoursestab=all').'"><span class="buynow-btn">Add More Course</span></a> 
 			</div>
-		<div class="btnhold"><a href="'.new \moodle_url('/').'"><div class="btnhold"><span class="buynow-btn">Check Out</span></div></a> 
+		<div class="btnhold"><a href="'.new \moodle_url('/').'"><span class="buynow-btn">Check Out</span></a> 
 			</div>
 			
 		</div>');

@@ -291,6 +291,9 @@ if ($mform->is_cancelled()) {
         $data->validto = null;
     }
     if ($isadding) {
+		echo "<pre>";
+		print_R($data);
+		echo "</pre>"; die;
         // Set up a profiles field category for this company.
         $catdata = new stdclass();
         $catdata->sortorder = $DB->count_records('user_info_category') + 1;

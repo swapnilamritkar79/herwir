@@ -859,9 +859,9 @@ class company {
      *              $managertype = int;
      *
      **/
-    public function assign_user_to_company($userid, $departmentid = 0, $managertype = 0, $ws = false) {
+    public function assign_user_to_company($userid, $departmentid = 0, $managertype = 0, $ws = false, $hscompanyid = null) {
         global $CFG, $DB;
-
+		
         // Were we passed a departmentid?
         if (!empty($departmentid)) {
             // Check its a department in this company.

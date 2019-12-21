@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once(__DIR__ . '/lib.php');
 
 $THEME->name = 'iomadboost';
-$THEME->sheets = ['iomad','wirehouse','jquery-ui','buttons.dataTables.min','dataTables.tableTools','jquery.dataTables.min'];
+$THEME->sheets = ['iomad','wirehouse','jquery-ui','owl','buttons.dataTables.min','dataTables.tableTools','jquery.dataTables.min'];
 $THEME->editor_sheets = [];
 $THEME->editor_scss = ['editor'];
 $THEME->usefallback = true;
@@ -163,4 +163,4 @@ $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 $THEME->requiredblocks = '';
 $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
 $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
-$THEME->javascripts = array('jquery-3.2.1.min','jquery.min','jquery-ui','jquery.dataTables.min','jquery.validate.min','slick.js');
+$THEME->javascripts = array('jquery-3.2.1.min','jquery-ui','owl.carousel','jquery.dataTables.min','jquery.validate.min');

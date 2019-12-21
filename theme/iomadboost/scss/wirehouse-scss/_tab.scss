@@ -44,7 +44,7 @@
  .tab-content{
     display: block;
     float: left;
-    width: calc(100% - 160px);
+    width: calc(100% - 165px);
  }
 
  .iomadlink_container {
@@ -115,8 +115,12 @@
             text-align: left;
             // padding-left: 69px;
             padding-top: 18px;
+            padding-bottom: 5px;
             font-size: 14px;
+            font-family:$normalfonts;
             color:$wirehouse-black;
+          
+            overflow: hidden;
             @media (max-width:$breakpoint-tablet626) {
                 padding-top: 8px;
                 text-align: center;
@@ -162,7 +166,8 @@
 
 .nav-tabs {
     
-        border-bottom: 1px solid $wirehouse-green;;
+        border-bottom: 1px solid $wirehouse-green;
+        background:#fff;
 
 .nav-link.active
  {
@@ -174,6 +179,7 @@
 .nav-link{ color: $wirehouse-black;}
 
 
+.nav-link:hover{ background:$wirehouse-green; color: #fff !important; }
 
 }
 

@@ -73,7 +73,7 @@ if (isguestuser()) {  // Force them to see system default, no editing allowed
     $context = context_user::instance($USER->id);
     $PAGE->set_blocks_editing_capability('moodle/my:manageblocks');
     $header = fullname($USER);
-    $pagetitle = $strmymoodle;
+	$pagetitle = $strmymoodle;
 }
 
 // Get the My Moodle page info.  Should always return something unless the database is broken.
@@ -164,13 +164,13 @@ if (empty($CFG->forcedefaultmymoodle) && $PAGE->user_allowed_editing()) {
     $USER->editing = $edit = 0;
 }
 
+
 echo $OUTPUT->header();
 ?>
 <?php
 echo "<script src="."'$CFG->wwwroot/theme/iomadboost/javascript/slick.js'"."></script>";
 echo "<script src="."'$CFG->wwwroot/theme/iomadboost/javascript/jquery.ellipsis.js'"."></script>";
 ?>
-
 <style>
 
 .tab-content>.tab-pane.active {
@@ -231,7 +231,6 @@ function initslider(){
 </script>
 <?php
 echo $OUTPUT->custom_block_region('content');
-
 echo $OUTPUT->footer();
 
 // Trigger dashboard has been viewed event.

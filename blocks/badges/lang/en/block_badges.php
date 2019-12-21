@@ -29,3 +29,5 @@ $string['nothingtodisplay'] = 'You have no badges to display';
 $string['badges:addinstance'] = 'Add a new Latest badges block';
 $string['badges:myaddinstance'] = 'Add a new Latest badges block to Dashboard';
 $string['privacy:metadata'] = 'The Latest badges block only shows data stored in other locations.';
+$string['dashboard'] = 'Iomad Dashboard';
+$string['mybadges'] = 'My badges';

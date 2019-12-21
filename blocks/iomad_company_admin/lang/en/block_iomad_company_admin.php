@@ -704,3 +704,4 @@ $string['clientreporter'] = 'Client report only';
 $string['archetypecompanyreporter_role'] = 'Company report only';
 $string['companyreporter_role'] = 'Company report only';
 $string['companyreporter'] = 'Company report only';
+$string['guardian_user_upload_title'] = 'Upload Guradian Customer Admin';

@@ -68,7 +68,14 @@ iomad::require_capability('block/iomad_company_admin:user_upload', context_syste
 
 // Correct the navbar .
 // Set the name for the page.
+
+if($USER->id == 2 ){
+	$linktext = get_string('guardian_user_upload_title', 'block_iomad_company_admin');
+}
+else{
+	echo '>>>>>>';
 $linktext = get_string('user_upload_title', 'block_iomad_company_admin');
+}
 // Set the url.
 $linkurl = new moodle_url('/blocks/iomad_company_admin/uploaduser.php');
 
@@ -147,7 +154,7 @@ $stdfields = array('id', 'firstname', 'lastname', 'username', 'email',
         'mnethostid', 'institution', 'department', 'idnumber', 'skype',
         'msn', 'aim', 'yahoo', 'icq', 'phone1', 'phone2', 'address',
         'url', 'description', 'descriptionformat', 'oldusername', 'deleted',
-        'password', 'temppassword', 'suspended');
+        'password', 'temppassword', 'suspended','profile_field_company');
 
 $prffields = array();
 
@@ -248,8 +255,8 @@ if ($mform->is_cancelled()) {
     if (!empty($formdata->submitbutton)) {
         // Another cancelled check.
         if (!empty($formdata->cancel) && $formdata->cancel == 'Cancel') {
-            $cir->cleanup(true);
-            redirect($returnurl);
+           $cir->cleanup(true);
+           redirect($returnurl);
         }
 
         // Deal with program license.
@@ -326,6 +333,16 @@ if ($mform->is_cancelled()) {
         $upt->init(); // Start table.
 
         while ($line = $cir->next()) {
+			if($CFG->assignCompanyAdmin==1){
+				if($USER->id==2){
+				if(!empty($line[17])){
+					$getCompanydata = $DB->get_record('company',array('shortname'=>$line[17]));
+					$companyid = $getCompanydata->id;
+					$company = new company($companyid);
+				}
+				}
+			}
+			
             $upt->flush();
             $linenum++;
             $errornum = 1;
@@ -787,6 +804,8 @@ if ($mform->is_cancelled()) {
                             $DB->update_record('company_users', $userdep);
                         } else {
                             // Add the user to the company
+							echo '3333333'; 
+							die;
                             $company->assign_user_to_company($existinguser->id, $department->id);
                         }
                     }
@@ -921,7 +940,19 @@ if ($mform->is_cancelled()) {
                 context_user::instance($user->id);
 
                 // Add the user to the company
-                $company->assign_user_to_company($user->id);
+                $company->assign_user_to_company($user->id,'',1,'');
+				if($CFG->assignCompanyAdmin==1){
+					if($USER->id==2){
+						
+						$myRoleAssignement=new stdClass();
+						$myRoleAssignement->roleid=10;
+						$myRoleAssignement->contextid=1;
+						$myRoleAssignement->userid=$user->id;
+						$myRoleAssignement->timemodified=time();
+						$myRoleAssignement->modifierid=$USER->id;
+						$DB->insert_record('role_assignments',$myRoleAssignement);
+					}
+				}
 
                 // Do we have a department in the file?
                 if (!empty($user->department)) {
@@ -1105,6 +1136,8 @@ $availableauths = get_plugin_list('auth');
 $availableauths = array_keys($availableauths);
 $contents = array();
 while ($fields = $cir->next()) {
+	$companyid = 5;
+	$companyshortname = 'tatatcs';
     $errormsg = array();
     $rowcols = array();
     foreach ($fields as $key => $field) {
@@ -1118,11 +1151,11 @@ while ($fields = $cir->next()) {
     if (isset($rowcols['profile_field_company']) && !company_user::can_see_company($rowcols['profile_field_company'])) {
         $errormsg['profile_field_company'] = get_string('invalid_company', 'block_iomad_company_admin');
     }
-    if ($companyid > 0 && isset($rowcols['profile_field_company']) && !empty($rowcols['profile_field_company'])
+    /* if ($companyid > 0 && isset($rowcols['profile_field_company']) && !empty($rowcols['profile_field_company'])
         && $rowcols['profile_field_company'] != $companyshortname ) {
         $errormsg['profile_field_company'] = get_string('profile_field_company_not_empty_does_not_match_selected',
                                                         'block_iomad_company_admin');
-    }
+    } */
 
     if ((!isset($rowcols['username']) || empty($rowcols['username'])) && isset($rowcols['email']) && !empty($rowcols['email'])) {
         // No username given, try to find an existing user via the email address.

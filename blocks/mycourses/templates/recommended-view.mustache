@@ -22,6 +22,7 @@
     Example context (json):
     {}
 }}
+<div id="recommended">Recommended Courses</div>
 <div id="recommended-view-{{uniqid}}" data-region=#recommended-view">
    
         <div class="tab-content">
@@ -33,110 +34,29 @@
 					
 							<div class="coursehold">
 								<div class="courseimage">
-								{{{ image }}}
+								<img class="imgresponsive" src="{{ image }}">
 								</div>
 								<div class="courecontent">
 									<div class="name">{{ fullname }}</div>
 									<div class="dec ">{{ summary}}</div>
-									<div class="price">${{price}}</div>
-									<div class="add-cart-action">
-										 <label class="container" >Add to cart
-										  <input type="checkbox" name="course_{{id}}" id="course_{{id}}" {{checked}} onclick="getcarturl('{{ carturl }}','course_{{id}}')">
-										  <span class="checkmark" ></span> </label>
-																		
-										
-									</div>
 								</div>
 							</div>
 						
 				{{/recommendview.recommendedcourses}}
 
 				</div>
-					
-				
-	
-
-			<script type="text/javascript">
-			    function getcarturl(url,chk)
-				{
-					console.log($('#'+chk).is(":checked"));
-					 if($('#'+chk).is(":checked"))
-					 {
-							url = url+"&remove=0";
-							console.log(url);
-							$.get(url.replace('&amp;','&'), function(data, status){
-								 alert("Course is added");
-							});
-					 }
-					 else
-					 {
-						url = url+"&remove=1";
-						console.log(url);
-						$.get(url.replace('&amp;','&'), function(data, status){
-								 alert("Course is removed");
-							});
-					 }
-					 
-				}
-				
-				
-				(function ($) {
-
-
-				/*$(window).on("load", function () {
-				$(".content, .content1").mCustomScrollbar(
-				  {
-
-					scrollInertia: 0,
-				  }
-
-
-				);
-				});*/
-
-				})(jQuery);
-
-
-				$(window).resize(function () {
-
-				$('.course-dec').ellipsis({ responsive: true });
-
-				});
-				
-
-
-				</script>
+			
 			</div>
 		</div>
 </div>
 {{#js}}
-require(['jquery', 'core/custom_interaction_events','core/modal_factory',"{{recommended.wwwroot}}/blocks/mycourses/slick/slick.js"], function($, customEvents,ModalFactory,slick) {
+require(['jquery', 'core/custom_interaction_events',"{{recommended.wwwroot}}/blocks/mycourses/slick/slick.js"], function($, customEvents,slick) {
     var root = $('#all-view-{{uniqid}}');
     customEvents.define(root, [customEvents.events.activate]);
     root.on(customEvents.events.activate, '[data-toggle="btns"] > .btn', function() {
         root.find('.btn.active').removeClass('active');
     });
-	
-	$(".viewcart").click(function(event){
-	event.preventDefault();
-		console.log($(this).attr('href'));
-       
-		$.get($(this).attr('href'), function(data, status){
-			var trigger = $('#myModal');
-			console.log(data);
-			
-			  ModalFactory.create({
-				
-				title: 'View Cart',
-				body: data,
-				large : 1,
-			  }, trigger)
-			  .done(function(modal) {
-				modal.show();
-			  });
-		
-    });
-	});
+
 
 });
 

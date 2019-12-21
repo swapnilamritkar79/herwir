@@ -20,26 +20,22 @@
 
 .path-calendar {
   .maincalendar {
-
-    
-
-    .calendarmonth{
+    .calendarmonth {
       width: 100%;
-      margin:0 auto; 
+      margin: 0 auto;
     }
 
     .bottom {
       padding: 20px 0px 0px 0px;
     }
-    .controls{
-        margin: 0px auto;
-        overflow: hidden;
-        background: #fff;
-        padding: 0px 10px;
-        border: 1px solid #ebebeb;
-        width:100%;
-        margin-top:15px;
-
+    .controls {
+      margin: 0px auto;
+      overflow: hidden;
+      background: #fff;
+      padding: 0px 10px;
+      border: 1px solid #ebebeb;
+      width: 100%;
+      margin-top: 15px;
     }
 
     .calendartable {
@@ -47,18 +43,20 @@
         padding: 10px;
       }
     }
-    .calendar-controls{
+    .calendar-controls {
+      .arrow {
+        font-family: "FontAwesome";
+      }
+      .previous,
+      .next {
+        margin-top: 9px;
+      }
 
-        .previous, .next{
-            margin-top: 9px;
-        }
-
-        .current{
-          font-size: 18px;
-          padding: 10px 0px 0px 0px;
-        }
+      .current {
+        font-size: 18px;
+        padding: 10px 0px 0px 0px;
+      }
     }
-
   }
 }
 
@@ -70,37 +68,86 @@ a[data-action="view-event"] {
   color: $wirehouse-black;
 }
 
-
 .block {
-
   .calendar-controls {
-  .previous, .next {
-    text-align: center;
-    width: 12%;
-    border: 1px solid $wirehouse-green;
-    color: $wirehouse-green;
-    border-radius: 2px;
-    padding: 4px;
-}
-
-}
-
-
-.minicalendar  {
-
-  max-width:100%;
-
-  th{ padding:5px 2px;}
-
-  h3{ font-size: 18px;}
-
-  thead{ 
-    background: #E8E9EC;
-    color: #250A1C;
-    border-bottom:2px solid $wirehouse-purple;
+    .previous,
+    .next {
+      text-align: center;
+      width: 12%;
+      border: 1px solid $wirehouse-green;
+      color: $wirehouse-green;
+      border-radius: 2px;
+      padding: 4px;
+    }
   }
-  
+
+  .minicalendar {
+    .arrow {
+      font-family: "FontAwesome";
+    }
+
+    max-width: 100%;
+
+    th {
+      padding: 5px 2px;
+    }
+    td {
+      padding: 5px 2px;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
+
+    thead {
+      background: #e8e9ec;
+      color: #250a1c;
+      border-bottom: 2px solid $wirehouse-purple;
+    }
+  }
 }
 
+.eventlist {
+  .card {
+    background: #fff;
+  }
 
+  .card-header {
+    background: #fff;
+  }
+
+  .calendar_event_user {
+    background-color: #ffffff;
+    padding: 0px 20px 20px 20px;
+  }
+
+  .atto_image_button_text-bottom.img-responsive {
+    margin: 0px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 100%;
+  }
+  .name{ font-size: 18px;}
+
+  .event {
+    margin-bottom: 15px;
+  }
+  span.date {
+    display: block;
+  }
+
+  span.date:before {
+    
+    content: "";
+    font-family: "FontAwesome";
+    color:$wirehouse-black;
+    padding-right: 10px;
+  }
+
+  .commands {
+    text-align: right;
+  }
+  .icon {
+    color: $wirehouse-black;
+  }
 }

@@ -33,7 +33,8 @@ require_once($CFG->libdir . "/badgeslib.php");
 class block_badges extends block_base {
 
     public function init() {
-        $this->title = get_string('pluginname', 'block_badges');
+        $this->title = get_string('pluginname', 'block_badges');	
+		
     }
 
     public function instance_allow_multiple() {
@@ -85,7 +86,8 @@ class block_badges extends block_base {
         // Create empty content.
         $this->content = new stdClass();
         $this->content->text = '';
-
+		
+			
         if (empty($CFG->enablebadges)) {
             $this->content->text .= get_string('badgesdisabled', 'badges');
             return $this->content;
@@ -96,9 +98,11 @@ class block_badges extends block_base {
             $courseid = null;
         }
 
-        if ($badges = badges_get_user_badges($USER->id, $courseid, 0, $this->config->numberofbadges)) {
+        if ($badges = badges_get_user_badges($USER->id, $courseid, 0, 2)) {		
             $output = $this->page->get_renderer('core', 'badges');
             $this->content->text = $output->print_badges_list($badges, $USER->id, true);
+			//$this->content->text .= '<div class="add-cart-action">';
+			//$this->content->text .= '<a href="'.$CFG->wwwroot.'/blocks/badges/view.php">View All</div>';
         } else {
             $this->content->text .= get_string('nothingtodisplay', 'block_badges');
         }

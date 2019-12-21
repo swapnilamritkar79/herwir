@@ -88,7 +88,7 @@ class all_view implements renderable, templatable {
 				
                 $isimage = $file->is_valid_image();
                 if (!$isimage) {
-                    $imageurl = $output->pix_icon(file_file_icon($file, 24), $file->get_filename(), 'moodle');
+                    $imageurl = NULL;
                 } else {
                     $imageurl = file_encode_url("$CFG->wwwroot/pluginfile.php",
                                 '/'. $file->get_contextid(). '/'. $file->get_component(). '/'.

@@ -1,11 +1,31 @@
 <?php
 	require_once("../../config.php");
 	ini_set('display_errors', 0);
+
 	global $CFG,$PAGE,$USER;
 	require_login();
 	$isadmin = is_siteadmin($USER);
 	$PAGE->set_context(context_system::instance());
 	$PAGE->set_url($CFG->wwwroot.'/blocks/simplehtml/course_subscription.php');
+
+// Set the name for the page.
+$linktext = get_string('linkname', 'block_simplehtml');
+// Set the url.
+$linkurl = new moodle_url('/blocks/simplehtml/course_subscription.php');
+
+// Print the page header.
+$PAGE->set_context($systemcontext);
+$PAGE->set_url($linkurl);
+$PAGE->set_pagelayout('admin');
+$PAGE->set_title($linktext);
+
+
+// Set the page heading.
+$PAGE->set_heading(get_string('myhome') . " - $linktext");
+$PAGE->navbar->add(get_string('dashboard', 'block_simplehtml'));
+$PAGE->navbar->add($linktext, $linkurl);
+
+
 	
 	$sitecontext =$PAGE->set_context(context_system::instance());
     $site = get_site();
@@ -41,7 +61,7 @@ function getCourse(){
 $courselist = getCourse();
 
 if(!empty($courselist)){
-	$courseOutput = '<select id="id_course" name="id_course">';
+	$courseOutput = '<select class="custom-select" id="id_course"  name="id_course">';
 	$courseOutput .='<option value="">Please select course</option>';
 	foreach($courselist as $k => $v){
 		if(@$data->fullname==$v->fullname){
@@ -59,33 +79,33 @@ if(!empty($courselist)){
 	 
 	echo "<div class='clearfix'></div>";
 	echo "<div class='gridStyle mt-30'>";
-	echo "<form method='post' id='course_subscription'>";
-	echo "<div class='p-20'>";
+	echo "<form method='post' class='row course_subscription' id='course_subscription'>";
+	echo "<div class='p-20 col-xl-3 col-md-4 col-sm-6 col-12 '>";
 	echo "<input type='hidden' name='flag' id='flag' value=$action>";
 	echo "<input type='hidden' name='id' id ='id_price' value=$id>";
 	echo "<div>";
-	echo "<div class='span4'>";
+	echo "<div class=''>";
 	echo "<label for='cname'>Course List </label>";
 	echo "<div> $courseOutput</div>";
 	echo "</div>";
 
-	echo "<div class='span4'>";
+	echo "<div class='pricehold'>";
 	echo "<label for='cname'>Price</label>";
-	echo "<div><input type='text' name='price' id='course_subscription_price' value=$data->price></div> ";
+	echo "<div><input  class='form-control' type='text' name='price' id='course_subscription_price' value=$data->price></div> ";
 	echo "</div>";
 	echo "</div>";
 
 	
 	echo "<div class='clearfix'></div>";
 	echo "</div>";
-	echo "<div class='text-right border1Top p-20'><input type='reset' name='cancel' value='Cancel' id='cancel'> <input type='submit' name='save' value=\"$buttonValue\"> </div>";
+	echo "<div  style='margin-top:10px; margin-bottom:10px;'class='text-left border1Top p-20 col-xl-12 col-md-12 col-12'><input class='btn btn-secondary' type='reset' name='cancel' value='Cancel' id='cancel'> <input class='btn btn-primary'  type='submit' name='save' value=\"$buttonValue\"> </div>";
 	echo "</form>";
 	echo "</div>";
 
 	echo "<div class='clearfix'></div>";
 
 
-	echo "<h2 class='primaryTitle'>Course Package Details</h2>"; 
+	echo "<h2 class='primaryTitle'>Course Price Setting</h2>"; 
 	echo "<div class='gridStyle mt-0'>"; 
 	echo "<div id=\"price_validate\"></div>";
 	echo "<table>";
@@ -99,6 +119,7 @@ if(!empty($courselist)){
         </thead>
 </table>";
 echo "</div>";
+
 	?>
 	<script>
 	$("#course_subscription" ).validate({
@@ -132,7 +153,11 @@ echo "</div>";
 			serverSide: true,
 			searching: true,
 			lengthChange: false,
-			language: { search: "" },
+			paging: true,
+			pageLength: 10,
+			//lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+			bLengthChange:true,
+			language: { search: " Search Box:" },
 			ajax: {url:"server_processing.php?funct=getPriceList"}
 			/// $('#dg').datagrid('reload'); 
 			});

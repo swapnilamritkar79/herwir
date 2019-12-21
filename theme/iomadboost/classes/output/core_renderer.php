@@ -79,6 +79,7 @@ class core_renderer extends \core_renderer {
         $header->navbar = $this->navbar();
         $header->pageheadingbutton = $this->page_heading_button();
         $header->courseheader = $this->course_header();
+		$header->companyadmin= is_company_admin();
         return $this->render_from_template('theme_iomadboost/header', $header);
     }
 
@@ -348,7 +349,7 @@ class core_renderer extends \core_renderer {
      * @return string HTML fragment
      */
     public function navbar_button() {
-        global $CFG;
+        global $CFG,$USER;
 
         $custommenuitems = false;
         // Deal with company custom menu items.
@@ -359,6 +360,7 @@ class core_renderer extends \core_renderer {
                 }
             }
         }
+		
 
         if (empty($CFG->custommenuitems) && $this->lang_menu() == '' && empty($custommenuitems)) {
             return '';

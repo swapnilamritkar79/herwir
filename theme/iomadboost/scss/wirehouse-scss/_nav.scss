@@ -1,3 +1,20 @@
+
+#nav-drawer{
+    -moz-box-shadow: 2px 2px 3px -2px #ccc;
+    -webkit-box-shadow: 2px 2px 3px -2px #ccc;
+    box-shadow: 2px 2px 3px -2px #ccc;
+
+}
+
+#page-header{
+
+    .page-header-headings{
+        h1{ display:none;}
+    }
+    .card-body { padding:8px 10px;}
+
+}
+
 .navbar { border-top:3px solid $wirehouse-purple}
 
 [data-region="drawer"] {

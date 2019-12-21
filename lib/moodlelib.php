@@ -10322,3 +10322,10 @@ function site_is_public() {
 
     return $ispublic;
 }
+
+function is_company_admin(){
+	global $USER;
+	$comapny_admin=user_has_role_assignment($USER->id,10);
+	return $comapny_admin;
+}
+

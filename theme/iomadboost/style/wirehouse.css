@@ -1,4 +1,18 @@
 @charset "UTF-8";
+@import url(..\style\fonts\stylesheet.css);
+#nav-drawer {
+  -webkit-box-shadow: 2px 2px 3px -2px #ccc;
+  box-shadow: 2px 2px 3px -2px #ccc;
+}
+
+#page-header .page-header-headings h1 {
+  display: none;
+}
+
+#page-header .card-body {
+  padding: 8px 10px;
+}
+
 .navbar {
   border-top: 3px solid #851C61;
 }
@@ -51,6 +65,10 @@ body {
 }
 
 /*Button CSS*/
+.btn {
+  border-radius: 2px;
+}
+
 .btn-secondary, .btn-default {
   color: #4CC0AF;
   background-color: #fff;
@@ -139,7 +157,7 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
 .block_iomad_company_admin .tab-content {
   display: block;
   float: left;
-  width: calc(100% - 160px);
+  width: calc(100% - 165px);
 }
 
 .block_iomad_company_admin .iomadlink_container {
@@ -206,8 +224,11 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
 .block_iomad_company_admin .iomadlink_container .iomadlink .actiondescription {
   text-align: left;
   padding-top: 18px;
+  padding-bottom: 5px;
   font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: #545454;
+  overflow: hidden;
 }
 
 @media (max-width: 626px) {
@@ -245,6 +266,7 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
 
 .nav-tabs {
   border-bottom: 1px solid #4CC0AF;
+  background: #fff;
 }
 
 .nav-tabs .nav-link.active {
@@ -257,6 +279,30 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
   color: #545454;
 }
 
+.nav-tabs .nav-link:hover {
+  background: #4CC0AF;
+  color: #fff !important;
+}
+
+#page-login-index #page-wrapper {
+  height: calc(100% - 57px);
+}
+
+@media (max-width: 626px) {
+  #page-login-index #page-wrapper {
+    background: #fff;
+  }
+}
+
+#page-login-index .logininfo {
+  color: #fff;
+  text-align: center;
+}
+
+#page-login-index .container {
+  margin-bottom: 0px;
+}
+
 #page-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -265,7 +311,7 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: calc(100% - 100px);
+  height: calc(100% - 69px);
 }
 
 .loginhold {
@@ -277,11 +323,25 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
   padding: 20px;
 }
 
+@media (max-width: 768px) {
+  .imagehold {
+    display: none;
+  }
+}
+
 .logincard {
   border-radius: 5px;
-  border: 1px solid #F7F7F7;
+  border: 1px solid #f7f7f7;
   -webkit-box-shadow: 0px 2px 2px #dbdbdb;
           box-shadow: 0px 2px 2px #dbdbdb;
+}
+
+@media (max-width: 626px) {
+  .logincard {
+    border: 0px solid #f7f7f7;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
 }
 
 .logincard .form-group {
@@ -298,7 +358,7 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
 }
 
 .logincard .form-control {
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
   border-radius: 4px;
   padding-left: 32px;
 }
@@ -311,8 +371,15 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
 }
 
 .logincard .loginbtn {
+  color: #fff;
   background: #4CC0AF;
   margin-top: 60px !important;
+  border-color: #4CC0AF;
+}
+
+.logincard .loginbtn:hover {
+  color: #fff;
+  background: #4CC0AF;
   border-color: #4CC0AF;
 }
 
@@ -321,10 +388,17 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
 }
 
 .logincard .alert-danger {
-  color: #FD0000;
+  color: #fd0000;
   background-color: #fff;
   border-color: #fff;
   margin-bottom: 0px;
+  text-align: center;
+}
+
+@media (max-width: 626px) {
+  .logincard .rememberpass {
+    margin-top: 20px;
+  }
 }
 
 #region-main {
@@ -372,7 +446,12 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
   padding: 10px;
 }
 
-.path-calendar .maincalendar .calendar-controls .previous, .path-calendar .maincalendar .calendar-controls .next {
+.path-calendar .maincalendar .calendar-controls .arrow {
+  font-family: "FontAwesome";
+}
+
+.path-calendar .maincalendar .calendar-controls .previous,
+.path-calendar .maincalendar .calendar-controls .next {
   margin-top: 9px;
 }
 
@@ -389,7 +468,8 @@ a[data-action="view-event"] {
   color: #545454;
 }
 
-.block .calendar-controls .previous, .block .calendar-controls .next {
+.block .calendar-controls .previous,
+.block .calendar-controls .next {
   text-align: center;
   width: 12%;
   border: 1px solid #4CC0AF;
@@ -402,7 +482,15 @@ a[data-action="view-event"] {
   max-width: 100%;
 }
 
+.block .minicalendar .arrow {
+  font-family: "FontAwesome";
+}
+
 .block .minicalendar th {
+  padding: 5px 2px;
+}
+
+.block .minicalendar td {
   padding: 5px 2px;
 }
 
@@ -411,9 +499,56 @@ a[data-action="view-event"] {
 }
 
 .block .minicalendar thead {
-  background: #E8E9EC;
-  color: #250A1C;
+  background: #e8e9ec;
+  color: #250a1c;
   border-bottom: 2px solid #851C61;
+}
+
+.eventlist .card {
+  background: #fff;
+}
+
+.eventlist .card-header {
+  background: #fff;
+}
+
+.eventlist .calendar_event_user {
+  background-color: #ffffff;
+  padding: 0px 20px 20px 20px;
+}
+
+.eventlist .atto_image_button_text-bottom.img-responsive {
+  margin: 0px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.eventlist .name {
+  font-size: 18px;
+}
+
+.eventlist .event {
+  margin-bottom: 15px;
+}
+
+.eventlist span.date {
+  display: block;
+}
+
+.eventlist span.date:before {
+  content: "";
+  font-family: "FontAwesome";
+  color: #545454;
+  padding-right: 10px;
+}
+
+.eventlist .commands {
+  text-align: right;
+}
+
+.eventlist .icon {
+  color: #545454;
 }
 
 /* Slider */
@@ -463,7 +598,6 @@ a[data-action="view-event"] {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  float:left;
 }
 
 .slick-track:before,
@@ -698,7 +832,7 @@ body {
   margin: 0;
   padding: 0;
   background: #F5F5F5;
-  font-family: "Museo Sans Rounded 300";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 * {
@@ -807,9 +941,8 @@ body {
   padding: 20px;
   color: #545454;
   position: relative;
-  width:27vw !important;
   float:left;
-  
+  min-width: 230px !important;
 }
 
 .courecontent .price {
@@ -949,6 +1082,21 @@ body {
   transform: rotate(45deg);
 }
 
+.iomadlogonone {
+  display: none;
+}
+
+.form-autocomplete-selection {
+  margin: .25rem;
+  min-height: 2.375rem;
+  display: inline-block;
+  width: auto !important;
+}
+
+#fitem_id_company {
+  margin-left: 0px;
+}
+
 .carthold {
   float: right;
   position: relative;
@@ -978,7 +1126,6 @@ body {
   margin: 20px 0;
   position: absolute;
   background: #f3f3f3;
-   min-width:800px;
   border-radius: 3px;
   padding: 1px;
   right: 0px;
@@ -987,17 +1134,7 @@ body {
   border: 1px solid #ebebeb;
   -webkit-box-shadow: 0px 2px #ccc;
           box-shadow: 0px 2px #ccc;
- /* display: none;
-   -webkit-transition: width 0.3; 
-  -webkit-transition-timing-function: linear;
-  transition: width 0.3s;
-  transition-timing-function: linear;*/
-}
-
-@media (max-width: 626px) {
-  .shopping-cart {
-    width: 375px;
-  }
+  min-width: 800px;
 }
 
 .shopping-cart:after {
@@ -1326,4 +1463,330 @@ body {
   position: relative;
   margin-bottom: 30px;
 }
+
+h2 {
+  font-size: 18px;
+}
+
+.dep_tree {
+  padding: 10px;
+  background-color: #7981b2;
+  border: 1px solid #7981b2;
+  border-radius: 2px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.dep_tree .tree_item {
+  padding-left: 0px;
+}
+
+.mform fieldset {
+  margin-left: 0;
+  background: #fff;
+  position: relative;
+  border: 1px solid #e8e9ec;
+}
+
+.mform fieldset.collapsed {
+  margin-bottom: 60px;
+}
+
+.mform fieldset.collapsible legend a.fheader {
+  padding: 0 5px 0 1.5rem;
+  margin-left: 0;
+}
+
+.mform .form-control {
+  border-radius: 4px;
+}
+
+.mform .custom-select {
+  border-radius: 4px;
+}
+
+legend.ftoggler {
+  position: absolute;
+  top: 0px;
+  padding: 10px 20px;
+  background: #fff;
+}
+
+.collapsed legend.ftoggler {
+  border: 1px solid #e8e9ec;
+}
+
+.fcontainer {
+  padding: 57px 20px;
+}
+
+a.fheader {
+  color: #373a3c;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.femptylabel {
+  margin-top: 20px;
+}
+
+#page-blocks-iomad_company_admin-editusers #mform1 {
+  display: block;
+}
+
+.generalbox .header {
+  background: #7981b2;
+  border: 1px solid #6e76a1;
+}
+
+.generalbox th {
+  color: #fff;
+}
+
+.generalbox th a {
+  color: #fff;
+}
+
+.generalbox th .text-info {
+  color: #fff !important;
+}
+
+.generalbox tbody tr:nth-child(even) {
+  background: #ececec !important;
+}
+
+.generalbox tbody tr:nth-child(odd) {
+  background: #fff !important;
+}
+
+.generaltable .header {
+  background: #7981b2;
+  border: 1px solid #6e76a1;
+}
+
+.generaltable th {
+  color: #fff;
+}
+
+.generaltable th a {
+  color: #fff;
+}
+
+.generaltable tbody tr:nth-child(even) {
+  background: #ececec !important;
+}
+
+.generaltable tbody tr:nth-child(odd) {
+  background: #fff !important;
+}
+
+#page-blocks-iomad_company_admin-iomad_courses_form .reporttablecontrolscontrol #id_searchbutton {
+  color: #fff;
+  background-color: #4CC0AF;
+  border-color: #4CC0AF;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+#page-blocks-iomad_company_admin-iomad_courses_form .reporttablecontrolscontrol #id_searchbutton:hover {
+  color: #4CC0AF;
+  background-color: #fff;
+  border-color: #4CC0AF;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.cell .custom-select {
+  border-radius: 4px;
+}
+
+.cell input[type=text] {
+  height: 35px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.cell input[type=submit] {
+  color: #4CC0AF;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 5px 8px;
+  border: 1px solid #4CC0AF;
+}
+
+.courseselector select {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.courseselector input[type=text] {
+  height: 35px;
+  margin-right: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.courseselector input[type=button] {
+  color: #4CC0AF;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 5px 8px;
+  border: 1px solid #4CC0AF;
+  cursor: pointer;
+}
+
+table.companycoursetable {
+  margin-top: 10px;
+}
+
+.singleselect {
+  margin-right: 10px;
+}
+
+.custom-select {
+  border-radius: 4px;
+}
+
+/*course subscription css*/
+.course_subscription .form-control {
+  border-radius: 4px;
+}
+
+.course_subscription .custom-select {
+  width: 100%;
+}
+
+.course_subscription .pricehold {
+  margin-top: 10px;
+}
+
+.primaryTitle {
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+.gridStyle .dataTables_length select {
+  border: 1px solid #ced4da;
+  color: #495057;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.gridStyle .dataTables_filter input {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.gridStyle thead {
+  background: #7981b2;
+  color: #fff;
+}
+
+.gridStyle table.dataTable tbody tr.odd {
+  background: #ececec;
+}
+
+.gridStyle table.dataTable tbody tr.even {
+  background: #fff;
+}
+
+.gridStyle table.dataTable tbody td .delete_button {
+  color: #000;
+  margin: 0px 15px 0px 0px;
+  cursor: pointer;
+}
+
+.gridStyle table.dataTable tbody td .edit_button {
+  margin: 0px 15px 0px 0px;
+}
+
+.gridStyle table.dataTable tbody td .edit_button a {
+  color: #000;
+}
+
+.gridStyle table.dataTable thead th {
+  padding: 10px 10px;
+  border-bottom: 1px solid #7981b2;
+}
+
+.gridStyle table.dataTable.no-footer {
+  border-bottom: 1px solid #7981b2;
+}
+
+.gridStyle .dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: #fff !important;
+  background: #4CC0AF !important;
+  border-color: #4CC0AF !important;
+  opacity: 0.5;
+}
+
+.gridStyle .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.gridStyle .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+  cursor: default;
+  color: #666 !important;
+  border: 1px solid transparentv !important;
+  background: transparent !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.gridStyle .dataTables_wrapper .dataTables_paginate .paginate_button.next {
+  cursor: default;
+  color: #666 !important;
+  border: 1px solid transparent !important;
+  background: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.gridStyle .dataTables_wrapper .dataTables_paginate .paginate_button.previous {
+  cursor: default;
+  color: #666 !important;
+  border: 1px solid transparent !important;
+  background: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.moodle-dialogue-base .moodle-dialogue .moodle-dialogue-bd {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: calc(100vh - 72px);
+}
+
+.company-selection-hold {
+  border: 1px solid #dee2e6;
+  background: #fff;
+  padding: 10px;
+}
+
+.company-selection-hold .singlebutton {
+  display: none;
+}
+
+.company-selection-hold #fitem_id_company {
+  margin-bottom: 0px;
+}
+
+.company-selection-hold .form-autocomplete-selection {
+  min-height: auto;
+}
+
+.company-selection-hold .tag {
+  line-height: inherit;
+  margin-bottom: 0px !important;
+}
+
+
 /*# sourceMappingURL=wirehouse.css.map */

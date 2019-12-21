@@ -23,16 +23,13 @@
     {}
 }}
 <div id="inprogress-view-{{uniqid}}"  >
-<div class="responsive-hold">
   <div class="responsive">
 
    {{#inprogressview.courses}}
-
         <div class="coursehold">
-            
                     <div class="courecontent">
                         <div class="courseimage">
-                             <a href="{{ url }}"><img class="imgresponsive" src="{{ image }}" class="courseimage"></a>
+                              <a href="{{ url }}"><img class="imgresponsive" src="{{ image }}" ></a>
                         </div>
                       <div class="ml-auto mt-auto">
                                 {{#hasprogress}}
@@ -55,7 +52,7 @@
 
 
 
-   {{/inprogressview.courses}}</div></div>
+   {{/inprogressview.courses}}</div>
     {{^inprogressview.courses}}
         <div class="text-xs-center text-center m-t-3">
             <img class="empty-placeholder-image-lg"

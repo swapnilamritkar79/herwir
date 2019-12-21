@@ -4911,8 +4911,6 @@ class settings_navigation extends navigation_node {
                 $url = new moodle_url('/user/files.php');
                 $dashboard->add(get_string('privatefiles'), $url, self::TYPE_SETTING, null, 'privatefiles');
             }
-          
-            
 
             // Add a node to view the users notes if permitted.
             if (!empty($CFG->enablenotes) &&

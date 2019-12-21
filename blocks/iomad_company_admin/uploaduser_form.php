@@ -202,7 +202,7 @@ class admin_uploaduser_form2 extends company_moodleform {
      * Form tweaks that depend on current data.
      */
     public function definition_after_data() {
-        global $USER, $SESSION, $DB, $output;
+        global $USER, $SESSION, $DB, $output,$CFG;
 
         $mform   =& $this->_form;
         $columns =& $this->_customdata;
@@ -238,7 +238,11 @@ class admin_uploaduser_form2 extends company_moodleform {
         $treehtml = $output->department_tree($departmenttree, optional_param('userdepartment', 0, PARAM_INT));
 
         //  Department drop down.
-        $mform->insertElementBefore($mform->addElement('html', $treehtml), 'uutypelabel');
+		if($CFG->hideDepartmentTree ==1){
+			if($USER->id==2){
+				$mform->insertElementBefore($mform->addElement('html', $treehtml), 'uutypelabel');
+			}
+		}
         $mform->insertElementBefore($mform->createElement('select', 'userdepartment',
                                                           '',
                                                            $subhierarchieslist,
@@ -299,9 +303,10 @@ class admin_uploaduser_form2 extends company_moodleform {
      * Server side validation.
      */
     public function validation($data, $files) {
-        global $DB, $SESSION;
+        global $DB, $SESSION,$CFG;
         if (!empty($data['cancel'])) {
-            return true;
+           header("Location: ".$CFG->wwwroot."/blocks/iomad_company_admin/uploaduser.php");
+			return true;
         }
         $errors = parent::validation($data, $files);
         $columns =& $this->_customdata;

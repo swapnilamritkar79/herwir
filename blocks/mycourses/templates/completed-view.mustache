@@ -23,14 +23,14 @@
     {}
 }}
 <div id="completed-view-{{uniqid}}" data-region="completed-view"  > 
-<div class="responsive-hold">
+
   <div class="responsive">
    {{#completedview.courses}}
         <div class="coursehold" >
             
                     <div class="courecontent">
                         <div class="courseimage">
-                            <a href="{{ url }}"><img class="imgresponsive" src="{{ image }}" class="courseimage"></a>
+                            <a href="{{ url }}"><img class="imgresponsive" src="{{ image }}" ></a>
                         </div>
                         <div class="mycoursedetails">
                             <div class="mycourseheading">
@@ -66,7 +66,7 @@
                     </div>
  
         </div>
-    {{/completedview.courses}}</div></div>
+    {{/completedview.courses}}</div>
     {{^completedview.courses}}
         <div class="text-xs-center text-center m-t-3">
             <img class="empty-placeholder-image-lg"

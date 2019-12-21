@@ -89,6 +89,7 @@ class event_exporter_base extends exporter {
         $data->timesort = $event->get_times()->get_sort_time()->getTimestamp();
         $data->visible = $event->is_visible() ? 1 : 0;
         $data->timemodified = $event->get_times()->get_modified_time()->getTimestamp();
+		
 
         if ($repeats = $event->get_repeats()) {
             $data->repeatid = $repeats->get_id();
@@ -299,13 +300,13 @@ class event_exporter_base extends exporter {
                 'time' => $timesort]);
         $viewurl->set_anchor('event_' . $event->get_id());
         $values['viewurl'] = $viewurl->out(false);
-        $values['formattedtime'] = calendar_format_event_time($legacyevent, time(), null, false,
-                $timesort);
+        $values['formattedtime'] = calendar_format_event_time($legacyevent, time(), null, false, $timesort);
 
         if ($group = $event->get_group()) {
             $values['groupname'] = format_string($group->get('name'), true,
                 ['context' => \context_course::instance($event->get_course()->get('id'))]);
         }
+		
 
         return $values;
     }

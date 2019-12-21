@@ -3,6 +3,8 @@ body{ background:$bodybgcolor; }
 
 /*Button CSS*/
 
+.btn{ border-radius:2px;}
+
 .btn-secondary, .btn-default {
     color:$wirehouse-green;
     background-color: #fff;
@@ -65,3 +67,5 @@ div[data-region=recentlyaccessedcourses-view-content] {
     font-size: 18px;
     border-radius: 4px;
 }
+
+

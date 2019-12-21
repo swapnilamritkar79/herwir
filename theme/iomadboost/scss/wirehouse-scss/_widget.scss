@@ -3,7 +3,7 @@ html,
       margin: 0;
       padding: 0;
       background: #F5F5F5;
-      font-family: "Museo Sans Rounded 300";
+      font-family:$normalfonts;
     }
 
     * {
@@ -277,5 +277,20 @@ html,
 
     }
 
+    .iomadlogonone{
+      display: none;
+    }
 
-  
+    .form-autocomplete-selection{
+
+        margin: .25rem;
+        min-height: 2.375rem;
+        display: inline-block;
+        width: auto !important;
+    
+    }
+
+
+    #fitem_id_company{ 
+      margin-left:0px;
+    }
