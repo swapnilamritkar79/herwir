@@ -221,11 +221,10 @@ function initslider(){
 }
 //$.noConflict();
 	jQuery( document ).ready(function($){
-		alert('fff');
     initslider();
 	$(".nav-link").click(function(event){
-			alert('eee');
-			initslider();
+			
+			$('.responsive').slick('refresh');
 		});
 });
 	

@@ -57,6 +57,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+	float:left;
 }
 .slick-track:before,
 .slick-track:after
