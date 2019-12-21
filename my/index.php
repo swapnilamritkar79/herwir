@@ -178,6 +178,11 @@ echo "<script src="."'$CFG->wwwroot/theme/iomadboost/javascript/jquery.ellipsis.
 	overflow:inherit;
 }
 </style>
+
+<?php
+echo $OUTPUT->custom_block_region('content');
+echo $OUTPUT->footer();
+?>
 <script>
 
 //$.noConflict();
@@ -220,7 +225,7 @@ function initslider(){
       });
 }
 //$.noConflict();
-	jQuery( document ).ready(function($){
+	$( document ).ready(function($){
     initslider();
 	$(".nav-link").click(function(event){
 			
@@ -229,11 +234,3 @@ function initslider(){
 });
 	
 </script>
-<?php
-echo $OUTPUT->custom_block_region('content');
-echo $OUTPUT->footer();
-
-// Trigger dashboard has been viewed event.
-$eventparams = array('context' => $context);
-$event = \core\event\dashboard_viewed::create($eventparams);
-$event->trigger();

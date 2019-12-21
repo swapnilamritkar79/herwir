@@ -101,22 +101,7 @@
 				}
 				
 				
-				(function ($) {
-
-
-				/*$(window).on("load", function () {
-				$(".content, .content1").mCustomScrollbar(
-				  {
-
-					scrollInertia: 0,
-				  }
-
-
-				);
-				});*/
-
-				})(jQuery);
-
+				
 
 				$(window).resize(function () {
 
@@ -138,28 +123,9 @@ require(['jquery', 'core/custom_interaction_events','core/modal_factory',"{{allv
         root.find('.btn.active').removeClass('active');
     });
 	
-	$(".viewcart").click(function(event){
-	event.preventDefault();
-		console.log($(this).attr('href'));
-       
-		$.get($(this).attr('href'), function(data, status){
-			var trigger = $('#myModal');
-			console.log(data);
-			
-			  ModalFactory.create({
-				
-				title: 'View Cart',
-				body: data,
-				large : 1,
-			  }, trigger)
-			  .done(function(modal) {
-				modal.show();
-			  });
-		
-    });
-	});
+ });
 	
-				
+	
 				
 				
 {{/js}}
