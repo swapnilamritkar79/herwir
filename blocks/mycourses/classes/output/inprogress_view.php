@@ -89,7 +89,7 @@ class inprogress_view implements renderable, templatable {
                 }
             }
             if (empty($imageurl)) {
-                $imageurl = $output->image_url('i/course');
+                $imageurl = file_encode_url($output->image_url('i/course'),true);
             }
 
             $exportedcourse = $exporter->export($output);
