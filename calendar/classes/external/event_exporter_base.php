@@ -70,7 +70,7 @@ class event_exporter_base extends exporter {
         $data = new \stdClass();
         $data->id = $event->get_id();
         $data->name = $event->get_name();
-        $data->description = file_rewrite_pluginfile_urls(
+		$data->description = file_rewrite_pluginfile_urls(
             $event->get_description()->get_value(),
             'pluginfile.php',
             $related['context']->id,
@@ -78,7 +78,25 @@ class event_exporter_base extends exporter {
             'event_description',
             $event->get_id()
         );
+		
+		$desc_arr=explode('<p>',$data->description);
+		foreach($desc_arr as $key)
+		{
+			if(empty($key))
+				continue;
+			if(strpos($key,'src'))
+			{
+				$data->desc_img=substr($key,0,-4);
+			}
+			else
+			{
+				 $data->desc_text=substr($key,0,100)."...";
+			}
+			
+		}
+				
         $data->descriptionformat = $event->get_description()->get_format();
+		
         $data->location = external_format_text($event->get_location(), FORMAT_PLAIN, $related['context']->id)[0];
         $data->groupid = $groupid;
         $data->userid = $userid;
@@ -169,6 +187,18 @@ class event_exporter_base extends exporter {
             ],
             'instance' => [
                 'type' => PARAM_INT,
+                'optional' => true,
+                'default' => null,
+                'null' => NULL_ALLOWED
+            ],
+			'desc_img' => [
+                'type' => PARAM_RAW,
+                'optional' => true,
+                'default' => null,
+                'null' => NULL_ALLOWED
+            ],
+			'desc_text' => [
+                'type' => PARAM_RAW,
                 'optional' => true,
                 'default' => null,
                 'null' => NULL_ALLOWED
