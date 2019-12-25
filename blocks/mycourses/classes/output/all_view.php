@@ -107,6 +107,12 @@ class all_view implements renderable, templatable {
 			$exportedcourse->cnt = count($allview['allcourses']);
 			$exportedcourse->price = $course->price;
 			$exportedcourse->id = $course->id;
+			$newcoursetime=time()- 7 * 86400;
+			if($course->timecreated > $newcoursetime)
+			{
+				$exportedcourse->newitem=1;
+				$exportedcourse->newitemimage=$output->image_url('new', 'theme');
+			}
 			
 			
 			if (isset($SESSION->basketid) && $DB->record_exists_sql('SELECT ii.id
