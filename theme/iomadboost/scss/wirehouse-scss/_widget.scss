@@ -20,9 +20,15 @@ html,
 
 
     .responsive {
-        width: 96%;
-        margin-left: 2%;
-        margin-right: 2%;
+        width: 100%;
+        margin-left:0;
+        margin-right: 0;
+
+        .slick-track{
+        
+          margin-left:0;
+          margin-right: 0;
+        }
 
  
       }
@@ -113,17 +119,22 @@ html,
     
 
       .price {
-        width: 51px;
-        height: 51px;
+        // width: 51px;
+        // height: 51px;
         background: #851C61;
         position: absolute;
-        top: -31px;
+        top: -26px;
         right: 29px;
-        border-radius: 80px;
+        border-radius:100px;
         font-size: 18px;
         color: #fff;
         text-align: center;
-        line-height: 51px;
+        // line-height: 51px;
+        padding: 11px 20px;
+        -webkit-box-shadow: 1px 1px 5px 0px rgba(163, 163, 163, 1);
+        -moz-box-shadow: 1px 1px 5px 0px rgba(163, 163, 163, 1);
+        box-shadow: 1px 1px 5px 0px rgba(163, 163, 163, 1);
+        
       }
 
       .name {
@@ -265,8 +276,11 @@ html,
           .checkmark:after {
             left: 8px;
             top: 3px;
-            width: 5px;
-            height: 10px;
+            /*width: 5px;
+            height: 10px;*/
+            top: 3px;
+            width: 8px;
+            height: 13px;
             border: solid #979696;
             border-width: 0 3px 3px 0;
             -webkit-transform: rotate(45deg);

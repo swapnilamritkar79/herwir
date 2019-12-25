@@ -370,8 +370,7 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
         $mform->addElement('text', 'imagealt', get_string('imagealt'), 'maxlength="100" size="30"');
         $mform->setType('imagealt', PARAM_TEXT);
 
-    }
-
+    } 
     // Display user name fields that are not currenlty enabled here if there are any.
     $disabledusernamefields = useredit_get_disabled_name_fields($enabledusernamefields);
     if (count($disabledusernamefields) > 0) {
@@ -385,9 +384,14 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
 
     if (core_tag_tag::is_enabled('core', 'user') and empty($USER->newadminuser)) {
         $mform->addElement('header', 'moodle_interests', get_string('interests'));
-        $mform->addElement('tags', 'interests', get_string('interestslist'),
-            array('itemtype' => 'user', 'component' => 'core'));
-        $mform->addHelpButton('interests', 'interestslist');
+		$choices1 = get_list_of_tags();
+    $choices1 = array('' => 'Please Select') + $choices1;
+    $select = $mform->addElement('select', 'interestedin', get_string('interestslist'), $choices1); 
+	//$mform->addRule('interestedin', get_string('requireinterestedin'), 'required', null, 'client', false, false);
+	$select->setMultiple(true);
+        //$mform->addElement('tags', 'interests', get_string('interestslist'));
+          //  array('itemtype' => 'user', 'component' => 'core'));
+       // $mform->addHelpButton('interests', 'interestslist');
     }
 
     // Moodle optional fields.
@@ -509,4 +513,15 @@ function useredit_get_disabled_name_fields($enabledadditionalusernames = null) {
     $nonusednamefields = array_diff(get_all_user_name_fields(),
             array_merge(array('firstname', 'lastname'), $enabledadditionalusernames));
     return $nonusednamefields;
+}
+/******************harbinger system function to get all course tags***********************/
+function get_list_of_tags(){
+	global $DB, $CFG;
+	$sql = 'SELECT t.name FROM mdl_tag t INNER JOIN mdl_tag_instance ti on t.id=ti.id where ti.itemtype="course"';	
+	$tags = $DB->get_records_sql($sql);
+	$output = array();
+	foreach($tags as $key=>$value){
+			$output[$key] = $value->name;
+	}
+	return $output;
 }

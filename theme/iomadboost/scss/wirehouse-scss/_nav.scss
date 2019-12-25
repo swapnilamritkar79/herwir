@@ -15,7 +15,18 @@
 
 }
 
-.navbar { border-top:3px solid $wirehouse-purple}
+.navbar { border-top:3px solid $wirehouse-purple;
+
+    @media (max-width: $breakpoint-tablet626) {
+        .has-logo{ display:none;}
+      }
+
+      .localnavbarplus{
+            .icon {
+                color: rgba(0,0,0,.5);
+            }
+      }
+}
 
 [data-region="drawer"] {
     padding:0; 
