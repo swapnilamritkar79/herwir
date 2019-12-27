@@ -12,14 +12,14 @@ class course_cart_form extends moodleform {
     public function __construct($actionurl,$customdata) {
         global $CFG;
 
-        parent::__construct($actionurl,$customdata);
+        parent::__construct($actionurl,$customdata,'post', '', array('id'=>'editcart'));
     }
 
     public function definition() {
 		global $CFG;
 
         $mform =& $this->_form;
-
+		
         // Then show the fields about where this block appears.
        //$mform->addElement('header', 'header','Cart');
 		$invoiceitems        = $this->_customdata['invoiceitems'];
@@ -48,7 +48,7 @@ class course_cart_form extends moodleform {
               </td>
               <td>');
 			  $removeurl = new \moodle_url('/blocks/mycourses/buynow.php',array('courseid' => $invoiceitem->invoiceableitemid,'popup'=>1,'remove'=>1));
-			$mform->addElement('html','<input type="number" min="1" class="price-textbox" name="quantity['.$invoiceitem->id.']" onchange="changequantity(this,'.$invoiceitem->id.')" value="'.$invoiceitem->quantity.'">');
+			$mform->addElement('html','<input type="number" min="1" class="price-textbox" name="quantity['.$invoiceitem->id.']" onchange="changequantity(this,'.$invoiceitem->id.')" value="'.$invoiceitem->quantity.'" onkeypress="return isNumberKey(event)">');
 			  $mform->addElement('html','<a class="removecart" href="'.$removeurl.'"><i class="fa fa-times remove-cart "
                   aria-hidden="true"></i></a></td>
               <td>
@@ -67,10 +67,10 @@ class course_cart_form extends moodleform {
           <div class="number">$'.sprintf ("%.2f",$total).'</div>
         </div>
         <div class="divhold">
-         <a href="'.new \moodle_url('/my/?mycoursestab=all').'"><span class="add-course-btn viewcart-btn">Add More Course</span></a> 
-		
-		<a href="'.new \moodle_url('/').'"><span class="check-out-btn buynow-btn">Check Out</span></a> 
-		
+          <div class="btnhold"><a href="'.new \moodle_url('/my/?mycoursestab=all').'"><span class="buynow-btn">Add More Course</span></a> 
+			</div>
+		<div class="btnhold"><a href="'.new \moodle_url('/').'"><span class="buynow-btn">Check Out</span></a> 
+			</div>
 			
 		</div>');
 	}

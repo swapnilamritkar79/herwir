@@ -50,7 +50,7 @@
 		</div>
 </div>
 {{#js}}
-require(['jquery', 'core/custom_interaction_events',"{{recommended.wwwroot}}/blocks/mycourses/slick/slick.js"], function($, customEvents,slick) {
+require(['jquery', 'core/custom_interaction_events',"{{recommendview.wwwroot}}/blocks/mycourses/slick/slick.js"], function($, customEvents,slick) {
     var root = $('#all-view-{{uniqid}}');
     customEvents.define(root, [customEvents.events.activate]);
     root.on(customEvents.events.activate, '[data-toggle="btns"] > .btn', function() {

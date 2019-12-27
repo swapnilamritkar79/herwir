@@ -99,6 +99,7 @@ if (!empty($SESSION->basketid)) {
 				'invoiceitems' => $invoiceitems
 			);
 			$editform = new course_cart_form(null,$args);
+			
 		$editform->display(); 
 	}
 	else
@@ -168,5 +169,14 @@ $(".viewcart").click(function(event){
             
     });
 });
+ function isNumberKey(evt)
+      {
+		console.log(evt);
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
 </script>
 <?php 
