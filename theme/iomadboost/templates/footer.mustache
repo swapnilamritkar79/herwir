@@ -44,14 +44,14 @@
 {{#js}}
 require(['jquery', 'core/custom_interaction_events','core/modal_factory'], function($, customEvents,ModalFactory) {
    
-	//alert($("#localnavbarplus-viewcart a"));
+	
 	$("#localnavbarplus-viewcart a").click(function(event){
 	event.preventDefault();
-		console.log($(this).attr('href'));
+		
        
 		$.get($(this).attr('href'), function(data, status){
 			var trigger = $('#myModal');
-			console.log(data);
+			
 			
 			  ModalFactory.create({
 				
@@ -61,12 +61,17 @@ require(['jquery', 'core/custom_interaction_events','core/modal_factory'], funct
 			  }, trigger).done(function(modal) {
 			   modal.getRoot().find('.modal-dialog').addClass("shopping-cart");
 				modal.show();
+				$(".modal-backdrop.in").hide();
+				console.log("sdfsdfsd");
 			  });
 		
     });
 	});
 	
 	
+	
+	
 });	
+
 {{/js}}
 
