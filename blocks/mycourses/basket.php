@@ -117,17 +117,17 @@ echo $OUTPUT->footer();
 }
 
 ?>
-
+<style>.modal-backdrop.in{display:none;}</style>
 <script>
 
 $("a.removecart").click(function(event){
     event.preventDefault();
-    console.log($(this).attr('href'));
+   
 	$.get($(this).attr('href'), function(data, status){
-		 console.log(data);
+		
 		$.get("<?php echo new moodle_url('/blocks/mycourses/basket.php',array('popup'=>$popup))?>", function(data, status){
 				var trigger = $('#myModal');
-				console.log(data);
+				
 				$(".modal-body").html(data);
 					
 			});
@@ -139,10 +139,10 @@ function changequantity(obj,invoiceid)
 	url = url + "&iitemid="+invoiceid+"&quantity="+obj.value;
 	
 	$.get(url, function(data, status){
-		 console.log(data);
+		 
 		$.get("<?php echo new moodle_url('/blocks/mycourses/basket.php',array('popup'=>$popup))?>", function(data, status){
 				var trigger = $('#myModal');
-				console.log(data);
+				
 				$(".modal-body").html(data);
 					
 			});
@@ -151,11 +151,11 @@ function changequantity(obj,invoiceid)
 }
 $(".viewcart").click(function(event){
     event.preventDefault();
-    console.log($(this).attr('href'));
+  
     
     $.get($(this).attr('href'), function(data, status){
         var trigger = $('#myModal');
-        console.log(data);
+       
         
         ModalFactory.create({
             
@@ -165,6 +165,7 @@ $(".viewcart").click(function(event){
         }, trigger)
         .done(function(modal) {
             modal.show();
+			$(".modal-backdrop.in").hide();
         });
             
     });
@@ -178,5 +179,6 @@ $(".viewcart").click(function(event){
 
          return true;
       }
+	 
 </script>
 <?php 
