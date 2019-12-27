@@ -25,20 +25,18 @@
 
 
 <div id="block-recommendedcourses-{{uniqid}}" class="block-recommendedcourses" data-region="recommendedcourses">
-
-    <div class="tab-content content-centred">
 		
-		
- 
         <div role="tabpanel" class="tab-pane fade {{#viewinginprogress}}in active{{/viewinginprogress}}" id="mycourses_inprogress_view">
             {{> block_recommendedcourses/recommend-view }}
         </div>
-	
-    </div>
+
 </div>
 
 <div  id="recommendedcourses_recommended_view">
             {{> block_recommendedcourses/recommend-view }}
+        </div>
+		<div  id="recommendedcourses_all_view">
+            {{> block_recommendedcourses/all-view }}
         </div>
 {{#js}}
 require(['jquery', 'block_mycourses/tab_preferences'], function($, TabPreferences) {

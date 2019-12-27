@@ -1,6 +1,15 @@
 
 body{ background:$bodybgcolor; }
 
+a {
+    color:$wirehouse-green;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 /*Button CSS*/
 
 .btn{ border-radius:2px;}
@@ -31,16 +40,27 @@ body{ background:$bodybgcolor; }
 
 /*Button CSS End*/
 
-
+#mycourses_all_view{ margin-bottom: 20px;}
 
 section{
+
+h5.card-title{ font-size:18px; font-weight:bold;}
+
+.viewall {
+position: absolute;
+right: 123px;
+top: 23px;
+
+a{color:$wirehouse-green; text-decoration:none;}
+
+}
 
 & .block_iomad_company_admin.card{ background: transparent; border: 0px solid #ccc; }
 
 }
 
 
-.block_mycourses.card, .block_recentlyaccessedcourses.card {
+.block_mycourses.card, .block_recentlyaccessedcourses.card, .block_recommendedcourses.card {
 
     background: transparent; border: 0px solid #ccc;
 
@@ -66,6 +86,37 @@ div[data-region=recentlyaccessedcourses-view-content] {
     padding: 10px;
     font-size: 18px;
     border-radius: 4px;
+}
+
+
+.has-region-side-pre {
+    .block_badges{
+        .viewallbadges{ right: 86px;}
+     }
+
+     .viewall {
+        right: 157px;
+     }
+
+     .slick-next {
+        right: 64px;
+      }
+    
+      .slick-prev {
+        right: 98px;
+      }
+    
+
+
+}
+
+
+.block_badges{
+   .viewallbadges{ right: 15px;
+    top: 15px;
+   position: absolute;
+   a{color:$wirehouse-green; text-decoration:none;}
+  }
 }
 
 

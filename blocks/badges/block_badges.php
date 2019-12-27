@@ -103,10 +103,7 @@ class block_badges extends block_base {
         if ($badges = badges_get_user_badges($USER->id, $courseid, 0, 4)) {		
             $output = $this->page->get_renderer('core', 'badges');
             $this->content->text = $output->print_badges_list($badges, $USER->id, true);
-			$this->content->text .= '<div class="add-cart-action" style="text-align: right;
-    position: absolute;
-    top: 18px;
-    padding: 0px 0px 0px 274px;">';
+			$this->content->text .= '<div class="viewallbadges">';
 			$this->content->text .= '<a href="'.$CFG->wwwroot.'/badges/view.php?type=1">View All</div>';
         } else {
             $this->content->text .= get_string('nothingtodisplay', 'block_badges');

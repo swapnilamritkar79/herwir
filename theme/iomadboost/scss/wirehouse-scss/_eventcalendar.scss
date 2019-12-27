@@ -57,6 +57,9 @@
         padding: 10px 0px 0px 0px;
       }
     }
+
+    .calendar_event_site{ background:#fff; padding:0px 15px;}
+
   }
 }
 
@@ -65,7 +68,7 @@
 }
 
 a[data-action="view-event"] {
-  color: $wirehouse-black;
+  color: #fff;
 }
 
 .block {
@@ -93,6 +96,8 @@ a[data-action="view-event"] {
     }
     td {
       padding: 5px 2px;
+
+      a {color:#000;}
     }
 
     h3 {

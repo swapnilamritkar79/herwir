@@ -266,6 +266,17 @@ else{$uploaduser="user_upload_title";}
                 'icon' => 'fa-map-marker',
                 'iconsmall' => 'fa-gear',
             ),
+			'courseprice' => array(
+                'category' => 'CourseAdmin',
+                'tab' => 3,
+                'name' => get_string('courseprice', 'block_iomad_company_admin'),
+                'url' => '/blocks/simplehtml/course_subscription.php',
+                'cap' => 'block/iomad_company_admin:classrooms',
+                'icondefault' => 'teachinglocations',
+                'style' => 'company',
+                'icon' => 'fa-dollar',
+                'iconsmall' => 'fa-plus-square',
+            ),
             'manageiomadlicenses' => array(
                 'category' => 'LicenseAdmin',
                 'tab' => 4,

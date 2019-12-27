@@ -362,15 +362,40 @@ table.companycoursetable {
   .col-form-label {
     float: left;
     padding: 11px 0;
-    @media (max-width:$breakpoint-tablet768) {
+    @media (max-width: $breakpoint-tablet768) {
       padding: 11px 0 0 0;
     }
   }
   .form-autocomplete-selection {
     margin: 5px 0px;
     min-height: auto;
-    @media (max-width:$breakpoint-tablet768) {
-      margin:0;
+    @media (max-width: $breakpoint-tablet768) {
+      margin: 0;
+    }
+  }
+}
+
+.collection {
+  .header {
+    background: $headingcolor;
+    border: 1px solid $headingcolor-border;
+  }
+
+  th {
+    color: #fff;
+
+    a {
+      color: #fff;
+    }
+  }
+
+  tbody {
+    tr:nth-child(even) {
+      background: #ececec !important;
+    }
+
+    tr:nth-child(odd) {
+      background: #fff !important;
     }
   }
 }

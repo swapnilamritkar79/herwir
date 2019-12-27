@@ -27,6 +27,10 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
+.navbar .has-logo img {
+  height: 26px;
+}
+
 [data-region="drawer"] {
   padding: 0;
   width: 280px;
@@ -74,6 +78,15 @@ body {
   background: #f8f9fa;
 }
 
+a {
+  color: #4CC0AF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 /*Button CSS*/
 .btn {
   border-radius: 2px;
@@ -104,12 +117,32 @@ body {
 }
 
 /*Button CSS End*/
+#mycourses_all_view {
+  margin-bottom: 20px;
+}
+
+section h5.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+section .viewall {
+  position: absolute;
+  right: 123px;
+  top: 23px;
+}
+
+section .viewall a {
+  color: #4CC0AF;
+  text-decoration: none;
+}
+
 section .block_iomad_company_admin.card {
   background: transparent;
   border: 0px solid #ccc;
 }
 
-.block_mycourses.card, .block_recentlyaccessedcourses.card {
+.block_mycourses.card, .block_recentlyaccessedcourses.card, .block_recommendedcourses.card {
   background: transparent;
   border: 0px solid #ccc;
 }
@@ -132,6 +165,33 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
   border-radius: 4px;
 }
 
+.has-region-side-pre .block_badges .viewallbadges {
+  right: 86px;
+}
+
+.has-region-side-pre .viewall {
+  right: 157px;
+}
+
+.has-region-side-pre .slick-next {
+  right: 64px;
+}
+
+.has-region-side-pre .slick-prev {
+  right: 98px;
+}
+
+.block_badges .viewallbadges {
+  right: 15px;
+  top: 15px;
+  position: absolute;
+}
+
+.block_badges .viewallbadges a {
+  color: #4CC0AF;
+  text-decoration: none;
+}
+
 .block_iomad_company_admin .nav.nav-tabs {
   display: block;
   -ms-flex-wrap: inherit;
@@ -146,6 +206,10 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
 
 .block_iomad_company_admin .nav.nav-tabs a {
   color: #545454;
+}
+
+.block_iomad_company_admin .nav.nav-tabs i {
+  width: 22px;
 }
 
 .block_iomad_company_admin .nav-tabs .nav-link.active {
@@ -470,12 +534,17 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
   padding: 10px 0px 0px 0px;
 }
 
+.path-calendar .maincalendar .calendar_event_site {
+  background: #fff;
+  padding: 0px 15px;
+}
+
 .today {
   background: #4CC0AF;
 }
 
 a[data-action="view-event"] {
-  color: #545454;
+  color: #fff;
 }
 
 .block .calendar-controls .previous,
@@ -502,6 +571,10 @@ a[data-action="view-event"] {
 
 .block .minicalendar td {
   padding: 5px 2px;
+}
+
+.block .minicalendar td a {
+  color: #000;
 }
 
 .block .minicalendar h3 {
@@ -841,7 +914,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #F5F5F5;
+  background: #f5f5f5;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
@@ -865,6 +938,7 @@ body {
   width: 100%;
   margin-left: 0;
   margin-right: 0;
+  padding-top: 10px;
 }
 
 .responsive .slick-track {
@@ -894,7 +968,7 @@ body {
 
 .event-bg .time {
   font-size: 14px;
-  color: #7A7A7A;
+  color: #7a7a7a;
   padding-bottom: 5px;
 }
 
@@ -915,6 +989,15 @@ body {
 .coursehold {
   padding-right: 20px;
   position: relative;
+}
+
+.coursehold h4.title {
+  margin: 15px 0px 0px 0px;
+}
+
+.coursehold h4.title a {
+  color: #545454;
+  text-decoration: none;
 }
 
 .coursehold .statusebar {
@@ -952,14 +1035,14 @@ body {
 }
 
 .courecontent {
-  background: #FFFFFF;
+  background: #ffffff;
   padding: 20px;
   color: #545454;
   position: relative;
 }
 
 .courecontent .price {
-  background: #851C61;
+  background: #851c61;
   position: absolute;
   top: -26px;
   right: 29px;
@@ -992,7 +1075,7 @@ body {
 
 .slick-next,
 .slick-prev {
-  border: 1px solid #44C0B0;
+  border: 1px solid #44c0b0;
   border-radius: 2px;
   top: -21px;
   z-index: 100;
@@ -1017,19 +1100,19 @@ body {
   line-height: inherit;
   font-family: FontAwesome;
   font-size: 20px;
-  color: #4CC0AF;
+  color: #4cc0af;
   display: inline-block;
 }
 
 .slick-next:before {
-  content: '';
+  content: "";
 }
 
 .slick-prev:before {
-  content: '';
+  content: "";
 }
 
-.container {
+label.container {
   display: block;
   position: relative;
   padding-left: 35px;
@@ -1040,7 +1123,7 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: #44C0B0;
+  color: #44c0b0;
   padding-top: 3px;
 }
 
@@ -1055,7 +1138,7 @@ body {
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+label.container:hover input ~ .checkmark {
   background-color: #fff;
   border: 1px solid #ccc;
 }
@@ -1067,7 +1150,7 @@ body {
   display: none;
 }
 
-.container input {
+label.container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -1075,16 +1158,16 @@ body {
   width: 0;
 }
 
-.container input:checked ~ .checkmark:after {
+label.container input:checked ~ .checkmark:after {
   display: block;
 }
 
-.container input:checked ~ .checkmark {
+label.container input:checked ~ .checkmark {
   background-color: #fff;
   border: 1px solid #ccc;
 }
 
-.container .checkmark:after {
+label.container .checkmark:after {
   left: 8px;
   top: 3px;
   /*width: 5px;
@@ -1103,7 +1186,7 @@ body {
 }
 
 .form-autocomplete-selection {
-  margin: .25rem;
+  margin: 0.25rem;
   min-height: 2.375rem;
   display: inline-block;
   width: auto !important;
@@ -1852,5 +1935,26 @@ table.companycoursetable {
   .company-selection-hold .form-autocomplete-selection {
     margin: 0;
   }
+}
+
+.collection .header {
+  background: #7981b2;
+  border: 1px solid #6e76a1;
+}
+
+.collection th {
+  color: #fff;
+}
+
+.collection th a {
+  color: #fff;
+}
+
+.collection tbody tr:nth-child(even) {
+  background: #ececec !important;
+}
+
+.collection tbody tr:nth-child(odd) {
+  background: #fff !important;
 }
 /*# sourceMappingURL=wirehouse.css.map */

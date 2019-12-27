@@ -55,11 +55,14 @@ class main implements renderable, templatable {
 		$myrecommended = mycourses_get_my_recommended();
 		//print_r($myrecommended);die;
         $recommendview = new recommend_view($myrecommended);
+		$allview = new all_view($myrecommended);
 		$nocoursesurl = $output->image_url('courses', 'block_myoverview')->out();
-//print_r($recommendview);die;
+		
+//print_r($allview);die;
         return [           
             'nocourses' => $nocoursesurl,
-            'recommendview' => $recommendview->export_for_template($output)           
+            'recommendview' => $recommendview->export_for_template($output),
+			'allview' => $allview->export_for_template($output)
         ];
 
     }
