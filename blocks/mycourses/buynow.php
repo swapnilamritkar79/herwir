@@ -122,7 +122,7 @@ else
 }
 if($popup != 1)
 {	echo $OUTPUT->footer();
-redirect(new \moodle_url('/blocks/mycourses/basket.php'));
+	redirect(new \moodle_url('/blocks/mycourses/basket.php'));
 
 }
 else

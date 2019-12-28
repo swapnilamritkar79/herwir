@@ -119,16 +119,18 @@ echo $OUTPUT->footer();
 ?>
 <style>.modal-backdrop.in{display:none;}</style>
 <script>
-
+var courseid;
 $("a.removecart").click(function(event){
     event.preventDefault();
-   
+	courseid = $(this).attr('courseid');
+    console.log(courseid);
 	$.get($(this).attr('href'), function(data, status){
 		
 		$.get("<?php echo new moodle_url('/blocks/mycourses/basket.php',array('popup'=>$popup))?>", function(data, status){
 				var trigger = $('#myModal');
-				
+				var course_id = "#course_"+courseid;
 				$(".modal-body").html(data);
+				$(course_id).prop('checked',false);
 					
 			});
 	});
