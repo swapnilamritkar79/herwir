@@ -121,7 +121,8 @@ else
 }
 }
 if($popup != 1)
-{	echo $OUTPUT->footer();
+{	
+	echo $OUTPUT->footer();
 	redirect(new \moodle_url('/blocks/mycourses/basket.php'));
 
 }
