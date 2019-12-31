@@ -33,13 +33,16 @@ class course_cart_form extends moodleform {
               <th>Course Name</th>
               <th>Course QTY</th>
               <th>Price </th>
+			  <th>Tax </th>
               <th>Total</th>
             </tr>
           </thead><tbody class=" content">');
 		  
-		$total = 0;
+		$actualprice = $tax =$total = 0;
 		foreach($invoiceitems as $invoiceitem)
 		{
+			$actualprice  += $invoiceitem->price * $invoiceitem->quantity;
+			$tax  += ($invoiceitem->price * $invoiceitem->quantity)*.2;
 			
            $mform->addElement('html','<tr>
               <td>
@@ -55,16 +58,31 @@ class course_cart_form extends moodleform {
                 <div class="price">$'.$invoiceitem->price.'</div>
               </td>
               <td>
-                <div class="total">$'.sprintf ("%.2f",$invoiceitem->price * $invoiceitem->quantity).'</div>
+                <div class="total">$'.sprintf ("%.2f",($invoiceitem->price * $invoiceitem->quantity)).'</div>
+              </td>
+			  <td>
+                <div class="total">$'.sprintf ("%.2f",($invoiceitem->price * $invoiceitem->quantity)*0.2).'</div>
+              </td>
+			   <td>
+                <div class="total">$'.sprintf ("%.2f",($invoiceitem->price * $invoiceitem->quantity)+($invoiceitem->price * $invoiceitem->quantity*.2)).'</div>
               </td>
 
             </tr>');
-			$total += ($invoiceitem->price * $invoiceitem->quantity);
+			$total += $actualprice;
+			
 			
 		}
 		$mform->addElement('html','</tbody></table><div class="final-total">
+          <div class="text">Total Price</div>
+          <div class="number">$'.sprintf ("%.2f",$actualprice).'</div>
+        </div>
+		<div class="final-total">
+          <div class="text">Tax</div>
+          <div class="number">$'.sprintf ("%.2f",$tax).'</div>
+        </div>
+		<div class="final-total">
           <div class="text">Total</div>
-          <div class="number">$'.sprintf ("%.2f",$total).'</div>
+          <div class="number">$'.sprintf ("%.2f",($tax+$actualprice)).'</div>
         </div>
         <div class="divhold">
           <div class="btnhold"><a href="'.new \moodle_url('/my/?mycoursestab=all').'"><span class="buynow-btn">Add More Course</span></a> 
