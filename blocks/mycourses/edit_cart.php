@@ -33,6 +33,7 @@ class course_cart_form extends moodleform {
               <th>Course Name</th>
               <th>Course QTY</th>
               <th>Price </th>
+			  <th>Actual Price </th>
 			  <th>Tax </th>
               <th>Total</th>
             </tr>
@@ -43,7 +44,7 @@ class course_cart_form extends moodleform {
 		{
 			$actualprice  += $invoiceitem->price * $invoiceitem->quantity;
 			$tax  += ($invoiceitem->price * $invoiceitem->quantity)*.2;
-			
+			$total += $actualprice;
            $mform->addElement('html','<tr>
               <td>
                 <div class="course-name">'.$invoiceitem->fullname.'</div>
@@ -68,11 +69,16 @@ class course_cart_form extends moodleform {
               </td>
 
             </tr>');
-			$total += $actualprice;
+			
 			
 			
 		}
-		$mform->addElement('html','</tbody></table><div class="final-total">
+		$mform->addElement('html','</tbody></table>
+		<div class="final-total">
+          <div class="text">Coupon</div>
+          <div class="number"><input type="text"  class="price-textbox" name="coupon" onchange="" value="" pattern="[A-Za-z0-9]+"></div>
+        </div>
+		<div class="final-total">
           <div class="text">Total Price</div>
           <div class="number">$'.sprintf ("%.2f",$actualprice).'</div>
         </div>
