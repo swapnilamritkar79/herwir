@@ -24,11 +24,17 @@
 
 function mycourses_get_my_recommended() {
     global $DB, $USER, $CFG;
-	
+	$interest=$USER->interestedin;
+
     $myrecommendcourse = new stdclass();
-    $sql="select id,fullname,summary from mdl_course";
-    $myrecommend = $DB->get_records_sql($sql);
-		//print_r($myrecommend);die;
+	if(empty($interest)){
+		 $sql="select id, fullname,summary from mdl_course";		
+	}
+	else
+	{
+      $sql="SELECT c.id,c.fullname,c.summary FROM mdl_course c where id in (SELECT t.itemid FROM mdl_tag_instance t where t.tagid in ($interest) and t.itemtype='course')";
+	}
+    $myrecommend = $DB->get_records_sql($sql);		
 	
 	$recommendcourse = array();
 	
@@ -39,7 +45,7 @@ function mycourses_get_my_recommended() {
   
   
   $myrecommendcourse->myrecommend = $myrecommend;
-  //print_r($myrecommendcourse);die;
+
 	return $myrecommendcourse;
 
 

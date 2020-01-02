@@ -110,7 +110,7 @@
                     <a href="{{signupurl}}">{{#str}} tocreatenewaccount {{/str}}</a>
                 </div>
             {{/cansignup}}
-
+			
             {{#error}}
                 <div class="loginerrors">
                     <a href="#" id="loginerrormessage" class="accesshide">{{error}}</a>
@@ -126,7 +126,7 @@
                         <input type="hidden" name="logintoken" value="{{logintoken}}">
                         <div class="form-group">
                              <i class=" usernameicon">
-                                <img src="/wirehouse_svn/wirehouse/theme/iomadboost/pix/username.svg" class="username-img" title="" alt=""/> 
+                                <img src="{{usernameImage}}" class="username-img" title="" alt=""/> 
                                 </i>
 
                                 <label for="username" class="sr-only">
@@ -147,7 +147,7 @@
                         <div class="form-group">
 
                         <i class=" usernameicon">
-                                <img src="/wirehouse_svn/wirehouse/theme/iomadboost/pix/padlock.svg" class="username-img" title="" alt=""/> 
+                                <img src="{{padlockImage}}" class="username-img" title="" alt=""/> 
                                 </i>
 
                             <label for="password" class="sr-only rakesh">{{#str}} password {{/str}}</label>
@@ -223,7 +223,7 @@
 
 </div>
 
-<div class="imagehold">  <img src="/wirehouse_svn/wirehouse/theme/iomadboost/pix/1021.svg" class="img-fluid" title="Login Image" alt="wierhouse"/>   </div></div>
+<div class="imagehold">  <img src="{{loginpageImage}}" class="img-fluid" title="Login Image" alt="wierhouse"/>   </div></div>
 </div>
 
 

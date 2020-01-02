@@ -517,11 +517,11 @@ function useredit_get_disabled_name_fields($enabledadditionalusernames = null) {
 /******************harbinger system function to get all course tags***********************/
 function get_list_of_tags(){
 	global $DB, $CFG;
-	$sql = 'SELECT t.name FROM mdl_tag t INNER JOIN mdl_tag_instance ti on t.id=ti.id where ti.itemtype="course"';	
+	$sql = 'SELECT t.id,t.rawname FROM mdl_tag t INNER JOIN mdl_tag_instance ti on t.id=ti.tagid where ti.itemtype="course"';	
 	$tags = $DB->get_records_sql($sql);
 	$output = array();
 	foreach($tags as $key=>$value){
-			$output[$key] = $value->name;
+			$output[$key] = $value->rawname;
 	}
 	return $output;
 }

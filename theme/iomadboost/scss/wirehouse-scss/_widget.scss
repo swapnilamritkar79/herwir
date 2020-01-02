@@ -290,3 +290,140 @@ label.container {
 }
 
 
+.coursebox {
+  &.odd {
+    background:#fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e8e9ec;
+  }
+  
+  &.even {
+    background:#fff !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e8e9ec;
+  }
+
+  .content {
+    .courseimage {
+      img{
+        max-width: 100%;
+        max-height: 100%;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.region_main_settings_menu_proxy{
+  height: 3rem;
+}
+
+
+.subcategories {
+  .category {
+    padding: 10px;
+    background: #fff;
+    margin: 10px 0px;
+    border: 1px solid #e8e9ec;
+  }
+}
+
+.course-content {
+  ul.topics{   
+     background: #fff;
+    border: 1px solid #e8e9ec;}
+}
+
+.path-course-view {
+ .completionprogress {
+  margin-top: 15px;
+  margin-right: 15px;
+}
+}
+
+
+#badge{
+  background: #fff;
+  border: 1px solid #e8e9ec;
+  padding: 15px;
+
+}
+
+
+
+#issued-badge-table{ 
+  
+  .activatebadge {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+ul.badges{ 
+  background: #fff;
+  border: 1px solid #e8e9ec;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.col-form-label { 
+  padding: 10px 0px;
+  display: inline-block !important;
+}
+
+}
+
+
+#scorm_toc_toggle_btn, #nav_skipprev, #nav_prev, #nav_up, #nav_next, #nav_skipnext{
+  border: 1px solid $wirehouse-green;
+  color:$wirehouse-green;
+  padding:5px 10px;
+  font-family:$normalfonts;
+  font-size: 20px;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.yui3-skin-sam .yui3-treeview-selected>.yui3-treeview-row {
+  background-color: #fff;
+  border-color: #cccccc;
+  padding: 10px;
+}
+
+.yui3-skin-sam .yui3-treeview-selected>.yui3-treeview-row:hover {
+  background-color: #fff;
+  border-color: #cccccc;
+  padding: 10px;
+}
+
+
+
+.coursebox>.info>.coursename a {
+  background-position: left 9px;
+}
+
+
+#page-mod-scorm-player {
+
+  .activity-navigation{ position:relative; top:10px}
+
+  #scormpage #scorm_content {
+    height: 94%;
+
+    @media (max-width:$breakpoint-tablet768) {
+      height:99%;
+    }
+  }
+
+ 
+  #prev-activity-link{
+    font-family:$normalfonts;
+    color:$wirehouse-green;
+    text-decoration:none;
+  }
+  
+}

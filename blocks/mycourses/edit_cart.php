@@ -33,18 +33,14 @@ class course_cart_form extends moodleform {
               <th>Course Name</th>
               <th>Course QTY</th>
               <th>Price </th>
-			  <th>Actual Price </th>
-			  <th>Tax </th>
               <th>Total</th>
             </tr>
           </thead><tbody class=" content">');
 		  
-		$actualprice = $tax =$total = 0;
+		$total = 0;
 		foreach($invoiceitems as $invoiceitem)
 		{
-			$actualprice  += $invoiceitem->price * $invoiceitem->quantity;
-			$tax  += ($invoiceitem->price * $invoiceitem->quantity)*.2;
-			$total += $actualprice;
+			
            $mform->addElement('html','<tr>
               <td>
                 <div class="course-name">'.$invoiceitem->fullname.'</div>
@@ -59,36 +55,16 @@ class course_cart_form extends moodleform {
                 <div class="price">$'.$invoiceitem->price.'</div>
               </td>
               <td>
-                <div class="total">$'.sprintf ("%.2f",($invoiceitem->price * $invoiceitem->quantity)).'</div>
-              </td>
-			  <td>
-                <div class="total">$'.sprintf ("%.2f",($invoiceitem->price * $invoiceitem->quantity)*0.2).'</div>
-              </td>
-			   <td>
-                <div class="total">$'.sprintf ("%.2f",($invoiceitem->price * $invoiceitem->quantity)+($invoiceitem->price * $invoiceitem->quantity*.2)).'</div>
+                <div class="total">$'.sprintf ("%.2f",$invoiceitem->price * $invoiceitem->quantity).'</div>
               </td>
 
             </tr>');
-			
-			
+			$total += ($invoiceitem->price * $invoiceitem->quantity);
 			
 		}
-		$mform->addElement('html','</tbody></table>
-		<div class="final-total">
-          <div class="text">Coupon</div>
-          <div class="number"><input type="text"  class="price-textbox" name="coupon" onchange="" value="" pattern="[A-Za-z0-9]+"></div>
-        </div>
-		<div class="final-total">
-          <div class="text">Total Price</div>
-          <div class="number">$'.sprintf ("%.2f",$actualprice).'</div>
-        </div>
-		<div class="final-total">
-          <div class="text">Tax</div>
-          <div class="number">$'.sprintf ("%.2f",$tax).'</div>
-        </div>
-		<div class="final-total">
+		$mform->addElement('html','</tbody></table><div class="final-total">
           <div class="text">Total</div>
-          <div class="number">$'.sprintf ("%.2f",($tax+$actualprice)).'</div>
+          <div class="number">$'.sprintf ("%.2f",$total).'</div>
         </div>
         <div class="divhold">
           <div class="btnhold"><a href="'.new \moodle_url('/my/?mycoursestab=all').'"><span class="buynow-btn">Add More Course</span></a> 

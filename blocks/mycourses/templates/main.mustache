@@ -27,7 +27,7 @@
 		<div  id="mycourses_all_view">
             {{> block_mycourses/all-view }}
         </div>
-		{{/companyadmin}}
+{{/companyadmin}}
 
 <div id="block-mycourses-{{uniqid}}" class="block-mycourses" data-region="mycourses">
     <ul id="block-mycourses-view-choices-{{uniqid}}" class="nav nav-tabs" role="tablist">
@@ -66,9 +66,9 @@
     </div>
 </div>
 
-<div  id="mycourses_recommended_view">
+<div id="mycourses_recommended_view">
             {{> block_mycourses/recommended-view }}
-        </div>
+</div>
 {{#js}}
 require(['jquery', 'block_mycourses/tab_preferences'], function($, TabPreferences) {
     var root = $('#block-mycourses-view-choices-{{uniqid}}');

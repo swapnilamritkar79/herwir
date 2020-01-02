@@ -27,25 +27,19 @@
   <div class="responsive">
    {{#completedview.courses}}
         <div class="coursehold" >
-            
                     <div class="courecontent">
                         <div class="courseimage">
                             <a href="{{ url }}"><img class="imgresponsive" src="{{ image }}" ></a>
                         </div>
-                        <div class="mycoursedetails">
-                            <div class="mycourseheading">
-                                <h4 class="title">
-                                    <a href="{{ url }}">{{ fullname }}</a>
-                                </h4>
-                            </div>
-                            <div class="mycoursesummary">
+							<div class="name">
+									<h4 class="title">
+										<a href="{{ url }}">{{ fullname }}</a>
+									</h4>
+							 </div>
+                            <div class="dec">
                                 {{ summary}}
                             </div>
-                            <div class="finalresults">
-                                <div class="ml-auto mt-auto w-50 p-t-1">
-                                    <div class="progress bg-white border">
-                                        <div class="progress-bar bar" role="progressbar" aria-valuenow="{{progress}}" style="width: {{progress}}%" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                                      
                                     <div class="small">
                                         <span class="sr-only">{{#str}}aria:courseprogress, block_myoverview{{/str}}</span>
                                         <strong>{{progress}}%</strong> {{#str}}complete, block_myoverview{{/str}}
@@ -53,20 +47,14 @@
                                         {{#timeexpires}}
                                             <strong>({{#str}} timeexpires, local_report_completion {{/str}}</strong> {{ timeexpires }})
                                         {{/timeexpires}}
-                                        <strong>{{#str}} finalscore, block_mycourses,  {{ finalscore }}</strong> {{/str}}
+                                        <!--<strong>{{#str}} finalscore, block_mycourses,  {{ finalscore }}</strong> {{/str}}-->
                                     </div>
-                                </div>
-                                {{#certificate}}
-                                    <div class = "certificatediv">
-                                        <a class="btn btn-secondary" href="{{ certificate }}">{{#str}} downloadcert, block_mycourses {{/str}}</a></p>
-                                    </div>
-                                {{/certificate}}
-                            </div>
-                        </div>
+                       
                     </div>
  
         </div>
-    {{/completedview.courses}}</div>
+    {{/completedview.courses}}
+	</div>
     {{^completedview.courses}}
         <div class="text-xs-center text-center m-t-3">
             <img class="empty-placeholder-image-lg"
