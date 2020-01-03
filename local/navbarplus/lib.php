@@ -148,7 +148,10 @@ function local_navbarplus_render_navbar_output() {
                 }
                 // Add the link to the HTML.
                 $output .= html_writer::start_tag('div', $divattributes);
+				$output .= html_writer::start_tag('div', array('id'=>'çart_count','çlass'=>'cart-container'));
+				$output .= html_writer::end_tag('div');
                 $output .= html_writer::link($itemurl, $itemicon, $linkattributes);
+				
                 $output .= html_writer::end_tag('div');
             }
         }
