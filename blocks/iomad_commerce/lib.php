@@ -230,9 +230,11 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
 
         $table = new html_table();
         $table->head = array (get_string('course'),
-                              "",
+                              
                               get_string('unitprice', 'block_iomad_commerce'),
-                              get_string('amount', 'block_iomad_commerce')
+                              get_string('quantity', 'block_iomad_commerce'),
+                              get_string('tax', 'block_iomad_commerce'),
+                              get_string('total', 'block_iomad_commerce')
                              );
         if ($includeremove) {
             $table->head[] = "";
@@ -240,10 +242,11 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
         if ($showprocessed) {
             $table->head[] = get_string('process', 'block_iomad_commerce');
         }
-        $table->align = array ("left", "center", "right", "right", "right");
+        $table->align = array ("left", "right", "right", "right", "right");
         $table->width = "600px";
 
         $total = 0;
+        $totaltax = 0;
         $count = 0;
         if (!empty($CFG->commerce_admin_currency)) {
             $currency = get_string($CFG->commerce_admin_currency, 'core_currencies');
@@ -252,19 +255,18 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
         }
         foreach ($basketitems as $item) {
             $rowtotal = $item->price * $item->license_allocation;
-
-            if ($item->invoiceableitemtype == 'singlepurchase') {
-                $unitprice = '';
-            } else {
-                $unitprice = $item->currency . number_format($item->price, 2);
-            }
+			$tax = sprintf ("%.2f",($CFG->tax/100) *$rowtotal );
+           
+                $unitprice = $item->currency .' '. number_format($item->price, 2);
+            
 
             $row = array(
                 ($links ? "<a href='course.php?id=$item->invoiceableitemid'>$item->fullname</a>" : $item->fullname),
-                get_string('type_quantity_' . ($item->license_allocation > 1 ? 'n' : '1') .
-                '_' . $item->invoiceableitemtype, 'block_iomad_commerce', $item->license_allocation),
+				
                 $unitprice,
-                $item->currency . ' ' .number_format($rowtotal, 2)
+				$item->license_allocation,
+				$item->currency . ' ' .number_format($tax, 2),
+                $item->currency . ' ' .number_format(($rowtotal+$tax), 2)
             );
             if ($includeremove) {
                 $row[] = "<a href='basket.php?remove=$item->id'>" . strtolower(get_string('remove')) . "</a>";
@@ -280,22 +282,52 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
             $table->data[] = $row;
 
             $currency = $item->currency;
-            $total += $rowtotal;
+            $total += ($rowtotal+$tax);
+			
+			$totaltax += $tax;
         }
 
-        $totalrow = array(
+        $totalrow= array(
             '<b>' . get_string('total', 'block_iomad_commerce') . '</b>',
+           
             '',
             '',
+            
+            '<b>' . $currency . ' ' . number_format($totaltax, 2) . '</b>',
             '<b>' . $currency . ' ' . number_format($total, 2) . '</b>'
         );
+		 $table->data[] = $totalrow;
+		
+		 $totalrow = array(
+            '<b>' . get_string('total', 'block_iomad_commerce') . '</b>',
+           
+            '',
+            '',
+            
+            '',
+            '<b>' . $currency . ' ' .  number_format($total*($CFG->discount/100), 2) . '</b>'
+        );
+		
+		$table->data[] = $totalrow;
+		 $totalrow = array(
+            '<b>' . get_string('total', 'block_iomad_commerce') . '</b>',
+           
+            '',
+            '',
+            
+            '',
+            '<b>' . $currency . ' ' .  number_format($total-($total*($CFG->discount/100)), 2) . '</b>'
+        );
+		
+		$table->data[] = $totalrow;
         if ($includeremove) {
             $totalrow[] = '';
         }
         if ($showprocessed) {
             $totalrow[] = '';
         }
-        $table->data[] = $totalrow;
+       // $table->data[] = $totalrow;
+		
 
         if (!empty($table)) {
             $result .= html_writer::table($table);

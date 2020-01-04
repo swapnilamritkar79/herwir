@@ -24,9 +24,9 @@
 }}
 
 
-<div id="block-recommendedcourses-{{uniqid}}" class="block-recommendedcourses" data-region="recommendedcourses">
+<div id="block-recommend-{{uniqid}}" class="block-recommend" data-region="recommend">
 		
-        <div role="tabpanel" class="tab-pane fade {{#viewinginprogress}}in active{{/viewinginprogress}}" id="mycourses_inprogress_view">
+        <div role="tabpanel" class="tab-pane fade " id="mycourses_recommend">
             {{> block_recommendedcourses/recommend-view }}
         </div>
 
@@ -39,8 +39,8 @@
             {{> block_recommendedcourses/all-view }}
         </div>
 {{#js}}
-require(['jquery', 'block_mycourses/tab_preferences'], function($, TabPreferences) {
-    var root = $('#block-recommendedcourses-view-choices-{{uniqid}}');
+require(['jquery', 'block_recommendedcourses/tab_preferences'], function($, TabPreferences) {
+    var root = $('#recommend-{{uniqid}}');
     TabPreferences.registerEventListeners(root);
 	
 });
