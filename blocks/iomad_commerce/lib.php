@@ -233,7 +233,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
                               
                               get_string('unitprice', 'block_iomad_commerce'),
                               get_string('quantity', 'block_iomad_commerce'),
-                              get_string('tax', 'block_iomad_commerce'),
+                             
                               get_string('total', 'block_iomad_commerce')
                              );
         if ($includeremove) {
@@ -247,6 +247,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
 
         $total = 0;
         $totaltax = 0;
+        $nettotaltax = 0;
         $count = 0;
         if (!empty($CFG->commerce_admin_currency)) {
             $currency = get_string($CFG->commerce_admin_currency, 'core_currencies');
@@ -265,8 +266,8 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
 				
                 $unitprice,
 				$item->license_allocation,
-				$item->currency . ' ' .number_format($tax, 2),
-                $item->currency . ' ' .number_format(($rowtotal+$tax), 2)
+				
+                $item->currency . ' ' .number_format(($rowtotal), 2)
             );
             if ($includeremove) {
                 $row[] = "<a href='basket.php?remove=$item->id'>" . strtolower(get_string('remove')) . "</a>";
@@ -282,41 +283,57 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
             $table->data[] = $row;
 
             $currency = $item->currency;
-            $total += ($rowtotal+$tax);
+            $total += ($rowtotal);
 			
 			$totaltax += $tax;
+			
+			
         }
-
+		$nettotaltax = $total + $totaltax;
         $totalrow= array(
             '<b>' . get_string('total', 'block_iomad_commerce') . '</b>',
            
             '',
             '',
             
-            '<b>' . $currency . ' ' . number_format($totaltax, 2) . '</b>',
+            
             '<b>' . $currency . ' ' . number_format($total, 2) . '</b>'
         );
 		 $table->data[] = $totalrow;
-		
+		 
 		 $totalrow = array(
-            '<b>' . get_string('total', 'block_iomad_commerce') . '</b>',
+            '<b>' . get_string('tax', 'block_iomad_commerce') . '</b>',
            
             '',
             '',
             
-            '',
-            '<b>' . $currency . ' ' .  number_format($total*($CFG->discount/100), 2) . '</b>'
+            
+            '<b>' . $currency . ' ' .  number_format($totaltax, 2) . '</b>'
         );
 		
 		$table->data[] = $totalrow;
+		
+		 $totalrow = array(
+            '<b>' . get_string('discount', 'block_iomad_commerce') . '</b>',
+           
+            '',
+            '',
+            
+            
+            '<b>' . $currency . ' ' .  number_format(($total+$totaltax)*($CFG->discount/100), 2) . '</b>'
+        );
+		
+		$table->data[] = $totalrow;
+		
+		
 		 $totalrow = array(
             '<b>' . get_string('total', 'block_iomad_commerce') . '</b>',
            
             '',
             '',
             
-            '',
-            '<b>' . $currency . ' ' .  number_format($total-($total*($CFG->discount/100)), 2) . '</b>'
+            
+            '<b>' . $currency . ' ' .  number_format($nettotaltax-($nettotaltax*($CFG->discount/100)), 2) . '</b>'
         );
 		
 		$table->data[] = $totalrow;

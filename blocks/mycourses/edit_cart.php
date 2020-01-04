@@ -38,7 +38,7 @@ class course_cart_form extends moodleform {
               <th>Course QTY</th>
               <th>Unit Price ('. $currency.')</th>
 			  <th>Price ('. $currency.') </th>
-			  <th>Tax ('. $currency.')</th>
+			 
               <th>Total ('. $currency.')</th>
             </tr>
           </thead><tbody class=" content">');
@@ -65,11 +65,9 @@ class course_cart_form extends moodleform {
               <td>
                 <div class="total">'.sprintf ("%.2f",($invoiceitem->price * $invoiceitem->quantity)).'</div>
               </td>
-			  <td>
-                <div class="total">'.sprintf ("%.2f",($invoiceitem->price * $invoiceitem->quantity)*($CFG->tax/100)).'</div>
-              </td>
+			 
 			   <td>
-                <div class="total">'.sprintf ("%.2f",($invoiceitem->price * $invoiceitem->quantity)+($invoiceitem->price * $invoiceitem->quantity*($CFG->tax/100))).'</div>
+                <div class="total">'.sprintf ("%.2f",($invoiceitem->price * $invoiceitem->quantity)).'</div>
               </td>
 
             </tr>');

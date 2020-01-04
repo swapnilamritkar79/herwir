@@ -206,7 +206,7 @@ if ($mform->is_cancelled()) {
        
 		$companylicense->expirydate = (9999 * 86400) + time();
 		// 86400 = 24*60*60 = number of seconds in a day.
-        
+        $companylicense->reference = $invoice->id;
         $companylicense->companyid = $company->id;
         $companylicenseid = $DB->insert_record('companylicense', $companylicense);
         // Create mdl_companylicense_courses record for the course.
@@ -277,7 +277,7 @@ if ($mform->is_cancelled()) {
 	}	
 		
         $transaction->allow_commit();
-		redirect(new moodle_url('blocks/iomad_company_admin/company_license_users_form.php'));
+		redirect(new moodle_url('/blocks/iomad_company_admin/company_license_users_form.php'));
    
 }
 
