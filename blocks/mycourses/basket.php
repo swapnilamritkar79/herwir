@@ -86,6 +86,7 @@ if (!empty($SESSION->basketid)) {
 			{
 				$invoiceitem = $DB->get_record('invoiceitem', array('id' => $SESSION->basketid, 'id' => $iitemid));
 				$invoiceitem->quantity = $quantity;
+				$invoiceitem->license_allocation = 1;
 				$DB->update_record('invoiceitem', $invoiceitem);
 			}
 			if($popup != 1)
@@ -149,6 +150,10 @@ function changequantity(obj,invoiceid)
 					
 			});
 	});
+	
+}
+function applycoupon()
+{
 	
 }
 $(".viewcart").click(function(event){

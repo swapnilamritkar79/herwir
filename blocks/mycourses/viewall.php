@@ -1,6 +1,6 @@
 <?php
 require_once('../../config.php');
-//require_once(dirname(__FILE__) . '/../recommendedcourses/locallib.php');
+require_once(dirname(__FILE__) . '/../recommendedcourses/locallib.php');
 
 define('DEFAULT_PAGE_SIZE', 20);
 define('SHOW_ALL_PAGE_SIZE', 5000);

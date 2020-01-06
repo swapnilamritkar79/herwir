@@ -175,7 +175,16 @@ if ($mform->is_cancelled()) {
 	
     $data->id = $basketid;	
 	$data->status = INVOICESTATUS_PAID;
-    $DB->update_record('invoice', $data, array('id' => $data->id));
+	if (!empty($CFG->commerce_admin_currency)) {
+		$currency = get_string($CFG->commerce_admin_currency, 'core_currencies');
+	} else {
+		$currency = get_string('GBP', 'core_currencies');
+	}
+	$data->pp_amount = 0;
+	$data->pp_settleamt = 0;
+	$data->pp_taxamt= 0;
+		
+	
 		
 	$invoice = $DB->get_record('invoice',array('id' => $data->id));
 	$invoiceitems = $DB->get_records_sql('SELECT ii.*, c.fullname
@@ -184,7 +193,18 @@ if ($mform->is_cancelled()) {
                                             WHERE ii.invoiceid = :invoiceid
                                             ORDER BY ii.id
                                            ', array('invoiceid' => $data->id));
+	foreach($invoiceitems as $invoiceitem)
+	{
+		$data->pp_ordertime = time();
+		$data->pp_currencycode =$currency;
+		$amount = round($invoiceitem->price * $invoiceitem->license_allocation * $invoiceitem->quantity,2);
+		$data->pp_amount += $amount;
+		$data->pp_taxamt += round($amount*($CFG->tax/100),2);
+		$data->pp_settleamt += ($amount+round($amount*($CFG->tax/100),2)) - (($amount+round($amount*($CFG->tax/100),2))*$CFG->discount) ;
+	}
 	
+	 
+    $DB->update_record('invoice', $data, array('id' => $data->id));
 	
 	foreach($invoiceitems as $invoiceitem)
 	{
@@ -197,12 +217,29 @@ if ($mform->is_cancelled()) {
         if ($count) {
             $licensename .= ' (' . ($count + 1) . ')';
         }
+		
+		$dlicensename = $company->shortname.'-'.$course->shortname.'-'.$invoice->id;
+		$count = $DB->count_records_sql("SELECT COUNT(*) FROM {license} WHERE shortname LIKE '" .
+                                        (str_replace("'", "\'", $dlicensename)) . "%'");
+        if ($count) {
+            $dlicensename .= '(' . ($count + 1) . ')';
+        }
+		
+		$license = new stdClass;
+		$license->shortname = $dlicensename;
+		$license->fullname=$licensename;
+		$license->source='';
+		$license->version=date("YmdHis");
+		$license->enabled=1;
+		$rslicense = $DB->insert_record('license', $license);
 
         // Create mdl_companylicense record.
         $companylicense = new stdClass;
         $companylicense->name = $licensename;
-        $companylicense->allocation = $invoiceitem->license_allocation;
+        $companylicense->allocation = $invoiceitem->license_allocation ;
+        $companylicense->humanallocation = $invoiceitem->license_allocation * $invoiceitem->quantity ;
         $companylicense->validlength = $invoiceitem->license_validlength;
+        $companylicense->startdate = time();
        
 		$companylicense->expirydate = (9999 * 86400) + time();
 		// 86400 = 24*60*60 = number of seconds in a day.
@@ -263,13 +300,13 @@ if ($mform->is_cancelled()) {
 		$grouppivot = (array) $DB->get_record('company_course_groups', array('courseid' => $course->id,'companyid'=>$company->id,'groupid'=>$groupid));
 		if(empty($grouppivot->id))
 		{
-		$grouppivot = array();
-        $grouppivot['companyid'] = $company->id;
-        $grouppivot['courseid'] = $course->id;
-        $grouppivot['groupid'] = $groupid;
-		
-        // Write the data to the DB.
-        $DB->insert_record('company_course_groups', $grouppivot);
+			$grouppivot = array();
+			$grouppivot['companyid'] = $company->id;
+			$grouppivot['courseid'] = $course->id;
+			$grouppivot['groupid'] = $groupid;
+			
+			// Write the data to the DB.
+			$DB->insert_record('company_course_groups', $grouppivot);
 		}
 		
 		

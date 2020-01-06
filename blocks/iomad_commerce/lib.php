@@ -255,7 +255,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
             $currency = get_string('GBP', 'core_currencies');
         }
         foreach ($basketitems as $item) {
-            $rowtotal = $item->price * $item->license_allocation;
+            $rowtotal = $item->price * $item->license_allocation*$item->quantity;
 			$tax = sprintf ("%.2f",($CFG->tax/100) *$rowtotal );
            
                 $unitprice = $item->currency .' '. number_format($item->price, 2);
@@ -265,7 +265,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
                 ($links ? "<a href='course.php?id=$item->invoiceableitemid'>$item->fullname</a>" : $item->fullname),
 				
                 $unitprice,
-				$item->license_allocation,
+				$item->license_allocation*$item->quantity,
 				
                 $item->currency . ' ' .number_format(($rowtotal), 2)
             );
