@@ -43,7 +43,7 @@
 			  
 {{#js}}
 require(['jquery', 'core/custom_interaction_events','core/modal_factory'], function($, customEvents,ModalFactory) {
-   
+   var modaldi;
 	
 	$("#localnavbarplus-viewcart a").click(function(event){
 	event.preventDefault();
@@ -59,14 +59,25 @@ require(['jquery', 'core/custom_interaction_events','core/modal_factory'], funct
 				body: data,
 				large : 1,
 			  }, trigger).done(function(modal) {
+			  modaldi = modal;
 			   modal.getRoot().find('.modal-dialog').addClass("shopping-cart");
 				modal.show();
 				$(".modal-backdrop.in").hide();
-				console.log("sdfsdfsd");
+				
 			  });
-		
+		 
     });
 	});
+	
+
+		$(document).click(function(event) {
+		  //if you click on anything except the modal itself or the "open modal" link, close the modal
+		  console.log($(event.target).closest(".modal-dialog").length);
+		  console.log(modaldi);
+		  if (!$(event.target).closest(".modal-dialog").length) {
+			modaldi.hide();
+		  }
+		});
 	
 	
 	
