@@ -44,6 +44,9 @@
 {{#js}}
 require(['jquery', 'core/custom_interaction_events','core/modal_factory'], function($, customEvents,ModalFactory) {
    var modaldi;
+   if($(".courselisting").length > 0) {
+  $("#çart_count").html($(".courselisting").filter(':checked').length);
+   }
 	
 	$("#localnavbarplus-viewcart a").click(function(event){
 	event.preventDefault();

@@ -44,7 +44,7 @@
 											<div class="price">${{price}}</div>
 											<div class="add-cart-action">
 												 <label class="container" >Add to cart
-												  <input type="checkbox" name="course_{{id}}" id="course_{{id}}" {{checked}} onclick="getcarturl('{{ carturl }}','course_{{id}}')">
+												  <input type="checkbox" class="courselisting" name="course_{{id}}" id="course_{{id}}" {{checked}} onclick="getcarturl('{{ carturl }}','course_{{id}}')">
 												  <span class="checkmark" ></span> </label>
 																				
 												
@@ -97,7 +97,7 @@
 								
 							});
 					 }
-					 
+					 $("#çart_count").html($(".courselisting").filter(':checked').length);
 				}
 				
 				
