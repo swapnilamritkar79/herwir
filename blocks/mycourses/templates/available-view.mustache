@@ -22,14 +22,15 @@
     Example context (json):
     {}
 }}
-<div id="available-view-{{uniqid}}"  >
 
+
+<div id="available-view-{{uniqid}}"  >
+<div id="allview"  class="viewall"><a href="{{availableview.wwwroot}}/blocks/mycourses/viewall.php">View All</a></div>
 <div class="tab-content">
       <div class="tab-pane active fade in" id="mycourses_available_view">
 			<div class="responsive">
    {{#availableview.courses}}
-   
-        <div class="coursehold"  >
+        <div class="coursehold" >
             
                     <div class="courecontent">
                         <div class="courseimage">
@@ -69,27 +70,7 @@ require(['jquery', 'core/custom_interaction_events',"{{availableview.wwwroot}}/b
     root.on(customEvents.events.activate, '[data-toggle="btns"] > .btn', function() {
         root.find('.btn.active').removeClass('active');
     });
-	$('.responsive').slick({
-				dots: false,
-				infinite: true,
-				speed: 300,
-				slidesToShow: 2,
-				slidesToScroll: 2,
-				responsive: [
-				  {
-					breakpoint: 1024,
-					settings: {
-					  slidesToShow: 2,
-					  slidesToScroll: 2,
-					  infinite: true,
-					  dots: true
-					}
-				  }
-				  // You can unslick at a given breakpoint now by adding:
-				  // settings: "unslick"
-				  // instead of a settings object
-				]
-				});
+	
 
 });
 {{/js}} 

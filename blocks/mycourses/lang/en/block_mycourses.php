@@ -51,4 +51,3 @@ $string['showsummarydesc'] = 'Show the course summary in the listing';
 $string['title'] = 'All Courses';
 $string['allcourse'] = 'All Courses';
 $string['recomcourse'] = 'Recommended Courses';
-$string['viewall']='View All Course';

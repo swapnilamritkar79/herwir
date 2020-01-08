@@ -89,7 +89,7 @@ class available_view implements renderable, templatable {
             $exportedcourse->url = new \moodle_url('/course/view.php', array('id' => $notstarted->courseid));
            
             $exportedcourse->image = $imageurl;
-            $exportedcourse->summary = $coursesummary;
+            $exportedcourse->summary = substr($coursesummary,0,80);
 			$exportedcourse->cnt = count($availableview['courses']);
             $availableview['courses'][] = $exportedcourse;
         }
@@ -105,7 +105,7 @@ class available_view implements renderable, templatable {
             $exportedcourse = $exporter->export($output);
             if ($CFG->mycourses_showsummary) {
                 // Convert summary to plain text.
-                $coursesummary = substr(content_to_text($exportedcourse->summary, $exportedcourse->summaryformat),0,80);
+                $coursesummary = content_to_text($exportedcourse->summary, $exportedcourse->summaryformat);
             } else {
                 $coursesummary = '';
             }

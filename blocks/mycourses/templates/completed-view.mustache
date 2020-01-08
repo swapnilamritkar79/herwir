@@ -22,8 +22,9 @@
     Example context (json):
     {}
 }}
-<div id="completed-view-{{uniqid}}" data-region="completed-view"  > 
 
+<div id="completed-view-{{uniqid}}" data-region="completed-view"  > 
+<div id="allview"  class="viewall"><a href="{{completedview.wwwroot}}/blocks/mycourses/viewall.php">View All</a></div>
   <div class="responsive">
    {{#completedview.courses}}
         <div class="coursehold" >
@@ -50,17 +51,10 @@
                                         <span class="sr-only">{{#str}}aria:courseprogress, block_myoverview{{/str}}</span>
                                         <strong>{{progress}}%</strong> {{#str}}complete, block_myoverview{{/str}}
                                         <strong>{{#str}} timecompleted, local_report_completion {{/str}}</strong> {{ timecompleted }}
-                                        {{#timeexpires}}
-                                            <strong>({{#str}} timeexpires, local_report_completion {{/str}}</strong> {{ timeexpires }})
-                                        {{/timeexpires}}
-                                        <strong>{{#str}} finalscore, block_mycourses,  {{ finalscore }}</strong> {{/str}}
+                                        
                                     </div>
                                 </div>
-                                {{#certificate}}
-                                    <div class = "certificatediv">
-                                        <a class="btn btn-secondary" href="{{ certificate }}">{{#str}} downloadcert, block_mycourses {{/str}}</a></p>
-                                    </div>
-                                {{/certificate}}
+                                
                             </div>
                         </div>
                     </div>
@@ -78,10 +72,10 @@
     {{/completedview.courses}}
 </div>
 {{#js}}
-require(['jquery', 'core/custom_interaction_events'], function($, customEvents) {
+require(['jquery', 'core/custom_interaction_events',"{{completedview.wwwroot}}/blocks/mycourses/slick/slick.js"], function($, customEvents,slick) {
     var root = $('#completed-view-{{uniqid}}');
     customEvents.define(root, [customEvents.events.activate]);
-    root.on(customEvents.events.activate, '[data-toggle="btns"] > .btn', function() {
+		root.on(customEvents.events.activate, '[data-toggle="btns"] > .btn', function() {
         root.find('.btn.active').removeClass('active');
     });
 });

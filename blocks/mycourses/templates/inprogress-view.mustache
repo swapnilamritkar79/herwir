@@ -22,7 +22,9 @@
     Example context (json):
     {}
 }}
+
 <div id="inprogress-view-{{uniqid}}"  >
+<div id="allview"  class="viewall"><a href="{{inprogressview.wwwroot}}/blocks/mycourses/viewall.php">View All</a></div>
   <div class="responsive">
 
    {{#inprogressview.courses}}
@@ -64,7 +66,7 @@
     {{/inprogressview.courses}}
 </div>
 {{#js}}
-require(['jquery', 'core/custom_interaction_events'], function($, customEvents) {
+require(['jquery', 'core/custom_interaction_events',"{{completedview.wwwroot}}/blocks/mycourses/slick/slick.js"], function($, customEvents,slick) {
     var root = $('#inprogress-view-{{uniqid}}');
     customEvents.define(root, [customEvents.events.activate]);
     root.on(customEvents.events.activate, '[data-toggle="btns"] > .btn', function() {

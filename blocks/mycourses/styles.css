@@ -68,3 +68,7 @@ html.yui3-js-enabled body#page-my-index.format-site.path-my.gecko.dir-ltr.lang-e
 {
 	color : red;
 }
+.slick-slide
+{
+	min-width:314px !important;
+}

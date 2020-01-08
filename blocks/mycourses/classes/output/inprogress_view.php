@@ -62,7 +62,7 @@ class inprogress_view implements renderable, templatable {
 
         // Build courses view data structure.
         $inprogressview = [];
-
+		$inprogressview = ['wwwroot'=>$CFG->wwwroot];
         foreach ($this->mycompletion->myinprogress as $mid => $inprogress) {
             $context = \context_course::instance($inprogress->courseid);
             $course = $DB->get_record("course", array("id"=>$inprogress->courseid));
@@ -72,7 +72,7 @@ class inprogress_view implements renderable, templatable {
             $exportedcourse = $exporter->export($output);
             if ($CFG->mycourses_showsummary) {
                 // Convert summary to plain text.
-                $coursesummary = substr(content_to_text($exportedcourse->summary, $exportedcourse->summaryformat),0,80);
+                $coursesummary = content_to_text($exportedcourse->summary, $exportedcourse->summaryformat);
             } else {
                 $coursesummary = '';
             }
@@ -95,7 +95,7 @@ class inprogress_view implements renderable, templatable {
             $exportedcourse = $exporter->export($output);
             $exportedcourse->url = new \moodle_url('/course/view.php', array('id' => $inprogress->courseid));
             $exportedcourse->image = $imageurl;
-            $exportedcourse->summary = $coursesummary;
+            $exportedcourse->summary = substr($coursesummary,0,80);
 
             // Get the course percentage.
             if ($totalrec = $DB->get_records('course_completion_criteria', array('course' => $inprogress->courseid))) {

@@ -62,7 +62,7 @@ class completed_view implements renderable, templatable {
 
         // Build courses view data structure.
         $completedview = [];
-
+		$completedview = ['wwwroot'=>$CFG->wwwroot];
         foreach ($this->mycompletion->mycompleted as $mid => $completed) {
             $context = \context_course::instance($completed->courseid);
             $course = $DB->get_record("course", array("id"=>$completed->courseid));
@@ -72,7 +72,7 @@ class completed_view implements renderable, templatable {
             $exportedcourse = $exporter->export($output);
             if ($CFG->mycourses_showsummary) {
                 // Convert summary to plain text.
-                $coursesummary = substr(content_to_text($exportedcourse->summary, $exportedcourse->summaryformat),0,80);
+                $coursesummary = content_to_text($exportedcourse->summary, $exportedcourse->summaryformat);
             } else {
                 $coursesummary = '';
             }
@@ -98,7 +98,7 @@ class completed_view implements renderable, templatable {
             $exportedcourse = $exporter->export($output);
             $exportedcourse->url = new \moodle_url('/course/view.php', array('id' => $completed->courseid));
             $exportedcourse->image = $imageurl;
-            $exportedcourse->summary = $coursesummary;
+            $exportedcourse->summary = substr($coursesummary,0,80);
             $exportedcourse->timecompleted = date($CFG->iomad_date_format, $completed->timecompleted);
             if ($iomadcourserec = $DB->get_record('iomad_courses', array('courseid' => $completed->courseid))) {
                 if (!empty($iomadcourserec->validlength)) {

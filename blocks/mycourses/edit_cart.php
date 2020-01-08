@@ -29,7 +29,7 @@ class course_cart_form extends moodleform {
         } else {
             $currency = "$";
         }*/
-		$currency = "$";
+		$currency = "&pound";
 		
     $mform->addElement('html', '<div class="shopping-cart-hold shopping-cart-all">
         <table style="width:100%" class="shopping-cart-table">
@@ -37,8 +37,8 @@ class course_cart_form extends moodleform {
             <tr>
               <th>Course Name</th>
               <th>Course QTY</th>
-              <th>Unit Price($)</th>
-              <th>Total($) </th>
+              <th>Unit Price('.$currency.')</th>
+              <th>Total('.$currency.' </th>
             </tr>
           </thead><tbody class=" content">');
 		  
@@ -55,7 +55,7 @@ class course_cart_form extends moodleform {
               </td>
               <td>');
 			  $removeurl = new \moodle_url('/blocks/mycourses/buynow.php',array('courseid' => $invoiceitem->invoiceableitemid,'popup'=>1,'remove'=>1));
-			$mform->addElement('html','<input type="number" min="1" class="price-textbox" name="quantity['.$invoiceitem->id.']" onchange="changequantity(this,'.$invoiceitem->id.','.$invoiceitem->invoiceableitemid.')" value="'.$invoiceitem->quantity.'" onkeypress="return isNumberKey(event)">');
+			$mform->addElement('html','<input type="number" min="1" class="price-textbox" name="quantity['.$invoiceitem->id.']" onchange="changequantity(this,'.$invoiceitem->id.')" value="'.$invoiceitem->quantity.'" onkeypress="return isNumberKey(event)">');
 			  $mform->addElement('html','<a class="removecart" courseid="'.$invoiceitem->invoiceableitemid.'" href="'.$removeurl.'"><i class="fa fa-times remove-cart "
                   aria-hidden="true"></i></a></td>
               <td>
@@ -93,7 +93,6 @@ class course_cart_form extends moodleform {
           <div class="number"> <div class="text">Total ('. $currency.')</div> '.sprintf ("%.2f",(($tax+$actualprice)- (($tax+$actualprice)*($CFG->discount/100)))).'</div>
         </div> -->
 		<div class="final-total">
-          
           <div class="number"> <div class="text">Total ('. $currency.')</div>'.sprintf ("%.2f",$actualprice).'</div>
         </div>
         <div class="divhold">

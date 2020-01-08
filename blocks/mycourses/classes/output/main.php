@@ -73,7 +73,7 @@ class main implements renderable, templatable {
         $inprogressview = new inprogress_view($mycompletion, $cutoffdate);
         $completedview = new completed_view($mycompletion, $cutoffdate);
         $allview = new all_view();
-        $recommendedview = new recommended_view();
+        /*$recommendedview = new recommended_view(); */
 		$c_admin=user_has_role_assignment($USER->id,10);
 		if(!$c_admin)
 		{
@@ -110,7 +110,7 @@ class main implements renderable, templatable {
             'nocourses' => $nocoursesurl,
             'availableview' => $availableview->export_for_template($output),
             'inprogressview' => $inprogressview->export_for_template($output),
-            'recommendview' => $recommendedview->export_for_template($output),
+            /*'recommendview' => $recommendedview->export_for_template($output),*/
             'allview' => $allview->export_for_template($output),
             'completedview' => $completedview->export_for_template($output),
             'viewingall' => $viewingall,
