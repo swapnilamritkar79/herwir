@@ -1064,6 +1064,7 @@ $string['institution'] = 'Institution';
 $string['instudentview'] = 'in student view';
 $string['interests'] = 'Interests';
 $string['interestslist'] = 'List of interests';
+$string['requireinterestedin'] ='Please select at least one interest';
 $string['interestslist_help'] = 'Enter your interests, one by one, which will then be displayed on your profile page as tags.';
 $string['invalidemail'] = 'Invalid email address';
 $string['invalidlogin'] = 'Invalid login, please try again';

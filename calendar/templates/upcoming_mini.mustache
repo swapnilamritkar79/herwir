@@ -31,7 +31,7 @@
     {
     }
 }}
-<div><a href="../calendar/view.php?view=upcoming">View All</a></div>
+<div id="allview" class="viewall"><a href="../calendar/view.php?view=upcoming">View All</a></div>
 <div id="upcoming-mini-{{uniqid}}" data-region=#upcoming-mini">
 <div class="responsive1">
 	<div class="coursehold">
@@ -81,7 +81,7 @@ require([
     'jquery',
     'core_calendar/selectors',
     'core_calendar/events',
-    '/blocks/mycourses/slick/slick.js'
+    "{{wwwroot}}/blocks/mycourses/slick/slick.js"
 ], function(
     $,
     CalendarSelectors,
@@ -141,3 +141,8 @@ $('.responsive').slick({
 				
 });
 {{/js}}
+<style>
+a[data-action="view-event"] {
+    color: #4cc0af;
+}
+</style>

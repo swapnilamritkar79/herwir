@@ -24,23 +24,17 @@
 }}
 
 
-<div id="block-recommend-{{uniqid}}" class="block-recommend" data-region="recommend">
-		
-        <div role="tabpanel" class="tab-pane fade " id="mycourses_recommend">
+<div id="block-recommendedcourses-{{uniqid}}" class="block-recommendedcourses" data-region="recommendedcourses">		
+       
+		<div  id="recommendedcourses_recommended_view">
             {{> block_recommendedcourses/recommend-view }}
         </div>
-
+	
 </div>
 
-<div  id="recommendedcourses_recommended_view">
-            {{> block_recommendedcourses/recommend-view }}
-        </div>
-		<div  id="recommendedcourses_all_view">
-            {{> block_recommendedcourses/all-view }}
-        </div>
 {{#js}}
-require(['jquery', 'block_recommendedcourses/tab_preferences'], function($, TabPreferences) {
-    var root = $('#recommend-{{uniqid}}');
+require(['jquery', 'block_mycourses/tab_preferences'], function($, TabPreferences) {
+    var root = $('#block-recommendedcourses-view-choices-{{uniqid}}');
     TabPreferences.registerEventListeners(root);
 	
 });

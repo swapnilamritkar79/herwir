@@ -29,20 +29,45 @@
 					{{#courses}}
 						<div class="col-xl-3  col-lg-4 col-md-6">
 									<div class="coursehold" >
+										
+										
 										<div class="courseimage">
+										{{^price}}
+									    <a href="{{ url }}"> 
+										{{/price}}
 										<img class="imgresponsive" src="{{ image }}" >
+										{{^price}}
+										</a>										
+										{{/price}}
+										
 										</div>
+										
+								        <div class="ml-auto mt-auto">
+										{{#hasprogress}}
+										{{> block_mycourses/progress-bar}}
+										{{/hasprogress}}
+										</div>
+										
 										<div class="courecontent">
-											<div class="name">{{ fullname }}</div>
-											<div class="dec ">{{ summary}}</div>
+									
+										<div class="name">	
+										{{^price}}<a href="{{ url }}">{{/price}}
+										{{ fullname }}
+										{{^price}}</a>{{/price}}
+										
+										</div>
+										
+										<div class="dec ">{{ summary}}</div>
+											
+											{{#price}}
 											<div class="price">${{price}}</div>
+											
 											<div class="add-cart-action">
 												 <label class="container" >Add to cart
 												  <input type="checkbox" name="course_{{id}}" id="course_{{id}}" {{checked}} onclick="getcarturl('{{ carturl }}','course_{{id}}')">
 												  <span class="checkmark" ></span> </label>
-																				
-												
 											</div>
+											{{/price}}
 										</div>
 									</div>
 							</div>		
@@ -61,6 +86,11 @@ require(['jquery', 'core/custom_interaction_events','core/modal_factory'], funct
 
 				
 {{/js}}
+<style>
+.card {
+display:none !important;
+}
+</style>
 <script type="text/javascript">
 			    function getcarturl(url,chk)
 				{

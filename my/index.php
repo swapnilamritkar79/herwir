@@ -233,4 +233,24 @@ function initslider(){
 		});
 });
 	
+/* $( document ).ready(function() {
+    $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    items:2,
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:2
+        },
+        600:{
+            items:2
+        },
+        1000:{
+            items:2
+        }
+    }
+})
+}); */	
 </script>

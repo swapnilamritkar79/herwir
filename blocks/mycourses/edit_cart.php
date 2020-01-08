@@ -24,11 +24,12 @@ class course_cart_form extends moodleform {
        //$mform->addElement('header', 'header','Cart');
 		$invoiceitems        = $this->_customdata['invoiceitems'];
 	
-		if (!empty($CFG->commerce_admin_currency)) {
+		/*if (!empty($CFG->commerce_admin_currency)) {
             $currency = get_string($CFG->commerce_admin_currency, 'core_currencies');
         } else {
-            $currency = get_string('GBP', 'core_currencies');
-        }
+            $currency = "$";
+        }*/
+		$currency = "$";
 		
     $mform->addElement('html', '<div class="shopping-cart-hold shopping-cart-all">
         <table style="width:100%" class="shopping-cart-table">
@@ -36,10 +37,8 @@ class course_cart_form extends moodleform {
             <tr>
               <th>Course Name</th>
               <th>Course QTY</th>
-              <th>Unit Price ('. $currency.')</th>
-			  
-			 
-              <th>Total ('. $currency.')</th>
+              <th>Unit Price($)</th>
+              <th>Total($) </th>
             </tr>
           </thead><tbody class=" content">');
 		  
@@ -52,7 +51,7 @@ class course_cart_form extends moodleform {
            $mform->addElement('html','<tr>
               <td>
                 <div class="course-name">'.$invoiceitem->fullname.'</div>
-                <div class="course-dec"><small>'.$invoiceitem->summary.'</small></div>
+                <div class="course-dec"><small>'.substr($invoiceitem->summary,0,103).'</small></div>
               </td>
               <td>');
 			  $removeurl = new \moodle_url('/blocks/mycourses/buynow.php',array('courseid' => $invoiceitem->invoiceableitemid,'popup'=>1,'remove'=>1));
@@ -65,8 +64,6 @@ class course_cart_form extends moodleform {
               <td>
                 <div class="total">'.sprintf ("%.2f",($invoiceitem->price * $invoiceitem->quantity)).'</div>
               </td>
-			 
-			   
 
             </tr>');
 			
@@ -75,25 +72,29 @@ class course_cart_form extends moodleform {
 		}
 		$mform->addElement('html','</tbody></table>
 		
-		<div class="final-total">
-          <div class="text">Total Price ('. $currency.')</div>
-          <div class="number">'.sprintf ("%.2f",$actualprice).'</div>
+		<!--<div class="final-total">
+         
+          <div class="number">  <div class="text">Total Price ('. $currency.')</div> '.sprintf ("%.2f",$actualprice).'</div>
         </div>
 		<div class="final-total">
-          <div class="text">Tax ('. $currency.')</div>
-          <div class="number">'.sprintf ("%.2f",$tax).'</div>
+          
+          <div class="number"> <div class="text">Tax ('. $currency.')</div> '.sprintf ("%.2f",$tax).'</div>
         </div>
 		<div class="final-total">
-          <div class="text">Total ('. $currency.')</div>
-          <div class="number">'.sprintf ("%.2f",($tax+$actualprice)).'</div>
+         
+          <div class="number">  <div class="text">Total ('. $currency.')</div> '.sprintf ("%.2f",($tax+$actualprice)).'</div>
         </div>
 		<div class="final-total">
-          <div class="text">Discount ('. $currency.')</div>
-          <div class="number">'.sprintf ("%.2f",($tax+$actualprice)*($CFG->discount/100)).'</div>
+          
+          <div class="number"> <div class="text">Discount ('. $currency.')</div> '.sprintf ("%.2f",($tax+$actualprice)*($CFG->discount/100)).'</div>
         </div>
 		<div class="final-total">
-          <div class="text">Total('. $currency.')</div>
-          <div class="number">'.sprintf ("%.2f",(($tax+$actualprice)- (($tax+$actualprice)*($CFG->discount/100)))).'</div>
+          
+          <div class="number"> <div class="text">Total ('. $currency.')</div> '.sprintf ("%.2f",(($tax+$actualprice)- (($tax+$actualprice)*($CFG->discount/100)))).'</div>
+        </div> -->
+		<div class="final-total">
+          
+          <div class="number"> <div class="text">Total ('. $currency.')</div>'.sprintf ("%.2f",$actualprice).'</div>
         </div>
         <div class="divhold">
           <div class="btnhold"><a href="'.new \moodle_url('/my/?mycoursestab=all').'"><span class="buynow-btn">Add More Course</span></a> 

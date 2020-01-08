@@ -90,7 +90,8 @@ class event_exporter_base extends exporter {
 			}
 			else
 			{
-				 $data->desc_text=substr($key,0,100)."...";
+				 $key=format_text($key, FORMAT_HTML, null, null);
+				 $data->desc_text= substr($key,0,100)."...";
 			}
 			
 		}
@@ -336,8 +337,9 @@ class event_exporter_base extends exporter {
             $values['groupname'] = format_string($group->get('name'), true,
                 ['context' => \context_course::instance($event->get_course()->get('id'))]);
         }
-		
-
+		$wwwroot=new moodle_url('/');
+		$values['wwwroot']=$wwwroot->out(false);
+		//print_r($values);
         return $values;
     }
 
