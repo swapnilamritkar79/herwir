@@ -73,7 +73,7 @@ if (!empty($SESSION->basketid)) {
 	$invoiceitems = $DB->get_records_sql("select ii.*,c.fullname,c.summary  from {invoiceitem} ii
                                 INNER JOIN {course} c ON ii.invoiceableitemid = c.id where ii.invoiceid = :basketid",array('basketid' => $SESSION->basketid) );
 	
-	
+	$cart_item=count($invoiceitems);
 	if(count($invoiceitems) >0)
 	{
 		
@@ -86,7 +86,6 @@ if (!empty($SESSION->basketid)) {
 			{
 				$invoiceitem = $DB->get_record('invoiceitem', array('id' => $SESSION->basketid, 'id' => $iitemid));
 				$invoiceitem->quantity = $quantity;
-				$invoiceitem->license_allocation = 1;
 				$DB->update_record('invoiceitem', $invoiceitem);
 			}
 			if($popup != 1)
@@ -112,7 +111,17 @@ if (!empty($SESSION->basketid)) {
 	echo '<script>alert($(".courselisting").length); $(".courselisting").prop(\'checked\',false)</script>';
 }
 
-
+if($cart_item)
+{?>
+<style>
+.cart-container {
+	display: block;
+	color: red;
+	padding-top:5px;
+	
+}
+</style>	
+<?php }
 if($popup != 1)
 {
 echo $OUTPUT->footer();
@@ -121,6 +130,7 @@ echo $OUTPUT->footer();
 ?>
 <style>.modal-backdrop.in{display:none;}</style>
 <script>
+var cartcnt=<?php echo $cart_item;?>;
 var courseid;
 $("a.removecart").click(function(event){
     event.preventDefault();
@@ -162,13 +172,6 @@ function changequantity(obj,invoiceid,courseid)
 	
 }
 
-function removecourse()
-{
-	
-	
-}
-
-
 $(".viewcart").click(function(event){
     event.preventDefault();
   
@@ -176,7 +179,7 @@ $(".viewcart").click(function(event){
     $.get($(this).attr('href'), function(data, status){
         var trigger = $('#myModal');
        
-        
+     console.log($('div.cart-container').text(cartcnt));  
         ModalFactory.create({
             
             title: 'View Cart',

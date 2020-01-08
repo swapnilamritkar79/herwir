@@ -145,9 +145,9 @@ if ($mform->is_cancelled()) {
 
     $data->id = $basketid;
 
-    $DB->update_record('invoice', $data, array('id' => $data->id));
+    //$DB->update_record('invoice', $data, array('id' => $data->id));
 
-    $pp = get_payment_provider_instance($data->paymentprovider);
+    //$pp = get_payment_provider_instance($data->paymentprovider);
     $error = $pp->init();
     if ($error) {
         $displaypage = 1;
@@ -155,8 +155,8 @@ if ($mform->is_cancelled()) {
 }
 
 if ($displaypage && !$error) {
-    require_once(dirname(__FILE__) . '/processor/processor.php');
-    processor::trigger_oncheckout($basketid);
+    //require_once(dirname(__FILE__) . '/processor/processor.php');
+   // processor::trigger_oncheckout($basketid);
 }
 
 echo $OUTPUT->header();

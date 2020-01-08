@@ -47,8 +47,6 @@ require(['jquery', 'core/custom_interaction_events','core/modal_factory'], funct
 	
 	$("#localnavbarplus-viewcart a").click(function(event){
 	event.preventDefault();
-		
-       
 		$.get($(this).attr('href'), function(data, status){
 			var trigger = $('#myModal');
 			
@@ -68,8 +66,6 @@ require(['jquery', 'core/custom_interaction_events','core/modal_factory'], funct
 		 
     });
 	});
-	
-
 		$(document).click(function(event) {
 		  //if you click on anything except the modal itself or the "open modal" link, close the modal
 		  
@@ -78,7 +74,7 @@ require(['jquery', 'core/custom_interaction_events','core/modal_factory'], funct
 			modaldi.hide();
 		  }
 		});
-	
+		
 	
 	
 	

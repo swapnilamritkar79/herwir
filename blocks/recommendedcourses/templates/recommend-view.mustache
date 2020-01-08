@@ -22,11 +22,12 @@
     Example context (json):
     {}
 }}
-<div id="recommend-view-{{uniqid}}"  >
-<div class="viewall"><a href="">View All</a></div>
-  <div class="responsive">
+<div id="allview" class="viewall"><a href="{{allview.wwwroot}}/blocks/mycourses/viewall.php?flag={{flag}}">View All</a></div>
+<div id="recommend-view-{{uniqid}}"  class="owl-carousel owl-theme">
+
+  
    {{#recommendview.courses}}
-        <div class="coursehold">
+        <div class="item">
                     <div class="courecontent">
                         <div class="courseimage">
                               <a href="{{ url }}"><img class="imgresponsive" src="{{ image }}" ></a>
@@ -47,7 +48,7 @@
 
 
 
-   {{/recommendview.courses}}</div>
+   {{/recommendview.courses}}
 
 </div>
 {{#js}}

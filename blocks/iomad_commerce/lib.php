@@ -30,7 +30,7 @@ function get_lowest_price_text($course_shopsetting_with_lowest_block_price) {
     if (!empty($CFG->commerce_admin_currency)) {
         $currency = $CFG->commerce_admin_currency;
     } else {
-        $currency = 'GBP';
+        $currency = '$';
     }
     $prices = array();
     if ($course_shopsetting_with_lowest_block_price->allow_single_purchase) {
@@ -249,25 +249,26 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
         $totaltax = 0;
         $nettotaltax = 0;
         $count = 0;
+		
         if (!empty($CFG->commerce_admin_currency)) {
             $currency = get_string($CFG->commerce_admin_currency, 'core_currencies');
         } else {
-            $currency = get_string('GBP', 'core_currencies');
+            $currency = get_string('$', 'core_currencies');
         }
         foreach ($basketitems as $item) {
-            $rowtotal = $item->price * $item->license_allocation*$item->quantity;
+            $rowtotal = $item->price * $item->license_allocation;
 			$tax = sprintf ("%.2f",($CFG->tax/100) *$rowtotal );
            
-                $unitprice = $item->currency .' '. number_format($item->price, 2);
+                $unitprice =  number_format($item->price, 2);
             
 
             $row = array(
                 ($links ? "<a href='course.php?id=$item->invoiceableitemid'>$item->fullname</a>" : $item->fullname),
 				
                 $unitprice,
-				$item->license_allocation*$item->quantity,
+				$item->license_allocation,
 				
-                $item->currency . ' ' .number_format(($rowtotal), 2)
+                number_format(($rowtotal), 2)
             );
             if ($includeremove) {
                 $row[] = "<a href='basket.php?remove=$item->id'>" . strtolower(get_string('remove')) . "</a>";
@@ -282,7 +283,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
 
             $table->data[] = $row;
 
-            $currency = $item->currency;
+            //$currency = $item->currency;
             $total += ($rowtotal);
 			
 			$totaltax += $tax;
@@ -297,7 +298,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
             '',
             
             
-            '<b>' . $currency . ' ' . number_format($total, 2) . '</b>'
+            '<b>' . number_format($total, 2) . '</b>'
         );
 		 $table->data[] = $totalrow;
 		 
@@ -308,7 +309,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
             '',
             
             
-            '<b>' . $currency . ' ' .  number_format($totaltax, 2) . '</b>'
+            '<b> ' .  number_format($totaltax, 2) . '</b>'
         );
 		
 		$table->data[] = $totalrow;
@@ -320,7 +321,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
             '',
             
             
-            '<b>' . $currency . ' ' .  number_format(($total+$totaltax)*($CFG->discount/100), 2) . '</b>'
+            '<b> ' .  number_format(($total+$totaltax)*($CFG->discount/100), 2) . '</b>'
         );
 		
 		$table->data[] = $totalrow;
@@ -333,7 +334,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
             '',
             
             
-            '<b>' . $currency . ' ' .  number_format($nettotaltax-($nettotaltax*($CFG->discount/100)), 2) . '</b>'
+            '<b> ' .  number_format($nettotaltax-($nettotaltax*($CFG->discount/100)), 2) . '</b>'
         );
 		
 		$table->data[] = $totalrow;

@@ -72,7 +72,7 @@ class completed_view implements renderable, templatable {
             $exportedcourse = $exporter->export($output);
             if ($CFG->mycourses_showsummary) {
                 // Convert summary to plain text.
-                $coursesummary = content_to_text($exportedcourse->summary, $exportedcourse->summaryformat);
+                $coursesummary = substr(content_to_text($exportedcourse->summary, $exportedcourse->summaryformat),0,80);
             } else {
                 $coursesummary = '';
             }

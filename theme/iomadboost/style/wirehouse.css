@@ -435,6 +435,10 @@ div[data-region=recentlyaccessedcourses-view-content] .empty-placeholder-image-l
   top: 5px;
 }
 
+.logincard .usernameicon img {
+  width: 14px;
+}
+
 .logincard .form-control {
   border: 1px solid #eaeaea;
   border-radius: 4px;
@@ -1449,8 +1453,8 @@ label.container .checkmark:after {
 }
 
 .shopping-cart-hold .final-total .number {
-  width: 20%;
-  float: left;
+  /*width: 20%;*/
+  float: right;
   font-weight: 700;
   padding: 10px 10px 10px 10px;
   font-size: 24px;
@@ -1697,6 +1701,25 @@ label.container .checkmark:after {
   margin-left: -6px;
   /*margin-right:-15px;*/
   overflow: hidden;
+}
+
+#çart_count {
+  position: absolute;
+  background: red;
+  padding: 5px;
+  right: 5px;
+  color: white;
+  font-size: 10px;
+  line-height: 10px;
+  border-radius: 2px;
+}
+
+.navbar .localnavbarplus.nav-link {
+  position: relative;
+}
+
+.navbar .localnavbarplus .icon:hover {
+  color: #000;
 }
 
 .all-courses {

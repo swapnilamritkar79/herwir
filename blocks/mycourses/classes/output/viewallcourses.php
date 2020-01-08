@@ -52,19 +52,90 @@ class viewallcourses implements renderable, templatable {
      public function __construct() {                                                                                        
                                                                                                    
     } 
-	 
-    public function export_for_template(renderer_base $output) {
+		public function getAvailable(){
+		global $DB, $USER;
+		
+		// getInprogress
+		$myavailable = $DB->get_records_sql("select * from mdl_course");
+		return $myavailable;
+	}
+		public function getInprogress(){
+		global $DB, $USER;
+		
+		$myinprogress = $DB->get_records_sql("SELECT cc.id as ccid, cc.userid, cc.courseid as courseid,c.*
+                                          FROM {local_iomad_track} cc
+                                          JOIN {course} c ON (c.id = cc.courseid)
+                                          JOIN {user_enrolments} ue ON (ue.userid = cc.userid)
+                                          JOIN {enrol} e ON (e.id = ue.enrolid AND e.courseid = c.id)
+                                          WHERE cc.userid = :userid
+                                          AND c.visible = 1
+                                          AND cc.timecompleted IS NULL
+                                          AND ue.timestart != 0",
+                                          array('userid' => $USER->id));
+		return $myinprogress;
+	}
+		public function getCompleted(){	
+        global $DB, $USER;		
+		
+		$mycompleted = $DB->get_records_sql("SELECT cc.id, cc.userid, cc.courseid as courseid, cc.finalscore as finalgrade, cc.timecompleted, c.*
+                                       FROM {local_iomad_track} cc
+                                       JOIN {course} c ON (c.id = cc.courseid)
+                                       WHERE cc.userid = :userid
+                                       AND c.visible = 1
+                                       AND cc.timecompleted IS NOT NULL",
+                                       array('userid' => $USER->id));
+		return $mycompleted;
+	}
+		public function getShoppingcart(){
+		global $DB, $USER;
+		
+		$mycart = $DB->get_records_sql("select c.*,cp.price from {course} c inner join {course_price}  cp on c.id = cp.courseid where visible =1");
+		
+		return $mycart;
+	}
+		public function getRecommended(){
+		global $DB, $USER;
+		
+		$recommended = $USER->interestedin;
+		$myrecommend = $DB->get_records_sql("SELECT c.* FROM mdl_course c where id in (SELECT t.itemid FROM mdl_tag_instance t where t.tagid in ($recommended) and t.itemtype='course')");
+		
+		return $myrecommend;
+	} 
+		public function export_for_template(renderer_base $output) {
         global $CFG, $DB, $USER;
 		require_once($CFG->dirroot.'/course/lib.php');
         // Build courses view data structure.
-        // Build courses view data structure.
+        
         $allview = ['wwwroot'=>$CFG->wwwroot];
-
-       
+		$flag  = $_REQUEST['flag'];
+		if(empty($flag)){
+			$flag = 'available';
+		}
+	
+	/* View all for Mycourses block(available,inprogress,completed) and Recommended courses, shopping cart, */
+		switch ($flag) {
+			case 'available':
+				$header = $this->getAvailable();
+				break;
+			case 'inprogress':
+				$header = $this->getInprogress();
+				break;
+			case 'completed':
+				$header = $this->getCompleted();
+				break;
+			case 'shoppingcart':
+				$header = $this->getShoppingcart();
+				break;
+			case 'recommended':
+				$header = $this->getRecommended();
+				break;
+			default:
+				echo "No Data to display";
+		}
 		
-		$allcourses = $DB->get_records_sql("select c.*,cp.price from {course} c inner join {course_price}  cp on c.id = cp.courseid where visible =1 ");
+	
 		$allview['allcourses'] =[];
-		foreach ($allcourses as $mid => $course) {
+		foreach ($header as $mid => $course) {
             // get the course display info.
             $context = \context_course::instance($course->id);
            // $course = $DB->get_record("course", array("id"=>$notstarted->courseid));
@@ -97,6 +168,7 @@ class viewallcourses implements renderable, templatable {
                 $imageurl = $output->image_url('i/course');
             }
             $exportedcourse = $exporter->export($output);
+			$exportedcourse->flag = $flag;
             $exportedcourse->url = new \moodle_url('/course/view.php', array('id' => $course->id));
             $exportedcourse->carturl = new \moodle_url('/blocks/mycourses/buynow.php', array('courseid' => $course->id,'popup'=>1));
             $exportedcourse->image = $imageurl;
@@ -105,6 +177,14 @@ class viewallcourses implements renderable, templatable {
 			$exportedcourse->price = $course->price;
 			$exportedcourse->id = $course->id;
 			
+			if($flag == 'inprogress')
+			{
+				if ($totalrec = $DB->get_records('course_completion_criteria', array('course' => $course->id))) {				
+				 $usercount = $DB->count_records('course_completion_crit_compl', array('course' => $course->id, 'userid' => $USER->id));             
+				 $exportedcourse->progress = round($usercount * 100 / count($totalrec), 0);
+				// $exportedcourse->hasprogress = true;
+				}
+			}
 			
 			if (isset($SESSION->basketid) && $DB->record_exists_sql('SELECT ii.id
                                       FROM {invoiceitem} ii
@@ -119,20 +199,21 @@ class viewallcourses implements renderable, templatable {
                                              ', array('basketid' => $SESSION->basketid, 'status' => INVOICESTATUS_BASKET,'courseid'=>$course->id)))
 			 {
 				 $exportedcourse->checked = "checked";
-				
+				 
 			 }
 			 else
 			 {
 				 $exportedcourse->checked = "";
 			 }
+			 if($flag != 'inprogress'){
+				 $exportedcourse->hasprogress = '';
+			 }
 			
             $allview['courses'][] = $exportedcourse;
 			
         }
+		//var_dump($exportedcourse);
 		
-		
-     		
-
 	return $allview;
     }
 	
