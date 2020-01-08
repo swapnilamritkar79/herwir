@@ -56,7 +56,7 @@ class course_cart_form extends moodleform {
               </td>
               <td>');
 			  $removeurl = new \moodle_url('/blocks/mycourses/buynow.php',array('courseid' => $invoiceitem->invoiceableitemid,'popup'=>1,'remove'=>1));
-			$mform->addElement('html','<input type="number" min="1" class="price-textbox" name="quantity['.$invoiceitem->id.']" onchange="changequantity(this,'.$invoiceitem->id.')" value="'.$invoiceitem->quantity.'" onkeypress="return isNumberKey(event)">');
+			$mform->addElement('html','<input type="number" min="1" class="price-textbox" name="quantity['.$invoiceitem->id.']" onchange="changequantity(this,'.$invoiceitem->id.','.$invoiceitem->invoiceableitemid.')" value="'.$invoiceitem->quantity.'" onkeypress="return isNumberKey(event)">');
 			  $mform->addElement('html','<a class="removecart" courseid="'.$invoiceitem->invoiceableitemid.'" href="'.$removeurl.'"><i class="fa fa-times remove-cart "
                   aria-hidden="true"></i></a></td>
               <td>

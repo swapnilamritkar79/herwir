@@ -109,6 +109,7 @@ if (!empty($SESSION->basketid)) {
 	}
 } else {
     echo '<p>' . get_string('emptybasket', 'block_iomad_commerce') . '</p>';
+	echo '<script>alert($(".courselisting").length); $(".courselisting").prop(\'checked\',false)</script>';
 }
 
 
@@ -130,13 +131,14 @@ $("a.removecart").click(function(event){
 		$.get("<?php echo new moodle_url('/blocks/mycourses/basket.php',array('popup'=>$popup))?>", function(data, status){
 				var trigger = $('#myModal');
 				var course_id = "#course_"+courseid;
+				console.log("****133***"+course_id);
 				$(".modal-body").html(data);
 				$(course_id).prop('checked',false);
 					
 			});
 	});
 });
-function changequantity(obj,invoiceid)
+function changequantity(obj,invoiceid,courseid)
 {
 	var url ="<?php echo new moodle_url('/blocks/mycourses/updatequantity.php',array('popup'=>$popup)); ?>";
 	url = url + "&iitemid="+invoiceid+"&quantity="+obj.value;
@@ -147,15 +149,26 @@ function changequantity(obj,invoiceid)
 				var trigger = $('#myModal');
 				
 				$(".modal-body").html(data);
+				if(obj.value ==0)
+				{
+					var course_id = "#course_"+courseid;
+					console.log("****155***"+course_id);
+						$(course_id).prop('checked',false);
+					
+				}
 					
 			});
 	});
 	
 }
-function applycoupon()
+
+function removecourse()
 {
 	
+	
 }
+
+
 $(".viewcart").click(function(event){
     event.preventDefault();
   
