@@ -136,7 +136,7 @@ $("a.removecart").click(function(event){
 			});
 	});
 });
-function changequantity(obj,invoiceid)
+function changequantity(obj,invoiceid,courseid)
 {
 	var url ="<?php echo new moodle_url('/blocks/mycourses/updatequantity.php',array('popup'=>$popup)); ?>";
 	url = url + "&iitemid="+invoiceid+"&quantity="+obj.value;
@@ -147,6 +147,8 @@ function changequantity(obj,invoiceid)
 				var trigger = $('#myModal');
 				
 				$(".modal-body").html(data);
+				var course_id = "#course_"+courseid;
+				$(course_id).prop('checked',false);
 					
 			});
 	});
