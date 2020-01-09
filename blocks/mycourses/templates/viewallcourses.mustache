@@ -111,7 +111,12 @@ display:none !important;
 								
 							});
 					 }
-					 $("#çart_count").html($(".courselisting").filter(':checked').length);
+					 //$("#çart_count").html($(".courselisting").filter(':checked').length);
+					if($(".courselisting").filter(':checked').length >0 ){
+					$("#çart_count").css("display","block");
+					}else{
+					$("#çart_count").css("display","none");
+					}
 					 
 				}
 </script>

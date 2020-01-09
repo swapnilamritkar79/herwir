@@ -24,7 +24,8 @@
 }}
 
 <div id="inprogress-view-{{uniqid}}"  >
-<div id="allview"  class="viewall"><a href="{{inprogressview.wwwroot}}/blocks/mycourses/viewall.php">View All</a></div>
+<div id="allview"  class="viewall"><a href="{{inprogressview.viewall}}">{{inprogressview.viewallstring}}</a></div>
+<div class="tab-content">
   <div class="responsive">
 
    {{#inprogressview.courses}}
@@ -54,7 +55,7 @@
 
 
 
-   {{/inprogressview.courses}}</div>
+   {{/inprogressview.courses}}</div> </div>
     {{^inprogressview.courses}}
         <div class="text-xs-center text-center m-t-3">
             <img class="empty-placeholder-image-lg"

@@ -97,7 +97,14 @@ class viewallcourses implements renderable, templatable {
 		global $DB, $USER;
 		
 		$recommended = $USER->interestedin;
-		$myrecommend = $DB->get_records_sql("SELECT c.* FROM mdl_course c where id in (SELECT t.itemid FROM mdl_tag_instance t where t.tagid in ($recommended) and t.itemtype='course')");
+		if(empty($recommended)){
+			$myrecommend=$DB->get_records_sql("select * from {course}");		
+		}
+		else
+		{
+			$myrecommend = $DB->get_records_sql("SELECT c.* FROM mdl_course c where id in (SELECT t.itemid FROM mdl_tag_instance t where t.tagid in ($recommended) and t.itemtype='course')");
+		}
+		
 		
 		return $myrecommend;
 	} 
@@ -208,11 +215,10 @@ class viewallcourses implements renderable, templatable {
 			 if($flag != 'inprogress'){
 				 $exportedcourse->hasprogress = '';
 			 }
-			
+			$exportedcourse->flag = 'inprogress';
             $allview['courses'][] = $exportedcourse;
 			
         }
-		//var_dump($exportedcourse);
 		
 	return $allview;
     }

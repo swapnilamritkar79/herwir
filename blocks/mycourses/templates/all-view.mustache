@@ -41,7 +41,7 @@
 										<div class="courecontent">
 											<div class="name">{{ fullname }}</div>
 											<div class="dec ">{{ summary}}</div>
-											<div class="price">${{price}}</div>
+											<div class="price">&pound{{price}}</div>
 											<div class="add-cart-action">
 												 <label class="container" >Add to cart
 												  <input type="checkbox" class="courselisting" name="course_{{id}}" id="course_{{id}}" {{checked}} onclick="getcarturl('{{ carturl }}','course_{{id}}')">
@@ -86,8 +86,9 @@
 							url = url+"&remove=0";
 							console.log(url);
 							$.get(url.replace('&amp;','&'), function(data, status){
-								 
+			 
 							});
+							
 					 }
 					 else
 					 {
@@ -96,8 +97,15 @@
 						$.get(url.replace('&amp;','&'), function(data, status){
 								
 							});
+							
 					 }
-					 $("#çart_count").html($(".courselisting").filter(':checked').length);
+					if($(".courselisting").filter(':checked').length >0 ){
+					$("#çart_count").css("display","block");
+					}else{
+					$("#çart_count").css("display","none");
+					}
+					
+					
 				}
 				
 				

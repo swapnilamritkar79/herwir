@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url(d:\wamp64\www\svn_wirehouse\wirehouse\theme\iomadboost\style\fonts\stylesheet.css);
+@import url(d:\wamp64\www\wirehouse_svn\wirehouse\theme\iomadboost\style\fonts\stylesheet.css);
 #nav-drawer {
   -webkit-box-shadow: 2px 2px 3px -2px #ccc;
   box-shadow: 2px 2px 3px -2px #ccc;
@@ -942,6 +942,18 @@ body {
   margin: 0px;
 }
 
+#mycourses_inprogress_view .responsive {
+  margin-top: 48px;
+}
+
+.mycourses_available_view .responsive {
+  margin-top: 48px;
+}
+
+.mycourses_completed_view .responsive {
+  margin-top: 48px;
+}
+
 .responsive {
   width: 100%;
   margin-left: 0;
@@ -1006,6 +1018,8 @@ body {
 .coursehold h4.title a {
   color: #545454;
   text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .coursehold .statusebar {
@@ -1438,17 +1452,17 @@ label.container .checkmark:after {
 }
 
 .shopping-cart-hold .final-total .text {
-  width: 75%;
+  width: auto;
   font-size: 24px;
   font-weight: 500;
-  padding: 10px 30px 10px 10px;
+  padding: 0px 30px 0px 10px;
   float: left;
   text-align: right;
 }
 
 @media (max-width: 626px) {
   .shopping-cart-hold .final-total .text {
-    width: 60%;
+    width: auto;
   }
 }
 
@@ -1539,6 +1553,12 @@ label.container .checkmark:after {
   font-weight: 700;
   text-align: right;
   margin-top: 15px;
+}
+
+@media (max-width: 626px) {
+  .shopping-cart-table .total {
+    word-break: break-word;
+  }
 }
 
 .shopping-cart-table tbody {

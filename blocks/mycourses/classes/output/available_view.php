@@ -59,7 +59,7 @@ class available_view implements renderable, templatable {
     public function export_for_template(renderer_base $output) {
         global $CFG, $DB;
         require_once($CFG->dirroot.'/course/lib.php');
-
+$courseCounter = 0;
         // Build courses view data structure.
         $availableview = ['wwwroot'=>$CFG->wwwroot];
 
@@ -172,8 +172,13 @@ class available_view implements renderable, templatable {
 			$exportedcourse->cnt = count($availableview['allcourses']);
 			$exportedcourse->price = $course->price;
             $availableview['allcourses'][] = $exportedcourse;
-        }*/
-		
+        }*/if(empty($availableview['viewall']) && $courseCounter > 1 ){
+				$availableview['viewall'] = $CFG->wwwroot.'/blocks/mycourses/viewall.php?flag=available';
+				$availableview['viewallstring']='View All';
+			}
+			
+			$courseCounter++;
+		//print_r($courseCounter);die;
         return $availableview;
     }
 }

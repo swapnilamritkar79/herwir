@@ -2218,3 +2218,11 @@ $string['messagedselectedcountusersfailed'] = 'A problem occurred and {$a} messa
 $string['messagedselecteduserfailed'] = 'The message was not sent to user {$a->fullname}.';
 $string['previewhtml'] = 'HTML format preview';
 $string['sitemessage'] = 'Message users';
+
+//new card details page changes
+$string['creditcardnumber']='Credit Card Number';
+$string['cardholder']='Card Holder Name';
+$string['cardmonth']='Month';
+$string['cardyear']='Year';
+$string['creditcardcvv']='CVV';
+$string['company']='Company';
