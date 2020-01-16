@@ -132,7 +132,11 @@ $("a.removecart").click(function(event){
 				var course_id = "#course_"+courseid;
 				$(".modal-body").html(data);
 				$(course_id).prop('checked',false);
-					
+				if($(".courselisting").filter(':checked').length >0 ){
+					$("#çart_count").css("display","block");
+					}else{
+					$("#çart_count").css("display","none");
+					}	
 			});
 	});
 });
@@ -148,8 +152,14 @@ function changequantity(obj,invoiceid,courseid)
 				
 				$(".modal-body").html(data);
 				var course_id = "#course_"+courseid;
-				$(course_id).prop('checked',false);
-					
+				if(obj.value == 0){
+					$(course_id).prop('checked',false);
+				}
+				if($(".courselisting").filter(':checked').length >0 ){
+					$("#çart_count").css("display","block");
+					}else{
+					$("#çart_count").css("display","none");
+					}	
 			});
 	});
 	

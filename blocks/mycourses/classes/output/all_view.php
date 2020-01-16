@@ -61,13 +61,14 @@ class all_view implements renderable, templatable {
         require_once($CFG->dirroot.'/course/lib.php');
 
         // Build courses view data structure.
-        $allview = ['wwwroot'=>$CFG->wwwroot];
-
+       $allview = ['wwwroot'=>$CFG->wwwroot];
+		
        
 		
 		$allcourses = $DB->get_records_sql("select c.*,cp.price from {course} c inner join {course_price}  cp on c.id = cp.courseid where visible =1 ");
 		$allview['allcourses'] =[];
 		foreach ($allcourses as $mid => $course) {
+				
             // get the course display info.
             $context = \context_course::instance($course->id);
            // $course = $DB->get_record("course", array("id"=>$notstarted->courseid));
@@ -133,7 +134,7 @@ class all_view implements renderable, templatable {
 			
         }
 		$allview['viewcarturl'] = new \moodle_url('/blocks/mycourses/basket.php', array('popup'=>1));
-		
+			
         return $allview;
     }
 }

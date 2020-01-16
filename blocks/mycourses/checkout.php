@@ -42,9 +42,8 @@ class checkout_form extends moodleform {
         $mform->addElement('html', get_string('checkoutpreamble', 'block_iomad_commerce'));
 
         $strrequired = get_string('required');
-		$mform->addElement('html', '<div class="col-12" style="float:left">');
-		$mform->addElement('html', '<div class="col-6" style="float:left">');
-
+		$mform->addElement('html', '<div class="col-md-12">');
+		
         $mform->addElement('text', 'firstname', get_string('firstname'), 'maxlength="100" size="50"');
         $mform->addRule('firstname', $strrequired, 'required', null, 'client');
         $mform->setType('firstname', PARAM_NOTAGS);
@@ -53,11 +52,15 @@ class checkout_form extends moodleform {
         $mform->addRule('lastname', $strrequired, 'required', null, 'client');
         $mform->setType('lastname', PARAM_NOTAGS);
 
-        $mform->addElement('text', 'company', get_string('company', 'block_iomad_company_admin'), 'maxlength="40" size="50"');
+        $mform->addElement('text', 'company', get_string('company'), 'maxlength="100" size="50"');
         $mform->addRule('company', $strrequired, 'required', null, 'client');
         $mform->setType('company', PARAM_NOTAGS);
 
+<<<<<<< HEAD
         $mform->addElement('text', 'address1', get_string('address1'), 'maxlength="70" size="50"');
+=======
+        $mform->addElement('text', 'address', get_string('address1'), 'maxlength="100" size="50"');
+>>>>>>> 8971324e542823349ae87dda7f6754bddbafaaa4
         $mform->addRule('address1', $strrequired, 'required', null, 'client');
         $mform->setType('address1', PARAM_NOTAGS);
 		
@@ -90,9 +93,13 @@ class checkout_form extends moodleform {
         $mform->addElement('text', 'phone1', get_string('phone'), 'maxlength="20" size="50"');
         $mform->setType('phone1', PARAM_NOTAGS);
 
+<<<<<<< HEAD
         $mform->addElement('html', '</div>');
 		/*$mform->addElement('html', '<div class="col-6" style="float:left">');
 		
+=======
+   	
+>>>>>>> 8971324e542823349ae87dda7f6754bddbafaaa4
 		$mform->addElement('text', 'creditcardnumber', get_string('creditcardnumber'), 'maxlength="16" size="16"');
         $mform->addRule('creditcardnumber', $strrequired, 'required', null, 'client');
 		$mform->addRule('creditcardnumber', 'Only Numerics Allowed', 'numeric', null, 'client');
@@ -101,30 +108,36 @@ class checkout_form extends moodleform {
 		$mform->addElement('text', 'cardholder', get_string('cardholder'), 'maxlength="100" size="50"');
         $mform->addRule('cardholder', $strrequired, 'required', null, 'client');
         $mform->setType('cardholder', PARAM_CLEAN);
-		
+		$mform->addElement('html', '<div class="col-md-12">');
+		$mform->addElement('html', '<div>');
 		$choices = array('01'=>'Jan','02'=>'Feb','03'=>'Mar','04'=>'Apr','05'=>'May','06'=>'Jun','07'=>'Jul','08'=>'Aug','09'=>'Sep','10'=>'Oct','11'=>'Nov','12'=>'Dec');
-        $mform->addElement('select', 'cardmonth', get_string('cardmonth'), $choices);
-        $mform->addRule('cardmonth', $strrequired, 'required', null, 'client');
-        $mform->setType('cardmonth', PARAM_INT);
-		
-		$choicesyear = Array();
+        $choicesyear = Array();
 		for($i=0;$i<=10;$i++)
 		{
 			$choicesyear[date("y")+$i] =Date("Y")+$i;
 		}
-		
-		
+		$mform->addElement('select', 'cardmonth', get_string('cardmonth'), $choices);
+        $mform->addRule('cardmonth', $strrequired, 'required', null, 'client');
+        $mform->setType('cardmonth', PARAM_INT);
 		$mform->addElement('select', 'cardyear', get_string('cardyear'), $choicesyear);
         $mform->addRule('cardyear', $strrequired, 'required', null, 'client');
         $mform->setType('cardyear', PARAM_INT);
+		$mform->addElement('html', '</div>');
 		
+	
+		$mform->addElement('html', '</div>');
 		$mform->addElement('text', 'cvv', get_string('creditcardcvv'), 'maxlength="4" size="4"');
         $mform->addRule('cvv', $strrequired, 'required', null, 'client');
 		$mform->addRule('cvv', 'Only Numerics Allowed', 'numeric', null, 'client');
         $mform->setType('cvv', PARAM_INT);
 		
+<<<<<<< HEAD
 		$mform->addElement('html', '</div>');*/
 		$mform->addElement('html', '</div>');
+=======
+		$mform->addElement('html', '</div>');
+		
+>>>>>>> 8971324e542823349ae87dda7f6754bddbafaaa4
         $mform->addElement('hidden', 'userid', $USER->id);
         $mform->setType('userid', PARAM_INT);
 

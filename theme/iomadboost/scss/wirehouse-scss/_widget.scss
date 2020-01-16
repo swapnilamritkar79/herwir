@@ -21,6 +21,25 @@ body {
   margin: 0px;
 }
 
+
+#mycourses_inprogress_view {
+  .responsive {
+    margin-top: 48px;
+  }
+}
+
+.mycourses_available_view{
+  .responsive {
+    margin-top: 48px;
+  }
+}
+
+.mycourses_completed_view{
+  .responsive {
+    margin-top: 48px;
+  }
+}
+
 .responsive {
   width: 100%;
   margin-left: 0;
@@ -81,6 +100,8 @@ body {
     a {
       color: $wirehouse-black;
       text-decoration: none;
+      font-weight: 500;
+      font-size: 18px;
     }
   }
 

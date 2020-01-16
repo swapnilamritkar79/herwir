@@ -59,17 +59,19 @@ class inprogress_view implements renderable, templatable {
     public function export_for_template(renderer_base $output) {
         global $CFG, $DB, $USER;
         require_once($CFG->dirroot.'/course/lib.php');
-
+		$courseCounter = 0;
         // Build courses view data structure.
         $inprogressview = [];
 		$inprogressview = ['wwwroot'=>$CFG->wwwroot];
         foreach ($this->mycompletion->myinprogress as $mid => $inprogress) {
+			
             $context = \context_course::instance($inprogress->courseid);
             $course = $DB->get_record("course", array("id"=>$inprogress->courseid));
             $courseobj = new \core_course_list_element($course);
 
             $exporter = new course_summary_exporter($course, ['context' => $context]);
             $exportedcourse = $exporter->export($output);
+			
             if ($CFG->mycourses_showsummary) {
                 // Convert summary to plain text.
                 $coursesummary = content_to_text($exportedcourse->summary, $exportedcourse->summaryformat);
@@ -103,8 +105,17 @@ class inprogress_view implements renderable, templatable {
                 $exportedcourse->progress = round($usercount * 100 / count($totalrec), 0);
                 $exportedcourse->hasprogress = true;
             }
+			
+			if(empty($inprogressview['viewall']) && $courseCounter >1 ){
+				$inprogressview['viewall'] = $CFG->wwwroot.'/blocks/mycourses/viewall.php?flag=inprogress';
+				$inprogressview['viewallstring']='View All';
+			}
+			
             $inprogressview['courses'][] = $exportedcourse;
+			
+			$courseCounter++;
         }
+		//var_dump($inprogressview);die;
         return $inprogressview;
     }
 }

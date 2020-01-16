@@ -58,9 +58,14 @@ class recommend_view implements renderable, templatable {
         global $CFG, $DB, $USER;
 		require_once($CFG->dirroot.'/course/lib.php');
         // Build courses view data structure.
+		$courseCounter = 0;
+		
+		$recommendurl = ['wwwroot'=>$CFG->wwwroot];
+		
         $recommendview = [];
 
 	        foreach ($this->myrecommended->myrecommend as $mid => $recommend) {
+			
             $context = \context_course::instance($recommend->id);
             $course = $DB->get_record("course", array("id"=>$recommend->id));
 			//print_r($course);die;
@@ -90,14 +95,19 @@ class recommend_view implements renderable, templatable {
                 $imageurl = $output->image_url('i/course');
             }
 
-            $exportedcourse = $exporter->export($output);
+            $exportedcourse = $exporter->export($output);						
             $exportedcourse->url = new \moodle_url('/course/view.php', array('id' => $recommend->id));
             $exportedcourse->image = $imageurl;
             $exportedcourse->summary = $coursesummary;
-
-
             $recommendview['courses'][] = $exportedcourse;
+			
+			if(empty($recommendview['viewall']) && $courseCounter > 1 ){
+				$recommendview['viewall'] = $CFG->wwwroot.'/blocks/mycourses/viewall.php?flag=recommended';
+				$recommendview['viewallstring']='View All';
+			}
+			$courseCounter++;
         }
+//var_dump($exportedcourse->flagurl);die;
         return $recommendview;
     }
     

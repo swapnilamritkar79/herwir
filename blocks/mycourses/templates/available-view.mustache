@@ -25,7 +25,7 @@
 
 
 <div id="available-view-{{uniqid}}"  >
-<div id="allview"  class="viewall"><a href="{{availableview.wwwroot}}/blocks/mycourses/viewall.php">View All</a></div>
+<div id="allview"  class="viewall"><a href="{{availableview.viewall}}">{{availableview.viewallstring}}</a></div>
 <div class="tab-content">
       <div class="tab-pane active fade in" id="mycourses_available_view">
 			<div class="responsive">
@@ -49,8 +49,6 @@
                     </div>
           
         </div>
-
-
     {{/availableview.courses}}
 	</div></div>
     {{^availableview.courses}}

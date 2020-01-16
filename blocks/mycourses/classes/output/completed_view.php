@@ -59,10 +59,11 @@ class completed_view implements renderable, templatable {
     public function export_for_template(renderer_base $output) {
         global $CFG, $DB;
         require_once($CFG->dirroot.'/course/lib.php');
-
+        $courseCounter = 0;
+		
         // Build courses view data structure.
         $completedview = [];
-		$completedview = ['wwwroot'=>$CFG->wwwroot];
+		//$completedview = ['wwwroot'=>$CFG->wwwroot];
         foreach ($this->mycompletion->mycompleted as $mid => $completed) {
             $context = \context_course::instance($completed->courseid);
             $course = $DB->get_record("course", array("id"=>$completed->courseid));
@@ -109,8 +110,19 @@ class completed_view implements renderable, templatable {
             $exportedcourse->hasprogress = true;
             $exportedcourse->finalscore = intval($completed->finalgrade);
             $exportedcourse->certificate = $completed->certificate;
+			
+			if(empty($completedview['viewall']) && $courseCounter >1 ){				
+				$completedview['viewall'] = $CFG->wwwroot.'/blocks/mycourses/viewall.php?flag=completed';
+				$completedview['viewallstring']='View All';
+				
+			}
+			
             $completedview['courses'][] = $exportedcourse;
+			
+			$courseCounter++;
+			
         }
+		//var_dump($completedview);die;
         return $completedview;
     }
 }
