@@ -17,7 +17,7 @@ $transaction = $DB->start_delegated_transaction();
 	} else {
 		$currency = '&pound';
 	}*/
-	$currency = '&pound';
+	$currency = 'GBP';
 	$data->pp_amount = 0;
 	$data->pp_settleamt = 0;
 	$data->pp_taxamt= 0;
@@ -35,7 +35,7 @@ $transaction = $DB->start_delegated_transaction();
 	{
 		$tot = $amount=$tax =$disc = 0;
 		$data->pp_ordertime = time();
-		$data->pp_currencycode =$currency;
+		$data->pp_currencycode =htmlspecialchars($currency);
 		$amount = round($invoiceitem->price * $invoiceitem->license_allocation * $invoiceitem->quantity,2);
 		
 		$amount = round($invoiceitem->price * $invoiceitem->license_allocation * $invoiceitem->quantity,2);

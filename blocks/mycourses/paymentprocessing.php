@@ -32,14 +32,17 @@ foreach($invoiceitems as $invoiceitem)
 	}
 	
 
+	$hash = createHash(sprintf('%01.2f',$pp_settleamt),826 );
+	$hashtime =getDateTime();
+
 ?>
 
-<form method="post" id="frmsubmit" action="https://test.ipg-online.com/connect/gateway/processing?storename=2220540392">
+<form method="post" id="frmsubmit" action="https://test.ipg-online.com/connect/gateway/processing">
 <input type="hidden" name="txntype" value="sale">
 <input type="hidden" name="timezone" value="Europe/London" />
-<input type="hidden" name="txndatetime" value="<?php echo getDateTime() ?>"/>
+<input type="hidden" name="txndatetime" value="<?php echo $hashtime ?>"/>
 <input type="hidden" name="hash_algorithm" value="SHA256"/>
-<input type="hidden" name="hash" value="<?php echo createHash("<?php echo sprintf('%01.2f',$pp_settleamt);?>","826" ) ?>"/>
+<input type="hidden" name="hash" value="<?php echo $hash; ?>"/>
 <input type="hidden" name="storename" value="2220540392"/>
 <input type="hidden" name="mode" value="payonly"/>
 <input type="hidden" name="paymentMethod" value="M"/>
@@ -58,6 +61,7 @@ foreach($invoiceitems as $invoiceitem)
 <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>"/>
 <input type="hidden" name="phone" value="<?php echo $_POST['phone1']; ?>"/>
 <input type="hidden" name="bname" value="<?php echo $_POST['firstname']." ".$_POST['lastname']; ?>"/>
+<input type="submit" name="submit" value="submit">
 </form>
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -66,6 +70,6 @@ foreach($invoiceitems as $invoiceitem)
 
 <script>
 $( document ).ready(function() {
-  // $("#frmsubmit").submit();
+  $("#frmsubmit").submit();
 });
 </script>
