@@ -51,5 +51,5 @@ $transaction = $DB->start_delegated_transaction();
     $DB->update_record('invoice', $data, array('id' => $data->id));
 $transaction->allow_commit();
 unset($SESSION->basketid);
-redirect(new moodle_url('/blocks/iomad_company_admin/company_license_users_form.php'));
+redirect(new moodle_url('/blocks/mycourses/failedpaymentmsg.php'));
 ?>

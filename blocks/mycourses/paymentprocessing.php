@@ -18,15 +18,21 @@ $invoiceitems = $DB->get_records_sql('SELECT ii.*, c.fullname
 										WHERE ii.invoiceid = :invoiceid
 										ORDER BY ii.id
 									   ', array('invoiceid' => $basketid));
-$pp_amount = $pp_taxamt =   $pp_settleamt=0;
+$pp_amount_disc = $pp_taxamt_disc = $pp_amount = $pp_taxamt =   $pp_settleamt=0;
 foreach($invoiceitems as $invoiceitem)
 	{
 		$amount = round($invoiceitem->price * $invoiceitem->license_allocation * $invoiceitem->quantity,2);
 		$tax = round($amount*($CFG->tax/100),2);
+		
+		
 		$pp_amount += $amount;
 		$pp_taxamt += $tax;
 		$tot = $amount+$tax;
 		$disc = round(($tot *($CFG->discount/100)),2);
+		$pp_amount_disc  += ($amount - round(($amount *($CFG->discount/100)),2));
+		$pp_taxamt_disc  += ($tax - round(($tax *($CFG->discount/100)),2));
+		
+		
 		$pp_settleamt += ($amount+$tax) - $disc ;
 		//echo $pp_settleamt."****".(($amount+$tax) - $disc)."*******".$amount."*******".$disc;
 	}
@@ -47,6 +53,9 @@ foreach($invoiceitems as $invoiceitem)
 <input type="hidden" name="mode" value="payonly"/>
 <input type="hidden" name="paymentMethod" value="M"/>
 <input type="hidden" name="chargetotal" value="<?php echo sprintf('%01.2f',$pp_settleamt);?>"/>
+<input type="hidden" name="subtotal" value="<?php echo sprintf('%01.2f',$pp_amount_disc);0?>"/>
+<input type="hidden" name="shipping" value="0"/>
+<input type="hidden" name="vattax" value="<?php echo sprintf('%01.2f',$pp_taxamt_disc);?>"/>
 <input type="hidden" name="currency" value="826"/>
 <input type="hidden" name="invoicenumber" value="<?php echo $basketid;?>"/>
 <input type="hidden" name="responseSuccessURL" value="<?php echo new moodle_url('/blocks/mycourses/successpayment.php') ?>"/>
@@ -61,7 +70,9 @@ foreach($invoiceitems as $invoiceitem)
 <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>"/>
 <input type="hidden" name="phone" value="<?php echo $_POST['phone1']; ?>"/>
 <input type="hidden" name="bname" value="<?php echo $_POST['firstname']." ".$_POST['lastname']; ?>"/>
-<input type="submit" name="submit" value="submit">
+<input type="hidden" name="customerid" value="<?php echo $USER->id; ?>"/>
+<input type="hidden" name="bypass" value="true"/>
+
 </form>
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -70,6 +81,6 @@ foreach($invoiceitems as $invoiceitem)
 
 <script>
 $( document ).ready(function() {
-  $("#frmsubmit").submit();
+ $("#frmsubmit").submit();
 });
 </script>
