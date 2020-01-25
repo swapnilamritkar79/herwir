@@ -1,5 +1,6 @@
 h2 {
   font-size: 18px;
+  font-weight: 500;
 }
 
 .dep_tree {
@@ -332,12 +333,14 @@ table.companycoursetable {
   }
 }
 
-.moodle-dialogue-base {
-  .moodle-dialogue {
-    .moodle-dialogue-bd {
-      overflow: hidden;
-      overflow-y: scroll;
-      height: calc(100vh - 72px);
+#page-calendar-view {
+  .moodle-dialogue-base {
+    .moodle-dialogue {
+      .moodle-dialogue-bd {
+        overflow: hidden;
+        overflow-y: scroll;
+        height: calc(100vh - 72px);
+      }
     }
   }
 }
@@ -396,6 +399,125 @@ table.companycoursetable {
 
     tr:nth-child(odd) {
       background: #fff !important;
+    }
+  }
+}
+
+.tag-management-form {
+  margin-bottom: 10px;
+  .no-overflow {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #id_tagfilter {
+    padding: 0.375rem 0.75rem;
+    font-size: 14px;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+
+  .tagdeleteselected {
+    margin-right: 10px;
+  }
+}
+
+.path-admin-tag {
+  .addstandardtags {
+    float: right;
+    margin-top: -41px;
+  }
+}
+
+/*survey and  forum CSS*/
+
+#surveyform {
+  padding: 10px 20px;
+  background: #fff;
+
+  .surveytable {
+    width: 100%;
+  }
+}
+
+.forumheaderlist {
+  thead {
+    background: $headingcolor;
+    color: #fff;
+    padding: 10px;
+  }
+
+  th {
+    padding: 10px;
+  }
+
+  tbody {
+    td {
+      padding: 15px;
+    }
+
+    tr:nth-child(odd) {
+      background: #ececec;
+    }
+    tr:nth-child(even) {
+      background: #fff;
+    }
+  }
+}
+
+.forumpost {
+  background: #fff;
+
+  .commands a {
+    background: $wirehouse-green;
+    color: #fff;
+  }
+}
+
+#buttonscell {
+  width: 20%;
+  input[type="submit"] {
+    background-color: #fff;
+    border: 1px solid $wirehouse-green;
+    border-radius: 2px;
+    color: $wirehouse-green;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+}
+
+#existingcell {
+  width: 40%;
+}
+#potentialcell {
+  width: 40%;
+}
+
+#page-admin-roles-define {
+  .rolecap {
+    width: 100%;
+
+    .header {
+      color: #fff;
+      padding: 10px;
+    }
+
+    th {
+      color: #000;
+      padding: 10px;
+      .text-info {
+        color: $wirehouse-green !important;
+      }
+      a {
+        color: $wirehouse-green;
+      }
+    }
+
+    td {
+      padding: 10px;
     }
   }
 }

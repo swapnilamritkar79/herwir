@@ -65,7 +65,8 @@ class company_license_users_form extends \moodleform {
             }
         }
         natsort($courseselect);
-        $courseselect = array(0 => get_string('all')) + $courseselect;
+      // $courseselect = array(0 => get_string('all')) + $courseselect;
+       $courseselect = $courseselect;
         $this->courseselect = $courseselect;
 
         if (\iomad::has_capability('block/iomad_company_admin:allocate_licenses', \context_system::instance())) {
@@ -110,6 +111,7 @@ class company_license_users_form extends \moodleform {
                              'selectedcourses' => $this->selectedcourses,
                              'courses' => $this->courseselect,
                              'multiple' => $multiple);
+			//print_r($options);
             if (empty($this->potentialusers)) {
                 $this->potentialusers = new \potential_license_user_selector('potentialcourseusers', $options);
             }
@@ -133,10 +135,20 @@ class company_license_users_form extends \moodleform {
         global $USER, $OUTPUT;
 
         $mform =& $this->_form;
-
+		
+		global $DB;
+				$course = $DB->get_record_sql("SELECT c.id, c.fullname
+                                                        FROM {course} c
+                                                        JOIN {companylicense_courses} lic
+                                                        on (c.id = lic.courseid)
+                                                        WHERE lic.licenseid = :licenseid",
+                                                        array('licenseid' => $this->license->id));
+				$this->course = $course;
+	$this->selectedcourses = array($course->id);
         if (!empty($this->course->id)) {
             $this->_form->addElement('hidden', 'courseid', $this->course->id);
         }
+		
         $this->create_user_selectors();
 
         // Adding the elements in the definition_after_data function rather than in the definition function
@@ -167,6 +179,8 @@ class company_license_users_form extends \moodleform {
         if ($this->license->expirydate > time()) {
             // Add in the courses selector.
             if (empty($this->license->program)) {
+				
+				
                 $courseselector = $mform->addElement('autocomplete',
                                                      'courses',
                                                      get_string('courses', 'block_iomad_company_admin'),
@@ -175,6 +189,8 @@ class company_license_users_form extends \moodleform {
                                                            'multiple' => false,
                                                            'onchange' => 'this.form.submit()'));
                 $courseselector->setMultiple(true);
+				
+				$mform->setDefault('courses',$course->id);
             } else {
                 $mform->addElement('hidden', 'courses');
                 $mform->setType('courses', PARAM_INT);
@@ -183,12 +199,13 @@ class company_license_users_form extends \moodleform {
             $mform->addElement('header', 'header', get_string('license_users_for',
                                                               'block_iomad_company_admin',
                                                               $this->license->name));
+			
             if (!$this->license->program) {
                 $mform->addElement('html', '('.($this->license->allocation - $this->license->used).' / '.
                 $this->license->allocation.get_string('licensetotal', 'block_iomad_company_admin').')');
             } else {
-                $mform->addElement('html', '('.($this->license->allocation - $this->license->used) / count($this->courseselect) .' / '.
-                $this->license->allocation / count($this->courseselect) . get_string('licensetotal', 'block_iomad_company_admin').')');
+                $mform->addElement('html', '('.($this->license->allocation - $this->license->used)  .' / '.
+                $this->license->allocation . get_string('licensetotal', 'block_iomad_company_admin').')');
             }
         } else {
             $mform->addElement('header', 'header', get_string('license_users_for',
@@ -229,10 +246,10 @@ class company_license_users_form extends \moodleform {
                                title="' . get_string('licenseallocate', 'block_iomad_company_admin') .'" class="btn btn-secondary"/><br />
                         <input name="addall" id="addall" type="submit" value="' . $OUTPUT->larrow().'&nbsp;'.get_string('licenseallocateall', 'block_iomad_company_admin') . '"
                                title="' . get_string('licenseallocateall', 'block_iomad_company_admin') .'" class="btn btn-secondary"/><br />
-                        <input name="remove" id="remove" type="submit" value="'. get_string('licenseremove', 'block_iomad_company_admin').'&nbsp;'.$OUTPUT->rarrow(). '"
+                        <!--<input name="remove" id="remove" type="submit" value="'. get_string('licenseremove', 'block_iomad_company_admin').'&nbsp;'.$OUTPUT->rarrow(). '"
                                title="'. get_string('licenseremove', 'block_iomad_company_admin') .'" class="btn btn-secondary"/><br />
                         <input name="removeall" id="removeall" type="submit" value="'. get_string('licenseremoveall', 'block_iomad_company_admin').'&nbsp;'.$OUTPUT->rarrow(). '"
-                               title="'. get_string('licenseremoveall', 'block_iomad_company_admin') .'" class="btn btn-secondary"/><br />
+                               title="'. get_string('licenseremoveall', 'block_iomad_company_admin') .'" class="btn btn-secondary"/><br /> -->
                      </p>
                   </td>
                   <td id="potentialcell">');

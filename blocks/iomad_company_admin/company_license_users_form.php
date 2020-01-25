@@ -30,7 +30,7 @@ $chosenid = optional_param('chosenid', 0, PARAM_INT);
 
 $context = context_system::instance();
 require_login();
-iomad::require_capability('block/iomad_company_admin:allocate_licenses', $context);
+//iomad::require_capability('block/iomad_company_admin:allocate_licenses', $context);
 
 // Correct the navbar.
 // Set the name for the page.

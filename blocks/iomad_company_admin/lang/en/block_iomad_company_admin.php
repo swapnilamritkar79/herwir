@@ -377,7 +377,7 @@ $string['fullnamegroup_help'] = 'This sets the course group description/name';
 $string['globalcoursesmatchipesng'] = 'Sitewide courses matching \'{$a}\'';
 $string['globalcourses'] = 'Sitewide courses';
 $string['groupdescription'] = 'Group name';
-$string['group_users_for'] = 'Group {$a->group} in course {$a->course}';
+$string['group_users_for'] = 'Group {$a->group} in course {$a->course} Manager {$a->manager}';
 $string['hasenrollments'] = 'existing enrolments';
 $string['hide_suspended_companies'] = 'Hide suspended companies?';
 $string['invalid_company'] = 'Optional field profile_field_company must match your company\'s shortname.';
@@ -706,3 +706,5 @@ $string['companyreporter_role'] = 'Company report only';
 $string['companyreporter'] = 'Company report only';
 $string['guardian_user_upload_title'] = 'Upload Guradian Customer Admin';
 $string['courseprice'] = 'Set Course Price';
+
+$string['employeemanager']='Employee Manager';

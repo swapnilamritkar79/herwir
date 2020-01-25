@@ -96,7 +96,7 @@ class course_group_display_form extends company_moodleform {
 
     public function definition() {
         global $CFG,$DB;
-
+		$systemcontext = \context_system::instance();
         $mform =& $this->_form;
         $company = $this->company;
         if (!empty($this->courseid)) {
@@ -128,6 +128,10 @@ class course_group_display_form extends company_moodleform {
         $mform->addElement('html', $coursegrouphtml);
         $mform->addElement('hidden', 'selectedcourse', $this->courseid);
         $mform->setType('selectedcourse', PARAM_INT);
+		
+		
+		
+		
 
         $buttonarray = array();
         $buttonarray[] = $mform->createElement('submit', 'create',
@@ -176,7 +180,7 @@ class group_edit_form extends company_moodleform {
     public function definition() {
         global $CFG;
         $mform =& $this->_form;
-
+		$systemcontext = \context_system::instance();
         // Then show the fields about where this block appears.
         if ($this->action == 0) {
             $mform->addElement('header', 'header',
@@ -185,6 +189,49 @@ class group_edit_form extends company_moodleform {
             $mform->addElement('header', 'header',
                                 get_string('editgroup', 'block_iomad_company_admin'));
         }
+		$managerarray = array();
+		if (iomad::has_capability('block/iomad_company_admin:assign_company_reporter', $systemcontext)) {
+            if (empty($managearray)) {
+                $managerarray['0'] = get_string('user', 'block_iomad_company_admin');
+            }
+            $managerarray['4'] = get_string('companyreporter', 'block_iomad_company_admin');
+        }
+		
+		global $DB;
+		  $rsusers =  $DB->get_records_sql('SELECT u.* FROM {company_users} cu inner join {user} u on cu.userid = u.id
+                                                 WHERE
+                                                 managertype= :roletype
+                                                 AND companyid = :companyid', array(
+																				'roletype' => 5,
+                                                                                'companyid' => iomad::get_my_companyid($context)));
+		
+		$managerarray =array(); 
+		foreach( $rsusers as  $rsuser)
+		{
+			$managerarray[$rsuser->id] = $rsuser->firstname." ".$rsuser->lastname;
+			
+		}
+		$sql = "select manager from {company_course_groups} where companyid=:companyid and groupid =:groupid and courseid=:courseid";
+		 $rsmanager =  $DB->get_record_sql($sql, array(  'companyid' => iomad::get_my_companyid($context)
+														,'groupid' => $this->groupid
+														,'courseid' => $this->courseid)
+		 );
+		 
+		
+		 $manager = 0;
+		 if(isset($rsmanager->manager))
+		 {
+			 
+			$manager = $rsmanager->manager;
+		 }
+		 
+		if (!empty($managerarray)) {
+            $mform->addElement('select', 'manager', get_string('manager', 'block_iomad_company_admin'), $managerarray);
+			$mform->setDefault('manager',$manager);
+        } else {
+            $mform->addElement('hidden', 'manager', 0);
+        }
+		
         $mform->addElement('hidden', 'courseid', $this->courseid);
         $mform->setType('courseid', PARAM_INT);
         $mform->addElement('hidden', 'groupid', $this->groupid);
@@ -344,7 +391,7 @@ if (!empty($selectedcourse)) {
 
         }
     } else if ($createdata = $editform->get_data()) {
-
+		
         // Create or update the department.
         company::create_company_course_group($companyid,
                                              $selectedcourse,

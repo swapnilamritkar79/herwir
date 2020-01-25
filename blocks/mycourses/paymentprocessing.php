@@ -33,7 +33,8 @@ foreach($invoiceitems as $invoiceitem)
 		$pp_taxamt_disc  += ($tax - round(($tax *($CFG->discount/100)),2));
 		
 		
-		$pp_settleamt += ($amount+$tax) - $disc ;
+		//$pp_settleamt += ($amount+$tax) - $disc ;
+		$pp_settleamt += ($amount+$tax) ;
 		//echo $pp_settleamt."****".(($amount+$tax) - $disc)."*******".$amount."*******".$disc;
 	}
 	
@@ -53,13 +54,14 @@ foreach($invoiceitems as $invoiceitem)
 <input type="hidden" name="mode" value="payonly"/>
 <input type="hidden" name="paymentMethod" value="M"/>
 <input type="hidden" name="chargetotal" value="<?php echo sprintf('%01.2f',$pp_settleamt);?>"/>
-<input type="hidden" name="subtotal" value="<?php echo sprintf('%01.2f',$pp_amount_disc);0?>"/>
+<input type="hidden" name="subtotal" value="<?php echo sprintf('%01.2f',$pp_amount);0?>"/>
 <input type="hidden" name="shipping" value="0"/>
-<input type="hidden" name="vattax" value="<?php echo sprintf('%01.2f',$pp_taxamt_disc);?>"/>
+<input type="hidden" name="vattax" value="<?php echo sprintf('%01.2f',$pp_taxamt);?>"/>
 <input type="hidden" name="currency" value="826"/>
 <input type="hidden" name="invoicenumber" value="<?php echo $basketid;?>"/>
 <input type="hidden" name="responseSuccessURL" value="<?php echo new moodle_url('/blocks/mycourses/successpayment.php') ?>"/>
-<input type="hidden" name="responseFailURL" value="<?php echo new moodle_url('/blocks/mycourses/failedpayment.php') ?>"/>
+<!--<input type="hidden" name="responseFailURL" value="<?php echo new moodle_url('/blocks/mycourses/successpayment.php') ?>"/>-->
+<input type="hidden" name="responseFailURL" value="<?php echo new moodle_url('/blocks/mycourses/failedpayment.php') ?>"/>  
 <input type="hidden" name="bcompany" value="<?php echo $_POST['company']; ?>"/>
 <input type="hidden" name="baddr1" value="<?php echo $_POST['address1']; ?>"/>
 <input type="hidden" name="baddr2" value="<?php echo $_POST['address2']; ?>"/>
@@ -71,7 +73,7 @@ foreach($invoiceitems as $invoiceitem)
 <input type="hidden" name="phone" value="<?php echo $_POST['phone1']; ?>"/>
 <input type="hidden" name="bname" value="<?php echo $_POST['firstname']." ".$_POST['lastname']; ?>"/>
 <input type="hidden" name="customerid" value="<?php echo $USER->id; ?>"/>
-<input type="hidden" name="bypass" value="true"/>
+
 
 </form>
 <script

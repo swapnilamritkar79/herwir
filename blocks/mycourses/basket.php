@@ -105,10 +105,10 @@ if (!empty($SESSION->basketid)) {
 	}
 	else
 	{
-		echo '<p>' . get_string('emptybasket', 'block_iomad_commerce') . '</p>';
+		echo '<p class="emptybasket">' . get_string('emptybasket', 'block_iomad_commerce') . '</p>';
 	}
 } else {
-    echo '<p>' . get_string('emptybasket', 'block_iomad_commerce') . '</p>';
+    echo '<p class="emptybasket">' . get_string('emptybasket', 'block_iomad_commerce') . '</p>';
 }
 
 

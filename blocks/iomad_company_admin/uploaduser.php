@@ -73,7 +73,6 @@ if($USER->id == 2 ){
 	$linktext = get_string('guardian_user_upload_title', 'block_iomad_company_admin');
 }
 else{
-	echo '>>>>>>';
 $linktext = get_string('user_upload_title', 'block_iomad_company_admin');
 }
 // Set the url.

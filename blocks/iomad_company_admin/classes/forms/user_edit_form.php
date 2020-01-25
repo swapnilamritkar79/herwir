@@ -184,6 +184,9 @@ class user_edit_form extends \moodleform {
             }
             $managerarray['4'] = get_string('companyreporter', 'block_iomad_company_admin');
         }
+			
+        $managerarray['5'] = get_string('employeemanager', 'block_iomad_company_admin');
+       
         if (!empty($managerarray)) {
             $mform->addElement('select', 'managertype', get_string('managertype', 'block_iomad_company_admin'), $managerarray, 0);
         } else {

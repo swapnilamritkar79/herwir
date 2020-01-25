@@ -38,7 +38,7 @@ class course_cart_form extends moodleform {
               <th>Course Name</th>
               <th>Course QTY</th>
               <th>Unit Price('.$currency.')</th>
-              <th>Total('.$currency.' </th>
+              <th>Total('.$currency.') </th>
             </tr>
           </thead><tbody class=" content">');
 		  

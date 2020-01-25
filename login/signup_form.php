@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->dirroot.'/user/profile/lib.php');
 require_once($CFG->dirroot . '/user/editlib.php');
+require_once($CFG->dirroot . '/apiClass.php');
 
 class login_signup_form extends moodleform implements renderable, templatable {
     function definition() {
@@ -77,7 +78,18 @@ class login_signup_form extends moodleform implements renderable, templatable {
         if (!empty($CFG->defaultcity)) {
             $mform->setDefault('city', $CFG->defaultcity);
         }
-
+		
+		
+		$mform->addElement('text', 'companyfullname', get_string('companyfullname'), 'maxlength="100" size="12" autocapitalize="none"');
+        $mform->setType('companyfullname', PARAM_RAW);
+        $mform->addRule('companyfullname', get_string('missingcompanyfullname'), 'required', null, 'client');
+		
+		$mform->addElement('hidden', 'customregistration', '1');
+		
+		$mform->addElement('text', 'companyshortname', get_string('companyshortname'), 'maxlength="100" size="12" autocapitalize="none"');
+        $mform->setType('companyshortname', PARAM_RAW);
+        $mform->addRule('companyshortname', get_string('missingcompanyshortname'), 'required', null, 'client');
+		
         $country = get_string_manager()->get_list_of_countries();
         $default_country[''] = get_string('selectacountry');
         $country = array_merge($default_country, $country);
@@ -126,8 +138,18 @@ class login_signup_form extends moodleform implements renderable, templatable {
      *         or an empty array if everything is OK (true allowed for backwards compatibility too).
      */
     public function validation($data, $files) {
+		global $DB;
+		$data['country'] = 'IN';
         $errors = parent::validation($data, $files);
-
+		
+		 if ($DB->record_exists('company', array('name'=>$data['companyfullname']))) {
+                $errors['companyfullname'] = get_string('companyfullnameexist');
+            }
+		
+		if ($DB->record_exists('company', array('shortname'=>$data['companyshortname']))) {
+                $errors['companyshortname'] = get_string('companyshortnameexist');
+            }
+			
         if (signup_captcha_enabled()) {
             $recaptchaelement = $this->_form->getElement('recaptcha_element');
             if (!empty($this->_form->_submitValues['g-recaptcha-response'])) {
@@ -141,7 +163,36 @@ class login_signup_form extends moodleform implements renderable, templatable {
         }
 
         $errors += signup_validate_data($data, $files);
-
+		
+		if(empty($errors)){
+			$apiClass = new apiClass();
+			$apiToken = $apiClass->setToken();
+			
+			$companies['name']=$data['companyfullname'];
+			$companies['shortname']=$data['companyshortname'];               
+            $companies['city']=$data['city'];
+            $companies['country']=$data['country'];
+            $companies['maildisplay']=2;
+            $companies['mailformat']=1;
+            $companies['maildigest']=0;
+            $companies['autosubscribe']=1;
+            $companies['trackforums']=0;
+            $companies['htmleditor']=1;                 
+            $companies['screenreader']=0;  
+            $companies['timezone']=99; 
+            $companies['lang']='en';
+            $companies['suspended']=0;
+            $companies['ecommerce']=0;
+            $companies['parentid']=0; 
+            $companies['customcss']='';
+            $companies['validto']=null;
+            $companies['suspendafter']=0;
+			$params = array('companies' => array($companies));
+			
+			$output_report=json_decode($apiClass->getData($apiToken,'block_iomad_company_admin_create_companies','json',$params,'get'));
+			
+		}else{}
+		
         return $errors;
     }
 
@@ -161,4 +212,12 @@ class login_signup_form extends moodleform implements renderable, templatable {
         ];
         return $context;
     }
+	
+	public function get_list_of_directCompanies(){
+		global $DB, $CFG, $USR;
+		$DB->set_debug(true);
+		//$getCompanies = $DB->get_records('company', array('guardian'=>0));
+		$getCompanies = $DB->get_records_sql("SELECT * FROM {company} WHERE guardian != 1");
+		print_R($getCompanies);
+	}
 }

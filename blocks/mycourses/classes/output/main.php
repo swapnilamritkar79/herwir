@@ -74,7 +74,7 @@ class main implements renderable, templatable {
         $completedview = new completed_view($mycompletion, $cutoffdate);
         $allview = new all_view();
         /*$recommendedview = new recommended_view(); */
-		$c_admin=user_has_role_assignment($USER->id,10);
+		$c_admin=user_has_role_assignment($USER->id,$CFG->directCompanyRole);
 		if(!$c_admin)
 		{
 			$notcompanyadmin=1;

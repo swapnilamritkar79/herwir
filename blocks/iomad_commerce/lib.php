@@ -255,22 +255,23 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
         } else {
             $currency = get_string('GBP', 'core_currencies');
         }*/
-		$item->currency=$currency="&pound";
+		$item->currency= $currency ="&pound";
 		
         foreach ($basketitems as $item) {
             $rowtotal = $item->price * $item->license_allocation*$item->quantity;
 			$tax = sprintf ("%.2f",($CFG->tax/100) *$rowtotal );
            
-                $unitprice = $item->currency .' '. number_format($item->price, 2);
+                $unitprice = $currency .' '. number_format($item->price, 2);
             
 
             $row = array(
-                ($links ? "<a href='course.php?id=$item->invoiceableitemid'>$item->fullname</a>" : $item->fullname),
+                /*($links ? "<a href='course.php?id=$item->invoiceableitemid'>$item->fullname</a>" : $item->fullname),*/
+				$item->fullname,
 				
                 $unitprice,
 				$item->license_allocation*$item->quantity,
 				
-                $item->currency . ' ' .number_format(($rowtotal), 2)
+                $currency . ' ' .number_format(($rowtotal), 2)
             );
             if ($includeremove) {
                 $row[] = "<a href='basket.php?remove=$item->id'>" . strtolower(get_string('remove')) . "</a>";
@@ -285,7 +286,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
 
             $table->data[] = $row;
 
-            $currency = $item->currency;
+            $currency = "&pound";
             $total += ($rowtotal);
 			
 			$totaltax += $tax;
@@ -316,7 +317,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
 		
 		$table->data[] = $totalrow;
 		
-		 $totalrow = array(
+		 /*$totalrow = array(
             '<b>' . get_string('discount', 'block_iomad_commerce') . '</b>',
            
             '',
@@ -327,7 +328,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
         );
 		
 		$table->data[] = $totalrow;
-		
+		*/
 		
 		 $totalrow = array(
             '<b>' . get_string('total', 'block_iomad_commerce') . '</b>',
@@ -336,7 +337,7 @@ function get_invoice_html($invoiceid, $includeremove = 0, $links = 1, $showproce
             '',
             
             
-            '<b>' . $currency . ' ' .  number_format($nettotaltax-($nettotaltax*($CFG->discount/100)), 2) . '</b>'
+            '<b>' . $currency . ' ' .  number_format($nettotaltax, 2) . '</b>'
         );
 		
 		$table->data[] = $totalrow;

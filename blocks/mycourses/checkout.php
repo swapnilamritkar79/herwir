@@ -43,7 +43,7 @@ class checkout_form extends moodleform {
 
         $strrequired = get_string('required');
 		$mform->addElement('html', '<div class="col-12" style="float:left">');
-		$mform->addElement('html', '<div class="col-6" style="float:left">');
+		
 
         $mform->addElement('text', 'firstname', get_string('firstname'), 'maxlength="100" size="50"');
         $mform->addRule('firstname', $strrequired, 'required', null, 'client');
@@ -57,11 +57,11 @@ class checkout_form extends moodleform {
         $mform->addRule('company', $strrequired, 'required', null, 'client');
         $mform->setType('company', PARAM_NOTAGS);
 
-        $mform->addElement('text', 'address1', get_string('address1'), 'maxlength="70" size="50"');
+        $mform->addElement('text', 'address1', get_string('address1','block_mycourses'), 'maxlength="70" size="50"');
         $mform->addRule('address1', $strrequired, 'required', null, 'client');
         $mform->setType('address1', PARAM_NOTAGS);
 		
-		 $mform->addElement('text', 'address2', get_string('address2'), 'maxlength="70" size="50"');
+		 $mform->addElement('text', 'address2', get_string('address2','block_mycourses'), 'maxlength="70" size="50"');
         $mform->addRule('address2', $strrequired, 'required', null, 'client');
         $mform->setType('address2', PARAM_NOTAGS);
 		
@@ -90,7 +90,11 @@ class checkout_form extends moodleform {
         $mform->addElement('text', 'phone1', get_string('phone'), 'maxlength="20" size="50"');
         $mform->setType('phone1', PARAM_NOTAGS);
 
-        $mform->addElement('html', '</div>');
+        $linkurl = new moodle_url('/my/index.php');
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', 'Continue');
+        $buttonarray[] = &$mform->createElement('button', 'resetbutton', 'Cancel',array('onclick'=>'window.location.href="'.$linkurl.'"'));
+        $mform->addGroup($buttonarray, 'buttonbar', '', ' ', false);
+		
 		/*$mform->addElement('html', '<div class="col-6" style="float:left">');
 		
 		$mform->addElement('text', 'creditcardnumber', get_string('creditcardnumber'), 'maxlength="16" size="16"');
@@ -128,7 +132,9 @@ class checkout_form extends moodleform {
         $mform->addElement('hidden', 'userid', $USER->id);
         $mform->setType('userid', PARAM_INT);
 
-        $this->add_action_buttons(true, get_string('continue'));
+        //$this->add_action_buttons(false, get_string('continue'));
+		$buttonarray = array();
+		
     }
 
 }
@@ -150,7 +156,7 @@ $PAGE->set_title($linktext);
 $PAGE->set_heading(get_string('checkout', 'block_iomad_commerce'));
 
 // Build the nav bar.
-$PAGE->navbar->add($linktext, $linkurl);
+//$PAGE->navbar->add($linktext, $linkurl);
 $PAGE->navbar->add(get_string('checkout', 'block_iomad_commerce'));
 
 
@@ -190,5 +196,12 @@ echo $error;
 $mform->display();
 
 echo get_basket_html();
+?>
+<style>
+#fitem_id_company {
+    margin-left: -16px !important;
+}</style>
+<?php
+
 
 echo $OUTPUT->footer();

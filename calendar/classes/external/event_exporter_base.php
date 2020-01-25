@@ -60,8 +60,7 @@ class event_exporter_base extends exporter {
      */
     public function __construct(event_interface $event, $related = []) {
         $this->event = $event;
-
-        $starttimestamp = $event->get_times()->get_start_time()->getTimestamp();
+		$starttimestamp = $event->get_times()->get_start_time()->getTimestamp();
         $endtimestamp = $event->get_times()->get_end_time()->getTimestamp();
         $groupid = $event->get_group() ? $event->get_group()->get('id') : null;
         $userid = $event->get_user() ? $event->get_user()->get('id') : null;
@@ -210,6 +209,7 @@ class event_exporter_base extends exporter {
             'timesort' => ['type' => PARAM_INT],
             'visible' => ['type' => PARAM_INT],
             'timemodified' => ['type' => PARAM_INT],
+			
         ];
     }
 
@@ -278,7 +278,9 @@ class event_exporter_base extends exporter {
      * @return array Keys are the property names, values are their values.
      */
     protected function get_other_values(renderer_base $output) {
-        $values = [];
+	    $values = [];
+		global $CFG;
+		$values['wwwroot1']=$CFG->wwwroot;
         $event = $this->event;
         $legacyevent = container::get_event_mapper()->from_event_to_legacy_event($event);
         $context = $this->related['context'];
@@ -332,15 +334,12 @@ class event_exporter_base extends exporter {
         $viewurl->set_anchor('event_' . $event->get_id());
         $values['viewurl'] = $viewurl->out(false);
         $values['formattedtime'] = calendar_format_event_time($legacyevent, time(), null, false, $timesort);
-
+		
         if ($group = $event->get_group()) {
             $values['groupname'] = format_string($group->get('name'), true,
                 ['context' => \context_course::instance($event->get_course()->get('id'))]);
         }
-		$wwwroot=new moodle_url('/');
-		$values['wwwroot']=$wwwroot->out(false);
-		//print_r($values);
-        return $values;
+		return $values;
     }
 
     /**

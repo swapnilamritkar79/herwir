@@ -152,7 +152,10 @@ class login implements renderable, templatable {
         $data->username = $this->username;
         $data->logintoken = $this->logintoken;
         $data->maintenance = format_text($this->maintenance, FORMAT_MOODLE);
-
+		
+		if($CFG->hasinstructions == false){
+			$data->hasinstructions = $CFG->hasinstructions;
+		}
         return $data;
     }
 }

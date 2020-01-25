@@ -17,7 +17,7 @@ $transaction = $DB->start_delegated_transaction();
 	} else {
 		$currency = '&pound';
 	}*/
-	$currency = '&pound';
+	$currency = 'GBP';
 	$data->pp_amount = 0;
 	$data->pp_settleamt = 0;
 	$data->pp_taxamt= 0;
@@ -54,10 +54,16 @@ $transaction = $DB->start_delegated_transaction();
 	
 	foreach($invoiceitems as $invoiceitem)
 	{
+		
         // Get name for company license.
+		$invoiceitem->processed=1;
+		$DB->update_record('invoiceitem', $invoiceitem, array('id' => $invoiceitem->id));
         $company = company::get_company_byuserid($invoice->userid);
         $course = $DB->get_record('course', array('id' => $invoiceitem->invoiceableitemid), 'id, shortname', MUST_EXIST);
-        $licensename = $invoice->id." - ".$company->shortname . " [" . $course->shortname . "] " . date($CFG->iomad_date_format);
+		//course name_date_10_license_company
+        ///$licensename = $invoice->id." - ".$company->shortname . " [" . $course->shortname . "] " . date($CFG->iomad_date_format);
+		$licensename = $course->shortname."_".date($CFG->iomad_date_format) ."_".$invoiceitem->quantity ."_license_" .$company->shortname;
+		
         $count = $DB->count_records_sql("SELECT COUNT(*) FROM {companylicense} WHERE name LIKE '" .
                                         (str_replace("'", "\'", $licensename)) . "%'");
         if ($count) {
@@ -82,7 +88,7 @@ $transaction = $DB->start_delegated_transaction();
         // Create mdl_companylicense record.
         $companylicense = new stdClass;
         $companylicense->name = $licensename;
-        $companylicense->allocation = $invoiceitem->license_allocation ;
+        $companylicense->allocation = $invoiceitem->license_allocation * $invoiceitem->quantity ;
         $companylicense->humanallocation = $invoiceitem->license_allocation * $invoiceitem->quantity ;
         $companylicense->validlength = $invoiceitem->license_validlength;
         $companylicense->startdate = time();

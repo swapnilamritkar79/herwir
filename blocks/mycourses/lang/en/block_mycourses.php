@@ -51,3 +51,6 @@ $string['showsummarydesc'] = 'Show the course summary in the listing';
 $string['title'] = 'All Courses';
 $string['allcourse'] = 'All Courses';
 $string['recomcourse'] = 'Recommended Courses';
+$string['companyname']='Company';
+$string['address1']='Address 1';
+$string['address2']='Address 2';

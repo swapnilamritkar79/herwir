@@ -10324,8 +10324,8 @@ function site_is_public() {
 }
 
 function is_company_admin(){
-	global $USER;
-	$comapny_admin=user_has_role_assignment($USER->id,10);
+	global $USER, $CFG;
+	$comapny_admin=user_has_role_assignment($USER->id,$CFG->directCompanyRole);
 	return $comapny_admin;
 }
 

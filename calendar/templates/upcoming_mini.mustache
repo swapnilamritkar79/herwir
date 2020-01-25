@@ -31,11 +31,16 @@
     {
     }
 }}
+
+<style>
+.upcomevent .slick-slide 
+{
+	min-width:300px !important;
+}
+</style>
 <div id="allview" class="viewall"><a href="../calendar/view.php?view=upcoming">View All</a></div>
-<div id="upcoming-mini-{{uniqid}}" data-region=#upcoming-mini">
-<div class="responsive1">
-	<div class="coursehold">
-					 
+<div id="upcoming-mini-{{uniqid}}" data-region=#upcoming-mini" class="upcomevent"> 
+				 
 			<div class=" card-text content calendarwrapper"{{!
 			    }} id="month-upcoming-mini-{{uniqid}}"{{!
 			    }} data-context-id="{{defaulteventcontext}}"{{!
@@ -44,7 +49,9 @@
 			}}>
 			    {{> core/overlay_loading}}
 			    <div class="responsive">
+				
 			    {{#events}}
+				<div class="coursehold">
 			    <div class="courecontent"> 	
 			        <div class-"name" {{!
 			            }} class="event"{{!
@@ -61,18 +68,19 @@
 			            <div class="time"><i class="far fa-clock"></i>{{{formattedtime}}}</div>
 			            <div class="time"><i class="fa fa-map-marker-alt"></i> {{location}}</div>
 			            <div class="event-img">{{{desc_img}}}</div>
-			           <div class="dec">{{desc_text}}</div>
+			           <div class="dec">{{{desc_text}}} </div>
 			            
 			        </div>
 			       </div>
+				   </div>
 			    {{/events}}</div>
 			    {{^events}}
 			        {{#str}}noupcomingevents, calendar{{/str}}
 			    {{/events}}
 			
-			</div>
+			
 	</div>
-</div>
+
 </div>
 {{#js}}
 
@@ -81,11 +89,11 @@ require([
     'jquery',
     'core_calendar/selectors',
     'core_calendar/events',
-    "{{wwwroot}}/blocks/mycourses/slick/slick.js"
+    
 ], function(
     $,
     CalendarSelectors,
-    CalendarEvents,slick
+    CalendarEvents,
 ) {
     var root = $('#month-upcoming-mini-{{uniqid}}');
 
@@ -115,30 +123,6 @@ require([
 
         transitionPromise.resolve();
     });
-
-$('.responsive').slick({
-				dots: false,
-				infinite: true,
-				speed: 300,
-				slidesToShow: 2,
-				slidesToScroll: 2,
-				responsive: [
-				  {
-					breakpoint: 1024,
-					settings: {
-					  slidesToShow: 2,
-					  slidesToScroll: 2,
-					  infinite: true,
-					  dots: true
-					}
-				  }
-				  // You can unslick at a given breakpoint now by adding:
-				  // settings: "unslick"
-				  // instead of a settings object
-				]
-				});
-
-				
 });
 {{/js}}
 <style>

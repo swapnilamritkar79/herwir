@@ -116,7 +116,10 @@ class company {
         if (iomad::has_capability('block/iomad_company_admin:assign_company_reporter', $systemcontext)) {
             $returnarray['4'] = get_string('companyreporter', 'block_iomad_company_admin');
         }
-        return $returnarray;
+		if (iomad::has_capability('block/iomad_company_admin:assign_company_reporter', $systemcontext)) {
+         $returnarray['5'] = get_string('employeemanager', 'block_iomad_company_admin');
+		}
+		return $returnarray;
     }
 
     /**
@@ -939,6 +942,7 @@ class company {
         $companycoursenoneditorrole = $DB->get_record('role', array('shortname' => 'companycoursenoneditor'));
         $companycourseeditorrole = $DB->get_record('role', array('shortname' => 'companycourseeditor'));
         $companyreporterrole = $DB->get_record('role', array('shortname' => 'companyreporter'));
+		$companyemployeemanager = $DB->get_record('role', array('shortname' => 'employee_manger'));
 
         // Get the full company tree as we may need it.
         $topcompanyid = $company->get_topcompanyid();
@@ -1053,7 +1057,11 @@ class company {
                             }
                         }
                     }
+                }else if ($managertype == 5 ) {
+                    // Give them the department manager role.
+                    role_assign($companyemployeemanager->id, $userid, $systemcontext->id);
                 }
+				
                 if ($educator == 1 && !$CFG->iomad_autoenrol_managers ) {
                     // Deal with company course roles.
                     if ($companycourses = $DB->get_records('company_course',
@@ -1202,6 +1210,10 @@ class company {
                             }
                         }
                     }
+                }
+				else if ($managertype == 5 ) {
+                    // Give them the department manager role.
+                    role_assign($companyemployeemanager->id, $userid, $systemcontext->id);
                 }
                 if ($managertype == 1 || $user->managertype == 1) {
                     // Deal with child companies.
@@ -2614,6 +2626,14 @@ class company {
             // Already exists so we are updating it.
             $grouprecord = $DB->get_record('groups', array('id' => $groupdata->groupid), '*', MUST_EXIST);
             $DB->set_field('groups', 'description', $groupdata->description, array('id' => $grouprecord->id));
+			
+			$sql = "select id from {company_course_groups} where companyid=:companyid and groupid =:groupid and courseid=:courseid";
+		 $rsmanager =  $DB->get_record_sql($sql, array(  'companyid' =>$companyid
+														,'groupid' => $groupdata->groupid
+														,'courseid' => $courseid)
+		 );
+		
+			$DB->set_field('company_course_groups', 'manager', $groupdata->manager, array('id' => $rsmanager->id));
             return $grouprecord->id;
         } else {
             $data = new stdclass();
@@ -2632,11 +2652,15 @@ class company {
         $grouppivot['companyid'] = $companyid;
         $grouppivot['courseid'] = $courseid;
         $grouppivot['groupid'] = $groupid;
+        $grouppivot['manager'] = $groupdata->manager;
+		
+		
 
         // Write the data to the DB.
         if (!$DB->insert_record('company_course_groups', $grouppivot)) {
             print_error(get_string('cantcreatecompanycoursegroup', 'block_iomad_company_admin'));
         }
+		
         return $groupid;
     }
 

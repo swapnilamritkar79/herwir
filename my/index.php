@@ -177,10 +177,7 @@ echo "<script src="."'$CFG->wwwroot/theme/iomadboost/javascript/jquery.ellipsis.
     height: auto;
 	overflow:inherit;
 }
-.slick-slide
-{
-	min-width:400px;
-}
+
 </style>
 
 <?php

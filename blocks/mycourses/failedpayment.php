@@ -33,6 +33,8 @@ $transaction = $DB->start_delegated_transaction();
                                            ', array('invoiceid' => $data->id));
 	foreach($invoiceitems as $invoiceitem)
 	{
+		$invoiceitem->processed=0;
+		$DB->update_record('invoiceitem', $invoiceitem, array('id' => $invoiceitem->id));
 		$tot = $amount=$tax =$disc = 0;
 		$data->pp_ordertime = time();
 		$data->pp_currencycode =htmlspecialchars($currency);

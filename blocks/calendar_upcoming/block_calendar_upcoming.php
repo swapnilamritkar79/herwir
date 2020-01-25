@@ -62,10 +62,10 @@ class block_calendar_upcoming extends block_base {
             $url->param('category', $this->page->category->id);
         }
 
-        $this->content->footer = html_writer::div(
+        /*$this->content->footer = html_writer::div(
             html_writer::link($url, get_string('gotocalendar', 'block_calendar_upcoming')),
             'gotocal'
-        );
+        );*/
 
         return $this->content;
     }

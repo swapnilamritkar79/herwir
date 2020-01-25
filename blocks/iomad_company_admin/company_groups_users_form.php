@@ -261,11 +261,25 @@ class course_group_users_form extends moodleform {
 
         $course = $DB->get_record('course', array('id' => $this->courseid));
         $group = $DB->get_record('groups', array('id' => $this->groupid));
+		
+		
 
         $company = $this->company;
+		
+		$resmanager= $DB->get_records_sql('SELECT * FROM {company_course_groups} cg 
+										INNER JOIN {user} u ON  cg.manager=u.id
+										WHERE cg.groupid=:groupid AND cg.courseid=:courseid', array('groupid'=>$this->groupid,'courseid'=>$this->courseid));
+										
+		foreach( $resmanager as  $manager)
+		{
+			
+			$manager = $manager->firstname." ".$manager->lastname;
+		}
         $stringobj = new stdclass();
         $stringobj->group = $group->description;
         $stringobj->course = $course->fullname;
+		$stringobj->manager = $manager ;
+		
         $mform->addElement('header', 'header',
                             get_string('group_users_for', 'block_iomad_company_admin',
                             $stringobj));

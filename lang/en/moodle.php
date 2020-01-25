@@ -2226,3 +2226,16 @@ $string['cardmonth']='Month';
 $string['cardyear']='Year';
 $string['creditcardcvv']='CVV';
 $string['company']='Company';
+
+$string['companyfullname']='Company Fullname';
+$string['missingcompanyfullname']='Please enter Company fullname';
+
+$string['companyshortname']='Company Shortname';
+$string['missingcompanyshortname']='Please enter Company shortname';
+
+$string['companyfullnameexist']= 'This Company already exist, Please contact to Company Admin for more details';
+$string['companyshortnameexist']= 'This Company already exist, Please contact to Company Admin for more details';
+
+
+
+

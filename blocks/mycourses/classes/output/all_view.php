@@ -63,7 +63,7 @@ class all_view implements renderable, templatable {
         // Build courses view data structure.
        $allview = ['wwwroot'=>$CFG->wwwroot];
 		
-       
+      $courseCounter = 0;
 		
 		$allcourses = $DB->get_records_sql("select c.*,cp.price from {course} c inner join {course_price}  cp on c.id = cp.courseid where visible =1 ");
 		$allview['allcourses'] =[];
@@ -107,6 +107,7 @@ class all_view implements renderable, templatable {
             $exportedcourse->summary = substr(content_to_text($course->summary, $course->summaryformat),0,80);
 			$exportedcourse->cnt = count($allview['allcourses']);
 			$exportedcourse->price = $course->price;
+			$exportedcourse->flag = $flag;
 			$exportedcourse->id = $course->id;
 			
 			
@@ -129,9 +130,13 @@ class all_view implements renderable, templatable {
 			 {
 				 $exportedcourse->checked = "";
 			 }
+			if(empty($allview['viewall']) && $courseCounter >1 ){
+				$allview['viewall'] = $CFG->wwwroot.'/blocks/mycourses/viewall.php?flag=shoppingcart';
+				$allview['viewallstring']='View All';
+			}
 			
             $allview['allcourses'][] = $exportedcourse;
-			
+			$courseCounter++;
         }
 		$allview['viewcarturl'] = new \moodle_url('/blocks/mycourses/basket.php', array('popup'=>1));
 			

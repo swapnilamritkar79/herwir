@@ -25,6 +25,9 @@
       margin: 0 auto;
     }
 
+
+   h2{font-size: 18px; font-weight:500;} 
+
     .bottom {
       padding: 20px 0px 0px 0px;
     }
@@ -55,6 +58,7 @@
       .current {
         font-size: 18px;
         padding: 10px 0px 0px 0px;
+        font-weight: 500;
       }
     }
 
@@ -132,7 +136,7 @@ a[data-action="view-event"] {
     width: 100%;
     max-width: 100%;
   }
-  .name{ font-size: 18px;}
+  .name{ font-size: 18px; font-weight:500;}
 
   .event {
     margin-bottom: 15px;
