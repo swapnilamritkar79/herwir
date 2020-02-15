@@ -109,7 +109,7 @@ $transaction = $DB->start_delegated_transaction();
 		
 		$coursedetails = (array) $DB->get_record('iomad_courses', array('courseid' => $course->id));
 		
-		if(!empty($coursedetails->id))
+		if(!empty($coursedetails['id']))
 		{
 			$coursedetails['licensed'] = 1;
 			$coursedetails['shared'] = 1;
@@ -125,18 +125,18 @@ $transaction = $DB->start_delegated_transaction();
 			$DB->insert_record('iomad_courses', $coursedetails);
 		}
 		$group = (array) $DB->get_record('groups', array('courseid' => $course->id,'idnumber'=>$invoice->userid));
-		if(empty($group->id))
+		if(empty($group['id']))
 		{
-		$group = Array();
-		$group['courseid'] =$course->id;
-		$group['idnumber'] =$invoice->id;
-		$group['description'] = $licensename;
-		$group['descriptionformat'] = 0;
-		$group['timecreated'] =time();
-		$group['timemodified']=time();
-		$group['hidepicture']=0;
-		$group['picture']=0;
-		$groupid  = $DB->insert_record('groups', $group);
+			$group = Array();
+			$group['courseid'] =$course->id;
+			$group['idnumber'] =$invoice->id;
+			$group['description'] = $licensename;
+			$group['descriptionformat'] = 0;
+			$group['timecreated'] =time();
+			$group['timemodified']=time();
+			$group['hidepicture']=0;
+			$group['picture']=0;
+			$groupid  = $DB->insert_record('groups', $group);
 		}
 		else
 		{
@@ -150,7 +150,7 @@ $transaction = $DB->start_delegated_transaction();
 			$groupid  = $DB->update_record('groups', $group);
 		}
 		$grouppivot = (array) $DB->get_record('company_course_groups', array('courseid' => $course->id,'companyid'=>$company->id,'groupid'=>$groupid));
-		if(empty($grouppivot->id))
+		if(empty($grouppivot['id']))
 		{
 			$grouppivot = array();
 			$grouppivot['companyid'] = $company->id;
